@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="css/index.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<p id="score">您的得分：<span>0</span>
+			<button id="pause">暂停</button>
+			<button id="simulate-click">模拟击锤</button>
+		</p>
+		<div style="display:none;">
+			<video autoplay controls width="320" height="240"></video>
+			<canvas id="c1" width="640" height="480"></canvas>
+			<canvas id="c2" width="640" height="480"></canvas>
+		</div>
+		<div id="container" style="relative">
+			<div id="canvas">
+				<div class="row" data-row="0">
+					<div class="hole" data-column="0">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole" data-column="1">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole last" data-column="2">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row" data-row="1">
+					<div class="hole" data-column="0">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole" data-column="1">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole last" data-column="2">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row" data-row="2">
+					<div class="hole" data-column="0">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole" data-column="1">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+					<div class="hole last" data-column="2">
+						<div class="mouse">
+							<div class="star"></div>
+							<div class="body"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="hammer"></div>
+			<table id="gridContainer"></table>
+		</div>
+		<script src="js/jquery-1.9.2.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/underscore.js"></script>
+		<script src="js/processor.js"></script>
+		<script src="js/ps.js"></script>
+		<script>
+			window.URL = window.URL || window.webkitURL;
+			navigator.getUerMedia = navigator.getUerMedia
+				|| navigator.webkitGetUserMedia
+				|| navigator.mozGetUserMedia
+				|| navigator.msGetUserMedia;
+
+			var video = document.querySelector("video");
+			var c1 = document.querySelector("#c1");
+			var c2 = document.querySelector("#c2");
+			var ctx1 = c1.getContext("2d");
+			var ctx2 = c2.getContext("2d");
+			var localMediaStream = null;
+			var greyBtn = document.querySelector("#threshold");
+			var last = false;
+			var interval = 30;
+
+			var onFail = function() {
+				console.log("fail");
+			};
+
+			// $("#ball").on('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+			//     function(e) {
+			//     	$("#ball").removeClass("right down up left");
+			// });
+
+			if (navigator.getUerMedia) {
+				navigator.getUerMedia({video: true}, function(stream) {
+
+					video.src = window.URL.createObjectURL(stream);
+					localMediaStream = stream;
+					setInterval(function() {
+						ctx1.drawImage(video, 0, 0);
+						ctx1.setTransform(-1, 0, 0, 1, 640, 0);
+						// difference
+						// var cur = ctx1.getImageData(0, 0, 640, 480);
+						// var d = ctx2.createImageData(640, 480);
+						// if (!last) {
+						// 	last = cur;
+						// } else {
+						// 	Filters.differenceAccuracy(d.data, cur.data, last.data);
+						// 	ctx2.putImageData(d, 0, 0);
+						// 	last = cur;
+						// }
+
+						// red filter
+						var cur = ctx1.getImageData(0, 0, 640, 480);
+						//cur.setMatrix(1,0,0,1,0,0);
+						var d = Filters.red(cur, [120, 120, 120]);
+						Processor.startup(d);
+						ctx2.putImageData(d, 0, 0);
+					}, interval);
+				}, onFail);
+			}
+		</script>
+	</body>
+</html>

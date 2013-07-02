@@ -1,0 +1,235 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#container {
+	position: relative;
+	width: 640px;
+	margin: 0 auto;
+}
+
+#container .row {
+	overflow: hidden;
+}
+
+.row .hole {
+	width: 200px;
+	height: 160px;
+	margin-right: 20px;
+	overflow: hidden;
+	float: left;
+}
+
+.row .last {
+	margin-right: 0px;
+}
+
+.mouse {
+	margin-top: 160px;
+}
+
+.mouse .star {
+	height: 45px;
+}
+
+.mouse .body {
+	height: 115px;
+	background: url("../image/beauty.jpg") no-repeat;
+}
+
+#hammer {
+    -moz-transition: all 0.03s ease-in;
+    -webkit-transition: all 0.03s ease-in;
+    -o-transition: all 0.03s ease-in;
+    transition: all 0.03s ease-in;
+    position:absolute;
+    width: 64px;
+    height: 64px;
+    background: url("../image/hammer.png");
+}
+
+table{
+	border:0;
+	margin:0;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+#gridContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 640px;
+	height: 480px;
+}
+
+td {
+    border-width:1px;
+    border-collapse:collapse;
+    border-color:red;
+    border-style:solid;
+}
+
+.faint {
+	width: 100px;
+	margin: 0 auto;
+	background: url("../image/star.png") no-repeat;
+	-webkit-animation-name: 'faint';
+	-webkit-animation-duration: 2s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
+}
+
+.active {
+	width: 100%;
+	height: 100%;
+	-webkit-animation-name: 'popup';
+	-webkit-animation-duration: 5s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
+}
+
+.pause {
+	-webkit-animation-play-state: paused;
+	-moz-animation-play-state: paused;
+	-o-animation-play-state: paused;
+	animation-play-state: paused;
+}
+
+button {
+	display: inline-block;
+	background: -webkit-gradient(linear,0% 40%,0% 70%,from(#f9f9f9),to(#e3e3e3));
+	background: -webkit-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+	background: -moz-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+	background: -ms-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+	background: -o-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+	background: linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+	border: 1px solid #999;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px 8px;
+	outline: 0;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	text-shadow: 1px 1px #fff;
+	font-weight: 700;
+	font-size: 10pt;
+	float: right;
+}
+
+.bang {
+	-webkit-animation-name: 'bang';
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
+}
+
+/* 动画效果 */
+@-webkit-keyframes 'faint' {
+	10% {
+		background-position: -115px 0;
+	}
+	20% {
+		background-position: -235px 0;
+	}
+	30% {
+		background-position: -385px 0;
+	}
+	40% {
+		background-position: -115px -80px;
+	}
+	50% {
+		background-position: -235px -80px;
+	}
+	60% {
+		background-position: -385px -80px;
+	}
+	70% {
+		background-position: -115px -160px;
+	}
+	80% {
+		background-position: -235px -160px;
+	}
+	90% {
+		background-position: -385px -160px;
+	}
+}
+
+@-webkit-keyframes 'popup' {
+	0% {
+		margin-top: 180px;
+	}
+	5% {
+		margin-top: 162px;
+	}
+	10% {
+		margin-top: 144px;
+	}
+	15% {
+		margin-top: 126px;
+	}
+	20% {
+		margin-top: 108px;
+	}
+	25% {
+		margin-top: 90px;
+	}
+	30% {
+		margin-top: 72px;
+	}
+	35% {
+		margin-top: 54px;
+	}
+	40% {
+		margin-top: 36px;
+	}
+	45% {
+		margin-top: 18px;
+	}
+	50% {
+		margin-top: 0px;
+	}
+	55% {
+		margin-top: 18px;
+	}
+	60% {
+		margin-top: 36px;
+	}
+	65% {
+		margin-top: 54px;
+	}
+	70% {
+		margin-top: 72px;
+	}
+	75% {
+		margin-top: 90px;
+	}
+	80% {
+		margin-top: 108px;
+	}
+	85% {
+		margin-top: 126px;
+	}
+	90% {
+		margin-top: 144px;
+	}
+	95% {
+		margin-top: 162px;
+	}
+	100% {
+		margin-top: 180px;
+	}
+}
+
+@-webkit-keyframes 'bang' {
+	50% {
+		-webkit-transform: rotate(-90deg);
+	}
+	100% {
+		-webkit-transform: rotate(0deg);
+	}
+}

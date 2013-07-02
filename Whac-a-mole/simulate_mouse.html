@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Simulate Mouse</title>
+		<style>
+			#container {
+				width: 640px;
+				height: 480px;
+				background: greenyellow;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+
+			#con1 {
+				position: absolute;
+				width: 40px;
+				height: 1000px;
+				background: red;
+				top: 0px;
+				left: 0px;
+				cursor: pointer;
+				margin-top: 20px;
+			}
+
+			#con2 {
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				background: blue;
+				top: 300px;
+				right: 50px;
+				cursor: pointer;
+			}
+
+			button {
+				display: inline-block;
+				background: -webkit-gradient(linear,0% 40%,0% 70%,from(#f9f9f9),to(#e3e3e3));
+				background: -webkit-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+				background: -moz-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+				background: -ms-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+				background: -o-linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+				background: linear-gradient(#f9f9f9 40%,#e3e3e3 70%);
+				border: 1px solid #999;
+				-webkit-border-radius: 3px;
+				border-radius: 3px;
+				padding: 5px 8px;
+				outline: 0;
+				white-space: nowrap;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+				cursor: pointer;
+				text-shadow: 1px 1px #fff;
+				font-weight: 700;
+				font-size: 10pt;
+			}
+		</style>
+	</head>
+
+	<body>
+		<button id="btn">Hit Me</button>
+		<div id="container">
+			<div id="con1"></div>
+			<div id="con2"></div>
+		</div>
+		<script src="js/jquery-1.9.2.js"></script>
+		<script>
+			$("#container").click(function(e) {
+				console.log(e.target);
+			});
+
+			$("#con1").click(function(e) {
+				alert("great");
+			});
+
+			$("#btn").click(function(e) {
+				var event = document.createEvent("MouseEvents");
+	 			event.initMouseEvent("click", true, true, document.defaultView, 0, 0, 0, 0, 0,false, false, false, false, 0, null);
+	 			document.getElementById("con1").dispatchEvent(event);
+	 		});
+		</script>
+	</body>
+</html>
