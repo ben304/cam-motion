@@ -108,7 +108,8 @@
 		var ctx2 = c2.getContext("2d");
 		var localMediaStream = null;
 		var last;
-		var interval = 500;
+		var interval1 = 500;
+		var interval2 = 30;
 		var currentColor;
 
 		var onFail = function() {
@@ -142,22 +143,24 @@
 							Filters.differenceAccuracy(d.data, cur.data, last.data);
 							ctx2.putImageData(d, 0, 0);
 							if (currentColor = Processor.detectColor(d, cur)) {
-								//clearInterval(t);
+								clearInterval(t);
 								console.dir(currentColor);
 								$("#detect").hide();
 								$("#play").show();
+								setInterval(function() {
+									ctx1.drawImage(video, 0, 0);
+									ctx1.setTransform(-1, 0, 0, 1, 640, 0);
+									var cur = ctx1.getImageData(0, 0, 640, 480);
+									//cur.setMatrix(1,0,0,1,0,0);
+									var d = Filters.filter(cur, [currentColor.r, currentColor.g, currentColor.b]);
+									Processor.startup(d);
+									ctx2.putImageData(d, 0, 0);
+								}, interval2);
 							}
 							last = cur;
 						}
-					} else {
-						ctx1.setTransform(-1, 0, 0, 1, 640, 0);
-						var cur = ctx1.getImageData(0, 0, 640, 480);
-						//cur.setMatrix(1,0,0,1,0,0);
-						var d = Filters.filter(cur, [currentColor.r, currentColor.g, currentColor.b]);
-						Processor.startup(d);
-						ctx2.putImageData(d, 0, 0);
 					}
-				}, interval);
+				}, interval1);
 			}, onFail);
 		}
 	</script>
