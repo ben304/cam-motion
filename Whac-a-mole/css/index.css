@@ -3,6 +3,10 @@ body {
 	margin: 0;
 }
 
+#play {
+	display: none;
+}
+
 #container {
 	position: relative;
 	width: 640px;

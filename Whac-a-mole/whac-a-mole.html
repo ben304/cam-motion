@@ -143,7 +143,7 @@
 						// red filter
 						var cur = ctx1.getImageData(0, 0, 640, 480);
 						//cur.setMatrix(1,0,0,1,0,0);
-						var d = Filters.filter(cur, [89,18,19]);
+						var d = Filters.filter(cur, [186,99,84]);
 						Processor.startup(d);
 						ctx2.putImageData(d, 0, 0);
 					}, interval);
