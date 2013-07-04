@@ -10,9 +10,9 @@
 			<button id="pause">暂停</button>
 			<button id="simulate-click">模拟击锤</button>
 		</p>
-		<div style="display:none;">
+		<div>
 			<video autoplay controls width="320" height="240"></video>
-			<canvas id="c1" width="640" height="480"></canvas>
+			<canvas id="c1" width="640" height="480" style="display:none;"></canvas>
 			<canvas id="c2" width="640" height="480"></canvas>
 		</div>
 		<div id="container" style="relative">
@@ -112,6 +112,15 @@
 			//     	$("#ball").removeClass("right down up left");
 			// });
 
+			var hex2dec = function(hex) {
+				var ret = [];
+				for (var i = 0; i < hex.length; i+=2) {
+					var sub = hex.substring(i, i+2);
+					ret.push(parseInt(sub, 16));
+				}
+				return ret;
+			};
+
 			if (navigator.getUerMedia) {
 				navigator.getUerMedia({video: true}, function(stream) {
 
@@ -126,15 +135,15 @@
 						// if (!last) {
 						// 	last = cur;
 						// } else {
-						// 	Filters.differenceAccuracy(d.data, cur.data, last.data);
-						// 	ctx2.putImageData(d, 0, 0);
+						// 	Filters.difference(cur, last);
+						// 	ctx2.putImageData(cur, 0, 0);
 						// 	last = cur;
 						// }
 
 						// red filter
 						var cur = ctx1.getImageData(0, 0, 640, 480);
 						//cur.setMatrix(1,0,0,1,0,0);
-						var d = Filters.red(cur, [120, 120, 120]);
+						var d = Filters.filter(cur, [89,18,19]);
 						Processor.startup(d);
 						ctx2.putImageData(d, 0, 0);
 					}, interval);

@@ -1,5 +1,7 @@
 Filters = {};
 
+var SENS = 10;
+
 Filters.getPixels = function(img) {
   var c = this.getCanvas(img.width, img.height);
   var ctx = c.getContext('2d');
@@ -58,29 +60,15 @@ Filters.threshold = function(pixels, threshold) {
   return pixels;
 };
 
-Filters.red = function(pixels, rgb) {
+Filters.filter = function(pixels, rgb) {
   var d = pixels.data;
   for (var i=0; i<d.length; i+=4) {
     var r = d[i];
     var g = d[i+1];
     var b = d[i+2];
-    // if (!(bo = data[pixel + key] <= color[key] + SENS && data[pixel + key] >= color[key] - SENS)) {
-    //     break;
-    //   } 
-    var v = (r>= 255-rgb[0] && r <= 255 && g <= rgb[1] && b <= rgb[2]) ? 0 : 255;
-    d[i] = d[i+1] = d[i+2] = v
-  }
-  return pixels;
-};
 
-Filters.black = function(pixels, rgb) {
-  var d = pixels.data, reverse_d = [];
-  for (var i=0; i<d.length; i+=4) {
-    var r = d[i];
-    var g = d[i+1];
-    var b = d[i+2];
-    var v = (r <= 20 && g <= 20 && b <= 20) ? 0 : 255;
-    d[i] = d[i+1] = d[i+2] = v;
+    var v = (r>= rgb[0]-SENS && r <= rgb[0]+SENS && g >= rgb[1]-SENS && g <= rgb[1]+SENS && b >= rgb[2]-SENS && b <= rgb[2]+SENS) ? 0 : 255;
+    d[i] = d[i+1] = d[i+2] = v
   }
   return pixels;
 };
@@ -170,7 +158,7 @@ Filters.difference = function(below, above) {
         dst[i] = Math.abs(a[i] - b[i]);
         dst[i + 1] = Math.abs(a[i + 1] - b[i + 1]);
         dst[i + 2] = Math.abs(a[i + 2] - b[i + 2]);
-        dst[i + 3] = a[i + 3] + ((255 - a[i + 3]) * b[i + 3]) * f;
+        dst[i + 3] = 0;//a[i + 3] + ((255 - a[i + 3]) * b[i + 3]) * f;
     }
     return below;
 };

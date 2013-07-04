@@ -1,6 +1,7 @@
 Processor = {
 
 	// Constant
+	TIMES_RATE: 2,
 	WIDTH: 640,
 	HEIGHT: 480,
 	AREA_IN_ROW: 16,
@@ -8,12 +9,21 @@ Processor = {
 
 	initialized: false,
 
+	// used for detect color
+	res: [false, false, false],
+	current: 0,
+	// 1 stands for border width
+	LEFT: 155+1,
+	RIGHT: 175+1,
+	TOP: 120+1,
+	BOTTOM: 140+1,
+
 	// Watching Area
 	matrix: [],
 
 	cloneMatrix: [],
 
-	last: null,
+	last: {up: 0, right: 0, down: 0, left: 0},
 
 	makeArray: function() {
 		var total = this.AREA_IN_ROW * this.AREA_IN_COL;
@@ -115,9 +125,11 @@ Processor = {
 		//console.log("sum ", _.pluck(this.cloneMatrix, 'sum'));
 
 		var beginner = this.cloneMatrix[0];
-		beginner.selected = true;
-		selected.push(beginner);
-		queue.push(beginner);
+		if (beginner.sum >= TOTAL_IN_AREA*0.6) {
+			beginner.selected = true;
+			selected.push(beginner);
+			queue.push(beginner);
+		}
 
 		while (queue.length) {
 			var base = queue[0];
@@ -156,7 +168,7 @@ Processor = {
 
 	// 特定的形状从上到下占三格
 	selectRect: function(selected) {
-		var up = 10000, down = -1, left = 10000, right = -1;
+		var up = 10000, down = -1, left = 10000, right = -1, pos;
 		for (var i = 0, l = selected.length; i < l; i++) {
 			var x = selected[i].index%this.AREA_IN_ROW,
 				y = Math.floor(selected[i].index/this.AREA_IN_COL);
@@ -173,8 +185,18 @@ Processor = {
 				down = y+1;
 			}
 		}
+		if (!selected.length) {
+			up = this.last.up;
+			right = this.last.right;
+			down = this.last.down;
+			left = this.last.left;
+		} else {
+			this.last.up = up;
+			this.last.right = right;
+			this.last.down = down;
+			this.last.left = left;
+		}
 
-		//console.log([up, right, down, left]);
 		this.calCenter([up, right, down, left]);
 	},
 
@@ -197,6 +219,84 @@ Processor = {
 		//var area = (pos[1]-pos[3])*(pos[2]-pos[0]);
 		//console.log(area);
 		app.hit(i_left, i_top);
+	},
+
+	// 记录黑白区别，以判断是否停止运动
+	isStop: function(pixels) {
+		var data = pixels.data,
+			NUM_IN_ROW = this.WIDTH*4,
+			white = 0,
+			black = 0,
+			counter = 0;
+
+		// 根据倍率设置区域大小
+		var J_START = this.TOP * this.TIMES_RATE,
+			J_END = this.BOTTOM * this.TIMES_RATE,
+			I_STRAT = this.LEFT * this.TIMES_RATE,
+			I_END = this.RIGHT * this.TIMES_RATE;
+
+		for (var j = J_START; j < J_END; j++) {
+			var prev = NUM_IN_ROW*(j-1);
+			for (var i = I_STRAT; i < I_END; i++) {
+				var start = prev + (i-1)*4;
+				if (data[start] == 255 && data[start+1] == 255 && data[start+2] == 255) {
+					white += 1;
+				} else if (data[start] == 0 && data[start+1] == 0 && data[start+2] == 0) {
+					black += 1;
+				}
+				counter++;
+			}
+		}
+		//console.log(white, black, black/(black+white), counter);
+		if (black/(black+white) > 0.98) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	takeColor: function(pixels) {
+		var data = pixels.data;
+		var NUM_IN_ROW = this.WIDTH*4, white = 0, black = 0, counter = 0;
+		var r_t = 0, g_t = 0, b_t = 0, i_t = 0, r, g, b;
+
+		// 根据倍率设置区域大小
+		var J_START = this.TOP * this.TIMES_RATE,
+			J_END = this.BOTTOM * this.TIMES_RATE,
+			I_STRAT = this.LEFT * this.TIMES_RATE,
+			I_END = this.RIGHT * this.TIMES_RATE;
+
+		for (var j = 242; j < 282; j++) {
+			var prev = NUM_IN_ROW*(j-1);
+			for (var i = 312; i < 352; i++) {
+				var start = prev + (i-1)*4;
+				var ri = data[start], gi = data[start+1], bi = data[start+2];
+				//console.log(ri, gi, bi);
+				r_t += ri;
+				g_t += gi;
+				b_t += bi;
+				i_t += 1;
+			}
+		}
+		r = Math.floor(r_t/i_t);
+		g = Math.floor(g_t/i_t);
+		b = Math.floor(b_t/i_t);
+
+		return {r:r, g:g, b:b};
+	},
+
+	detectColor: function(pixels, real) {
+		var once;
+
+		once = this.isStop(pixels);
+		this.res[this.current] = once;
+		this.current = (this.current+1)%3;
+		if (this.res[0] && this.res[1] && this.res[2]) {
+			console.log(this.res);
+			return this.takeColor(real);
+		} else {
+			return false;
+		}
 	},
 
 	startup: function(pixels) {

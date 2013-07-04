@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>detect</title>
+</head>
+<body>
+	<div style="position:relative;">
+		<video autoplay controls width="320" height="240"></video>
+		<div style="position:absolute;width:20px;height:20px;top:120px;left:155px;border:1px solid #FFF;"></div>
+	</div>
+	<canvas id="c1" width="640" height="480" style="display:none;"></canvas>
+	<canvas id="c2" width="640" height="480"></canvas>
+	<script src="js/ps.js"></script>
+	<script src="js/processor.js"></script>
+	<script>
+		window.URL = window.URL || window.webkitURL;
+		navigator.getUerMedia = navigator.getUerMedia
+			|| navigator.webkitGetUserMedia
+			|| navigator.mozGetUserMedia
+			|| navigator.msGetUserMedia;
+
+		var video = document.querySelector("video");
+		var c1 = document.querySelector("#c1");
+		var c2 = document.querySelector("#c2");
+		var ctx1 = c1.getContext("2d");
+		var ctx2 = c2.getContext("2d");
+		var localMediaStream = null;
+		var last;
+		var interval = 500;
+
+		var onFail = function() {
+			console.log("fail");
+		};
+
+		// $("#ball").on('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+		//     function(e) {
+		//     	$("#ball").removeClass("right down up left");
+		// });
+
+		var hex2dec = function(hex) {
+			var ret = [];
+			for (var i = 0; i < hex.length; i+=2) {
+				var sub = hex.substring(i, i+2);
+				ret.push(parseInt(sub, 16));
+			}
+			return ret;
+		};
+
+		if (navigator.getUerMedia) {
+			navigator.getUerMedia({video: true}, function(stream) {
+
+				video.src = window.URL.createObjectURL(stream);
+				localMediaStream = stream;
+				var t = setInterval(function() {
+					ctx1.drawImage(video, 0, 0);
+					// difference
+					var cur = ctx1.getImageData(0, 0, 640, 480);
+					var d = ctx2.createImageData(640, 480);
+					var res;
+					if (!last) {
+						last = cur;
+					} else {
+						Filters.differenceAccuracy(d.data, cur.data, last.data);
+						ctx2.putImageData(d, 0, 0);
+						if (res = Processor.detectColor(d, cur)) {
+							clearInterval(t);
+							console.dir(res);
+						}
+						last = cur;
+					}
+				}, interval);
+			}, onFail);
+		}
+	</script>
+</body>
+</html>
