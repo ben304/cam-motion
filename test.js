@@ -5,11 +5,11 @@ $ = KISSY.all;
 
 FPS = 1000 / 30;
 
-WIDTH = 100;
+WIDTH = 640;
 
-HEIGHT = 75;
+HEIGHT = 480;
 
-SENS = 120;
+SENS = 40;
 
 $('canvas').add('#vi').attr({
   width: WIDTH,
@@ -85,11 +85,12 @@ calPos = function(poses, width, height) {
 };
 
 filter = function(imageData, color) {
-  var bo, data, height, key, pixel, pos, tmp, width, _i, _j, _ref;
+  var bo, data, height, key, pixel, pos, tmp, width, _i, _j, _ref, _results;
   width = imageData.width;
   height = imageData.height;
   data = imageData.data;
   tmp = [];
+  _results = [];
   for (pos = _i = 0, _ref = width * height; 0 <= _ref ? _i < _ref : _i > _ref; pos = 0 <= _ref ? ++_i : --_i) {
     pixel = pos * 4;
     bo = false;
@@ -99,18 +100,18 @@ filter = function(imageData, color) {
       }
     }
     if (bo) {
-      tmp.push(pos);
+      _results.push(tmp.push(pos));
     } else {
-      imageData.data[pixel + 3] = 0;
+      _results.push(imageData.data[pixel + 3] = 0);
     }
   }
-  return calPos(tmp, width, height);
+  return _results;
 };
 
 dealWithFrame = function(imageData) {
   var time1, time2;
   time1 = new Date().getTime();
-  filter(imageData, [255, 0, 0]);
+  filter(imageData, [124, 111, 113]);
   time2 = new Date().getTime();
   cv2.putImageData(imageData, 0, 0);
   return console.log(time2 - time1);
@@ -124,6 +125,7 @@ navigator.getUserMedia({
   vi.src = window.URL.createObjectURL(stream);
   return setInterval(function() {
     cv1.drawImage(vi, 0, 0, WIDTH, HEIGHT);
+    cv1.setTransform(-1, 0, 0, 1, WIDTH, 0);
     return dealWithFrame(cv1.getImageData(0, 0, WIDTH, HEIGHT));
   }, FPS);
 });

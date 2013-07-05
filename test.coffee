@@ -1,10 +1,10 @@
 $ = KISSY.all
 FPS = 1000 / 30
 
-WIDTH = 100
-HEIGHT = 75
+WIDTH = 640 #100
+HEIGHT = 480 # 75
 
-SENS = 120
+SENS = 40
 
 
 
@@ -132,7 +132,7 @@ filter = (imageData, color)->
       tmp.push pos # if Math.random() > 0.2
     else
       imageData.data[pixel + 3] = 0
-  calPos tmp, width, height
+  # calPos tmp, width, height
     #   # for key in [0...3]
     #   #   imageData.data[pixel + key] = 255
       # imageData.data[pixel + 3] = 0
@@ -143,7 +143,7 @@ dealWithFrame = (imageData)->
  
   # horiFlip imageData
 
-  filter imageData, [255,0,0]
+  filter imageData, [124, 111, 113]
 # 
   time2 = new Date().getTime()
   cv2.putImageData imageData, 0, 0
@@ -158,9 +158,12 @@ navigator.getUserMedia {video: true } , (stream)->
   vi.src = window.URL.createObjectURL stream
   # vi.addEventListener 'loadeddata', (e)->
     # 用 canvas 重绘图像
+  # cv1.setTransform -1, 0, 0, 1, 0, 0
+  # cv1.scale -1, 1
   setInterval ->
     # vi.addEventListener "timeupdate", ->
     cv1.drawImage vi, 0, 0, WIDTH, HEIGHT
+    cv1.setTransform -1, 0, 0, 1, WIDTH, 0
     dealWithFrame cv1.getImageData(0,0,WIDTH,HEIGHT)
   , FPS
 
