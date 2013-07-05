@@ -1,0 +1,174 @@
+@mixin setanim($name){
+  -webkit-animation-name: $name;
+}
+@mixin addkeyframes($name, $left:left, $top:top){
+  @-webkit-keyframes $name {
+    50% { background-position: $left $top; }
+  }
+}
+.game ul li {
+  &.p1 {
+    left: 58px;
+    top: -9px;
+  }
+  &.p2 {
+    left: 460px;
+    top: 180px;
+  }
+  &.p3 {
+    left: 280px;
+    top: 47px;
+  }
+  &.p4 {
+    left: 98px;
+    top: 214px;
+  }
+  &.p5 {
+    left: 670px;
+    top: 275px;
+  }
+  &.p6 {
+    left: 525px;
+    top: 420px;
+  }
+  &.p7 {
+    left: 205px;
+    top: 495px;
+  }
+  &.p8 {
+    left: 45px;
+    top: 370px;
+  }
+  &.p9 {
+    left: 325px;
+    top: 320px;
+  }
+  &.p10 {
+    left: 570px;
+    top: -5px;
+  }
+  p {
+    &.m1 {
+      background-position: 0 0;
+      @include setanim('fm1');
+    }
+    &.m2 {
+      background-position: 0 -111px;
+      @include setanim('fm2');
+    }
+    &.m3 {
+      background-position: 0 -222px;
+      @include setanim('fm3');
+    }
+    &.m4 {
+      background-position: 0 -333px;
+      @include setanim('fm4');
+    }
+    &.m5 {
+      background-position: 0 -444px;
+      @include setanim('fm5');
+    }
+    &.m6 {
+      background-position: -225px 0;
+      @include setanim('fm6');
+    }
+    &.m7 {
+      background-position: -225px -111px;
+      @include setanim('fm7');
+    }
+    &.m8 {
+      background-position: -225px -222px;
+      @include setanim('fm8');
+    }
+    &.m9 {
+      background-position: -225px -333px;
+      @include setanim('fm9');
+    }
+    &.m10 {
+      background-position: -225px -444px;
+      @include setanim('fm10');
+    }
+    &.m11 {
+      background-position: -450px 0;
+      @include setanim('fm11');
+    }
+    &.m12 {
+      background-position: -450px -111px;
+      @include setanim('fm12');
+    }
+    &.m13 {
+      background-position: -450px -222px;
+      @include setanim('fm13');
+    }
+    &.m14 {
+      background-position: -450px -333px;
+      @include setanim('fm14');
+    }
+    &.m15 {
+      background-position: -450px -444px;
+      @include setanim('fm15');
+    }
+  }
+  div.hit p {
+    &.m1 {
+      background-position: -150px 0;
+    }
+    &.m2 {
+      background-position: -150px -111px;
+    }
+    &.m3 {
+      background-position: -150px -222px;
+    }
+    &.m4 {
+      background-position: -150px -333px;
+    }
+    &.m5 {
+      background-position: -150px -444px;
+    }
+    &.m6 {
+      background-position: -375px 0;
+    }
+    &.m7 {
+      background-position: -375px -111px;
+    }
+    &.m8 {
+      background-position: -375px -222px;
+    }
+    &.m9 {
+      background-position: -375px -333px;
+    }
+    &.m10 {
+      background-position: -375px -444px;
+    }
+    &.m11 {
+      background-position: -600px 0;
+    }
+    &.m12 {
+      background-position: -600px -111px;
+    }
+    &.m13 {
+      background-position: -600px -222px;
+    }
+    &.m14 {
+      background-position: -600px -333px;
+    }
+    &.m15 {
+      background-position: -600px -444px;
+    }
+  }
+}
+@include addkeyframes('fm1', -75px, 0);
+@include addkeyframes('fm2', -75px, -111px);
+@include addkeyframes('fm3', -75px, -222px);
+@include addkeyframes('fm4', -75px, -333px);
+@include addkeyframes('fm5', -75px, -444px);
+@include addkeyframes('fm6', -300px, 0);
+@include addkeyframes('fm7', -300px, -111px);
+@include addkeyframes('fm8', -300px, -222px);
+@include addkeyframes('fm9', -300px, -333px);
+@include addkeyframes('fm10', -300px, -444px);
+@include addkeyframes('fm11', -525px, 0);
+@include addkeyframes('fm12', -525px, -111px);
+@include addkeyframes('fm13', -525px, -222px);
+@include addkeyframes('fm14', -525px, -333px);
+@include addkeyframes('fm15', -525px, -444px);
