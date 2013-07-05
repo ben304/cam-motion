@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Media</title>
+		<style>
+			#ball {
+			    left: 200px;
+			    top: 200px;
+			    -moz-transition: all 0.02s ease-in;
+			    -webkit-transition: all 0.02s ease-in;
+			    -o-transition: all 0.02s ease-in;
+			    transition: all 0.02s ease-in;
+			    position:absolute;
+			    width: 10px;
+			    height: 10px;
+			    background: red;
+			    border-radius: 5px;
+			}
+
+			#hammer {
+			    -moz-transition: all 0.02s ease-in;
+			    -webkit-transition: all 0.02s ease-in;
+			    -o-transition: all 0.02s ease-in;
+			    transition: all 0.02s ease-in;
+			    position:absolute;
+			    width: 64px;
+			    height: 64px;
+			    background: url("image/hammer.png");
+			}
+
+			table{
+				border:0;
+				margin:0;
+				border-collapse:collapse;
+				border-spacing:0;
+			}
+
+			#gridContainer {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 640px;
+				height: 480px;
+			}
+
+			td {
+		        border-width:1px;
+		        border-collapse:collapse;
+		        border-color:red;
+		        border-style:solid;
+		    }
+		</style>
+	</head>
+
+	<body>
+
+		<div>
+			<video autoplay controls width="320" height="240"></video>
+			<canvas id="c1" width="640" height="480" style="display:none;"></canvas>
+		</div>
+		<div style="position:relative;">
+			<canvas id="c2" width="640" height="480"></canvas>
+			<canvas id="c3" width="320" height="240"></canvas>
+			<div id="hammer"></div>
+			<table id="gridContainer"></table>
+		</div>
+		<script src="js/jquery-1.9.2.js"></script>
+		<script src="js/underscore.js"></script>
+		<script src="js/processor.js"></script>
+		<script src="js/ps.js"></script>
+		<script>
+			window.URL = window.URL || window.webkitURL;
+			navigator.getUerMedia = navigator.getUerMedia
+				|| navigator.webkitGetUserMedia
+				|| navigator.mozGetUserMedia
+				|| navigator.msGetUserMedia;
+
+			var video = document.querySelector("video");
+			var c1 = document.querySelector("#c1");
+			var c2 = document.querySelector("#c2");
+			var ctx1 = c1.getContext("2d");
+			var ctx2 = c2.getContext("2d");
+			var localMediaStream = null;
+			var greyBtn = document.querySelector("#threshold");
+			var last = false;
+			var interval = 1000;
+
+			var onFail = function() {
+				console.log("fail");
+			};
+
+			// $("#ball").on('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+			//     function(e) {
+			//     	$("#ball").removeClass("right down up left");
+			// });
+
+			if (navigator.getUerMedia) {
+				navigator.getUerMedia({video: true}, function(stream) {
+
+					video.src = window.URL.createObjectURL(stream);
+					localMediaStream = stream;
+					setInterval(function() {
+						ctx1.drawImage(video, 0, 0);
+
+						// difference
+						// var cur = ctx1.getImageData(0, 0, 640, 480);
+						// var d = ctx2.createImageData(640, 480);
+						// if (!last) {
+						// 	last = cur;
+						// } else {
+						// 	Filters.differenceAccuracy(d.data, cur.data, last.data);
+						// 	ctx2.putImageData(d, 0, 0);
+						// 	last = cur;
+						// }
+
+						// red filter
+						var cur = ctx1.getImageData(0, 0, 640, 480);
+						var d = Filters.black(cur);
+						Processor.startup(d);
+						ctx2.putImageData(d, 0, 0);
+					}, interval);
+				}, onFail);
+			}
+		</script>
+	</body>
+</html>
