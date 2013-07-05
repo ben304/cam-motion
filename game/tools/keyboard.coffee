@@ -1,6 +1,8 @@
 LETTER_CHECKING_TIME = 3000
 LETTER_CHECKING_DELAY = 300
-Circle = $('#J_KeyBoardCircle')
+Circle = $('#J_KeyBoardCircle').knob
+  thickness : 0.3
+  width     : 60
 
 class LettersCtrl
   constructor: ->
@@ -66,10 +68,18 @@ class LettersCtrl
 
 
   showProgress: ->
+    Circle.show().val(0)
+    value = 0
+    @progressTimer = setInterval ->
+      val = Circle.
+      Circle.val value++
+    , LETTER_CHECKING_TIME / 100
 
 
   hideProgress: ->
-
+    Circle.hide()
+    clearInterval @progressTimer
+    
 
   checkInLetter: (x, y)->
     for letter in @letters

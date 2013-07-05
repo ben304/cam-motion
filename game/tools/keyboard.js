@@ -5,7 +5,10 @@ LETTER_CHECKING_TIME = 3000;
 
 LETTER_CHECKING_DELAY = 300;
 
-Circle = $('#J_KeyBoardCircle');
+Circle = $('#J_KeyBoardCircle').knob({
+  thickness: 0.3,
+  width: 60
+});
 
 LettersCtrl = (function() {
 
@@ -54,9 +57,20 @@ LettersCtrl = (function() {
 
   LettersCtrl.inputLetter = function(letter) {};
 
-  LettersCtrl.prototype.showProgress = function() {};
+  LettersCtrl.prototype.showProgress = function() {
+    var value;
+    Circle.show().val(0);
+    value = 0;
+    return this.progressTimer = setInterval(function() {
+      var val;
+      return val = Circle.Circle.val(value++);
+    }, LETTER_CHECKING_TIME / 100);
+  };
 
-  LettersCtrl.prototype.hideProgress = function() {};
+  LettersCtrl.prototype.hideProgress = function() {
+    Circle.hide();
+    return clearInterval(this.progressTimer);
+  };
 
   LettersCtrl.prototype.checkInLetter = function(x, y) {
     var letter, _i, _len, _ref;
