@@ -17,8 +17,8 @@
 		<button id="simulate-click">模拟击锤</button>
 	</p>
 	<div>
-		<canvas id="c1" width="640" height="480" style="display:none;"></canvas>
-		<canvas id="c2" width="640" height="480"></canvas>
+		<canvas id="c1" width="800" height="600"></canvas>
+		<canvas id="c2" width="800" height="600"></canvas>
 	</div>
 	<div id="container" style="relative">
 		<div id="canvas">
@@ -109,7 +109,7 @@
 		var localMediaStream = null;
 		var last;
 		var interval1 = 500;
-		var interval2 = 30;
+		var interval2 = 100;
 		var currentColor;
 
 		var onFail = function() {
@@ -149,8 +149,8 @@
 								$("#play").show();
 								setInterval(function() {
 									ctx1.drawImage(video, 0, 0);
-									ctx1.setTransform(-1, 0, 0, 1, 640, 0);
-									var cur = ctx1.getImageData(0, 0, 640, 480);
+									ctx1.setTransform(-1.25, 0, 0, 1.25, 800, 0);
+									var cur = ctx1.getImageData(0, 0, 800, 600);
 									//cur.setMatrix(1,0,0,1,0,0);
 									var d = Filters.filter(cur, [currentColor.r, currentColor.g, currentColor.b]);
 									Processor.startup(d);

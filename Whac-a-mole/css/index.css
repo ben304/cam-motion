@@ -3,14 +3,42 @@ body {
 	margin: 0;
 }
 
-#play {
-	display: none;
+.color {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 100px;
+	height: 30px;
+	background: #CCC;
+	line-height: 30px;
+}
+
+.color i {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background: #FF0000;
+}
+
+.color span {
+	font-size: 12px;
+	display: inline-block;
+	color: #FF0000;
 }
 
 #container {
 	position: relative;
-	width: 640px;
-	margin: 0 auto;
+	display: inline-block;
+	width: 100%;
+}
+
+#canvas {
+	float: left;
+	width: 800px;
+}
+
+#c3 {
+	float: left;
 }
 
 #container .row {
@@ -43,14 +71,13 @@ body {
 }
 
 #hammer {
-    -moz-transition: all 0.03s ease-in;
-    -webkit-transition: all 0.03s ease-in;
-    -o-transition: all 0.03s ease-in;
-    transition: all 0.03s ease-in;
+    -webkit-transition: all 0.01s ease-in;
     position:absolute;
     width: 64px;
     height: 64px;
     background: url("../image/hammer.png");
+    top: 0px;
+    left: 0px;
 }
 
 table{
@@ -62,10 +89,10 @@ table{
 
 #gridContainer {
 	position: absolute;
-	top: 0;
+	top: 600px;
 	left: 0;
-	width: 640px;
-	height: 480px;
+	width: 800px;
+	height: 600px;
 }
 
 td {

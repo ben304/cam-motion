@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>detect</title>
+	<link href="css/index.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="color"><i id="block"></i><span id="text">#FF0000</span></div>
+	<div style="position:relative;">
+		<video autoplay controls width="320" height="240"></video>
+		<div id="detect" style="position:absolute;width:20px;height:20px;top:120px;left:155px;border:1px dashed #FFF;"></div>
+	</div>
+
+	<div id="play">
+	<div style="position:relative;">
+		<canvas id="c1" width="800" height="600" style="display:none;"></canvas>
+		<canvas id="c2" width="800" height="600"></canvas>
+	</div>
+	<div id="container" style="relative">
+		<div id="canvas">
+			<div class="row" data-row="0">
+				<div class="hole" data-column="0">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole" data-column="1">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole last" data-column="2">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row" data-row="1">
+				<div class="hole" data-column="0">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole" data-column="1">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole last" data-column="2">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row" data-row="2">
+				<div class="hole" data-column="0">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole" data-column="1">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+				<div class="hole last" data-column="2">
+					<div class="mouse">
+						<div class="star"></div>
+						<div class="body"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<canvas id="c3" width="320" height="240"></canvas>
+		<div id="hammer"></div>
+	</div>
+	</div>
+
+	<script src="js/jquery-1.9.2.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/watcher.js"></script>
+	<script src="js/ps.js"></script>
+	<script src="js/processor.js"></script>
+	<script>
+		Watcher.camStart();
+	</script>
+</body>
+</html>

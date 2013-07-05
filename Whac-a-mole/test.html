@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<style>
+		.outer {
+			width: 50px;
+			height: 50px;
+			background: #CCC;
+			border-radius: 25px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.inner {
+			width: 40px;
+			height: 40px;
+			top: 50%;
+			left: 50%;
+			margin-top: -20px;
+			margin-left: -20px;
+			position: absolute;
+			background: green;
+			border-radius: 20px;
+			background: yellow;
+		}
+
+		.water {
+			width: 50px;
+			height: 50px;
+			top: 0px;
+			background: blue;
+			border-radius: 25px;
+			-webkit-animation-name: 'water';
+			-webkit-animation-duration: 1s;
+			-webkit-animation-timing-function: ease-in-out;
+			-webkit-animation-iteration-count: 1;
+		}
+
+		.bg {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 0px;
+			background: url("image/bg.png");
+			z-index: 1;
+		}
+
+		@-webkit-keyframes 'water' {
+			0% {
+				margin-top: 50px;
+			}
+
+			20% {
+				margin-top: 40px;
+			}
+
+			40% {
+				margin-top: 30px;
+			}
+
+			60% {
+				margin-top: 20px;
+			}
+
+			80% {
+				margin-top: 10px;
+			}
+
+			100% {
+				margin-top: 0px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="outer">
+		<div class="water"></div>
+		<div class="inner"></div>
+	</div>
+</body>
+</html>

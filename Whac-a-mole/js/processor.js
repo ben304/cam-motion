@@ -1,18 +1,24 @@
 Processor = {
 
-	// Constant
+	/*---- 常数 ----*/
+	// 用于侦测颜色
 	TIMES_RATE: 2,
-	WIDTH: 640,
-	HEIGHT: 480,
-	AREA_IN_ROW: 16,
-	AREA_IN_COL: 16,
+	_WIDTH: 640,
+	_HEIGHT: 480,
 
+	// 用于游戏
+	WIDTH: 800,
+	HEIGHT: 600,
+	AREA_IN_ROW: 50,
+	AREA_IN_COL: 50,
+
+	/*---- 全局变量 ----*/
 	initialized: false,
 
-	// used for detect color
+	// 用于缓存侦测的值
 	res: [false, false, false],
 	current: 0,
-	// 1 stands for border width
+	// 1代表边框的线
 	LEFT: 155+1,
 	RIGHT: 175+1,
 	TOP: 120+1,
@@ -20,11 +26,11 @@ Processor = {
 
 	// Watching Area
 	matrix: [],
-
 	cloneMatrix: [],
-
 	last: {up: 0, right: 0, down: 0, left: 0},
 
+	// 用于查找指定颜色所在区域
+	// -------------------------------------------------------------start
 	makeArray: function() {
 		var total = this.AREA_IN_ROW * this.AREA_IN_COL;
 		for (var i = 0; i < total; i++) {
@@ -36,7 +42,7 @@ Processor = {
 		for (var i = 0; i < this.AREA_IN_COL; i++) {
 			var row = $("<tr>");
 			for (var j = 0; j < this.AREA_IN_ROW; j++) {
-				row.append($("<td>"+(i*this.AREA_IN_COL+j)+"</td>"));
+				row.append($("<td></td>"));
 			}
 			container.append(row);
 		}
@@ -55,40 +61,6 @@ Processor = {
 		}
 		return array;
 	},
-
-	//快速排序
-	/*
-	sortQuick: function(array){
-		var low = 0, high = array.length-1;
-
-		var sort = function(low, high) {
-			if(low == high){
-				return;
-			}
-			var key = array[low];
-			var tmplow = low;
-			var tmphigh = high;
-			while(low < high) {
-				while(low < high && key.sum <= array[high].sum) {
-					--high;
-				}
-				array[low] = array[high];
-				while(low < high && array[low].sum <= key.sum) {
-					++low;
-				}
-				array[high] = array[low];
-				if(low == tmplow) {
-					sort(++low, tmphigh);
-					return;
-				}
-			}
-			array[low] = key;
-			sort(tmplow, low-1);
-			sort(high+1, tmphigh);
-		}
-		sort(low, high);
-		return array;
-	},*/
 
 	// Get area from x & y
 	getPos: function(x, y) {
@@ -120,7 +92,8 @@ Processor = {
 			queue = [],
 			start = 1;
 
-		this.sortBubble(this.cloneMatrix);
+		//this.sortBubble(this.cloneMatrix);
+		this.cloneMatrix.sort(function(a, b) {return b.sum - a.sum;})
 		//console.log("index ", _.pluck(this.cloneMatrix, 'index'));
 		//console.log("sum ", _.pluck(this.cloneMatrix, 'sum'));
 
@@ -140,7 +113,7 @@ Processor = {
 				if (this.cloneMatrix[i].sum >= TOTAL_IN_AREA*0.6) {
 					var distance = Math.abs(this.cloneMatrix[i].index - base.index);
 					// 是在base的附近
-					if (distance == 1 || distance == 15 || distance == 16 || distance == 17) {
+					if (distance == 1 || distance == 49 || distance == 50 || distance == 51) {
 						selected.push(this.cloneMatrix[i]);
 						// 如果后面的元素也是占满的，检测它附近的
 						if (this.cloneMatrix[i].sum == TOTAL_IN_AREA && !this.cloneMatrix[i].selected) {
@@ -218,13 +191,16 @@ Processor = {
 
 		//var area = (pos[1]-pos[3])*(pos[2]-pos[0]);
 		//console.log(area);
-		app.hit(i_left, i_top);
+		//app.hit(i_left, i_top);
 	},
+	// -------------------------------------------------------------end
 
+	// 用于侦测颜色
 	// 记录黑白区别，以判断是否停止运动
+	// -------------------------------------------------------------start
 	isStop: function(pixels) {
 		var data = pixels.data,
-			NUM_IN_ROW = this.WIDTH*4,
+			NUM_IN_ROW = this._WIDTH*4,
 			white = 0,
 			black = 0,
 			counter = 0;
@@ -257,7 +233,7 @@ Processor = {
 
 	takeColor: function(pixels) {
 		var data = pixels.data;
-		var NUM_IN_ROW = this.WIDTH*4, white = 0, black = 0, counter = 0;
+		var NUM_IN_ROW = this._WIDTH*4, white = 0, black = 0, counter = 0;
 		var r_t = 0, g_t = 0, b_t = 0, i_t = 0, r, g, b;
 
 		// 根据倍率设置区域大小
@@ -298,6 +274,7 @@ Processor = {
 			return false;
 		}
 	},
+	// -------------------------------------------------------------end
 
 	startup: function(pixels) {
 		if (!this.initialized) {
