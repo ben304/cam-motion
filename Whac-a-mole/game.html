@@ -5,10 +5,12 @@
   <title>怪兽打打</title>
   <link rel="stylesheet" href="css/game.css" />
   <link rel="stylesheet" href="css/monster.css" />
+  <script src="js/jquery.min.js"></script>
   <script src="js/config-min.js"></script>
+  <script src="js/game-min.js"></script>
 </head>
 <body>
-  <div class="stage">
+  <div id="stage" class="stage">
     
     <!--游戏开始界面-->
     <div class="start">
@@ -16,65 +18,65 @@
     </div>
     
     <!--游戏进行中-->
-    <div class="gaming enabled">
+    <div class="gaming">
       <div class="hammer bang"></div>
-      <ul>
+      <ul id="holes">
         <li class="p1">
-          <div class="hit">
+          <div class="monster hit">
             <b></b>
             <p class="m1"></p>
           </div>
         </li>
         <li class="p2">
-          <div class="disapear-level2">
+          <div class="monster disapear-level2">
             <b></b>
             <p class="m2"></p>
           </div>
         </li>
         <li class="p3">
-          <div class="disapear-level3">
+          <div class="monster disapear-level3">
             <b></b>
             <p class="m3"></p>
           </div>
         </li>
         <li class="p4">
-          <div class="disapear-level4">
+          <div class="monster disapear-level4">
             <b></b>
             <p class="m4"></p>
           </div>
         </li>
         <li class="p5">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m5"></p>
           </div>
         </li>
         <li class="p6">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m6"></p>
           </div>
         </li>
         <li class="p7">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m7"></p>
           </div>
         </li>
         <li class="p8">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m8"></p>
           </div>
         </li>
         <li class="p9">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m9"></p>
           </div>
         </li>
         <li class="p10">
-          <div>
+          <div class="monster">
             <b></b>
             <p class="m10"></p>
           </div>
