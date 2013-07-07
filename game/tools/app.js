@@ -8,7 +8,7 @@
 	window.lettersCtrl = new LettersCtrl()
 
 	/* 用于控制地鼠出现 */
-	var controller = {
+	var app = {
 
 		level: 0,
 
@@ -182,6 +182,7 @@
 	};
 
 	/* 总控 */
+	/*
 	var app = {
 
 		paused: false,
@@ -241,7 +242,7 @@
 			// temp
 			Watcher.gameStart(function(x, y) {lettersCtrl.bind(y, x);});
 		}
-	};
+	};*/
 
 	//app.init();
 
