@@ -78,7 +78,7 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
-				game.nextPhase(Watcher.gameStart);
+				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl)));
 			}
 			last = cur;
 		}

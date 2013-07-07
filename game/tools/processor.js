@@ -189,7 +189,7 @@ Processor = {
 			i_left = left + width;
 
 		if (this.callback && $.isFunction(this.callback)) {
-			this.callback(i_top, i_left);
+			this.callback(i_left, i_top);
 		}
 	},
 	// -------------------------------------------------------------end

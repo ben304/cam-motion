@@ -5,10 +5,10 @@
 		TOTAL_RATS = 1,
 		SPEED = 2000;
 
-	window.lettersCtrl = new LettersCtrl()
+	window.lettersCtrl = new LettersCtrl();
 
 	/* 用于控制地鼠出现 */
-	var app = {
+	var App = {
 
 		level: 0,
 
@@ -134,6 +134,10 @@
 
 		random: function() {
 			return Math.floor(Math.random()*3);
+		},
+
+		hit: function() {
+			console.log("test");
 		}
 	};
 
@@ -246,6 +250,6 @@
 
 	//app.init();
 
-	window.app = app;
+	window.App = App;
 
 })(jQuery);
