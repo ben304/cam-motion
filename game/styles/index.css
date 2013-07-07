@@ -1,0 +1,62 @@
+.container {
+	width: 100%;
+	min-height: 660px;
+	position: relative;
+}
+
+.outer {
+	width: 800px;
+	height: 600px;
+	left: 50%;
+	top: 50%;
+	margin-left: -400px;
+	margin-top: -300px;
+	position: absolute;
+}
+
+#gridContainer {
+	width: 800px;
+	height: 600px;
+	position: absolute;
+	top: 0px;
+}
+
+td {
+    border-width:1px;
+    border-collapse:collapse;
+    border-color:red;
+    border-style:solid;
+}
+
+#phase1 .outer {
+	background: url("../images/g_detect.png");
+}
+
+#phase1 #wrapper {
+	width: 320px;
+	height: 240px;
+	margin: 0 auto;
+	display: block;
+	margin-top: 230px;
+	background: #FFF;
+	position: relative;
+}
+
+#phase1 #area {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 120px;
+	left: 155px;
+	border: 1px dashed #FFF;
+}
+
+#phase2 {
+	display: none;
+}
+
+#phase2 .outer {
+}
+
+
+
