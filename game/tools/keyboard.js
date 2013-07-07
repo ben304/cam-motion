@@ -55,15 +55,13 @@ LettersCtrl = (function() {
     }, LETTER_CHECKING_TIME);
   };
 
-  LettersCtrl.inputLetter = function(letter) {};
+  LettersCtrl.prototype.inputLetter = function(letter) {};
 
   LettersCtrl.prototype.showProgress = function() {
     var value;
     Circle.show().val(0);
     value = 0;
     return this.progressTimer = setInterval(function() {
-      var val;
-      val = Circle.val();
       return Circle.val(value++);
     }, LETTER_CHECKING_TIME / 100);
   };
