@@ -62,8 +62,6 @@ LettersCtrl = (function() {
     Circle.show().val(0);
     value = 0;
     return this.progressTimer = setInterval(function() {
-      var val;
-      val = Circle.val();
       return Circle.val(value++);
     }, LETTER_CHECKING_TIME / 100);
   };

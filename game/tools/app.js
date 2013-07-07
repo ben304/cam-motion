@@ -3,7 +3,8 @@
 	var GRID_ROW = 3,
 		GRID_COLUMN = 3,
 		TOTAL_RATS = 1,
-		SPEED = 2000;
+		SPEED = 2000,
+		lettersCtrl = new LettersCtrl();
 
 	/* 用于控制地鼠出现 */
 	var controller = {
@@ -186,7 +187,7 @@
 
 		score: 0,
 
-		currentPhase: 1, 
+		currentPhase: 1,
 
 		init: function(cb) {
 			this.bindEvent();
@@ -231,6 +232,9 @@
 			$("#phase"+this.currentPhase).hide();
 			$("#phase"+next).show();
 			this.currentPhase = next;
+
+			// temp
+			Watcher.gameStart(function(x, y) {lettersCtrl.bind(y, x);});
 		}
 	};
 

@@ -56,6 +56,11 @@ td {
 }
 
 #phase2 .outer {
+	background: url("../images/g_keyboard.png") no-repeat;
+}
+
+#phase3 {
+	display: none;
 }
 
 

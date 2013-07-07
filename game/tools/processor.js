@@ -274,7 +274,7 @@ Processor = {
 	startup: function(pixels, callback) {
 		if (!this.initialized) {
 			this.makeArray();
-			this.makeGrid($("#gridContainer"));
+			//this.makeGrid($("#gridContainer"));
 			this.initialized = true;
 		}
 		this.callback = callback;
