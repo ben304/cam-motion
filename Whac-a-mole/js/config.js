@@ -30,20 +30,3 @@ var LEVEL = [
 	{ CLSNAME: 'disapear-level3', SCORE: 300, CHANCE: [0,0,0,0,1,1,1,1,2,2] },
 	{ CLSNAME: 'disapear-level4', SCORE: 400, CHANCE: [0,0,0,1,1,1,1,2,2,2] }
 ];
-
-//根据用户总得分获得关卡
-function getLevelByUserScore(totalScore){
-	if(totalScore >= LEVEL[3].SCORE) return LEVEL[3];
-	for(var i = 0; i < 4; i++){
-		if(totalScore <= LEVEL[i].SCORE){
-			return LEVEL[i];
-		}
-	}
-}
-//根据关卡获得怪物
-function getMonsterByLevel(level){
-	var chance = level.CHANCE,
-		fam = chance[Math.random()*chance.length|0],
-		start = fam * 5, end = start + 5;
-	return MONSTER[(Math.random()*(end-start)|0)+start];
-}
