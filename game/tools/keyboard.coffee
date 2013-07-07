@@ -7,8 +7,8 @@ Circle = $('#J_KeyBoardCircle').knob
 class LettersCtrl
   constructor: ->
     letters = [
-      ["Q", 0, 0]
-      ["W", 0, 0]
+      ["Q", 23, 249]
+      ["W", 99, 249]
       ["E", 0, 0]
       ["R", 0, 0]
       ["T", 0, 0]
@@ -18,8 +18,8 @@ class LettersCtrl
       ["O", 0, 0]
       ["P", 0, 0]
       ["A", 0, 0]
-      ["S", 0, 0]
-      ["D", 0, 0]
+      ["S", 136, 329]
+      ["D", 213, 329]
       ["F", 0, 0]
       ["G", 0, 0]
       ["H", 0, 0]
@@ -42,7 +42,7 @@ class LettersCtrl
     @delayTimer = null
     @inputTimer = null
     @inLetter = ""
-    @bind()
+    # @bind()
 
   bind: (x, y)->
     @x = x
