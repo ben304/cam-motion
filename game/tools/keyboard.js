@@ -55,7 +55,7 @@ LettersCtrl = (function() {
     }, LETTER_CHECKING_TIME);
   };
 
-  LettersCtrl.inputLetter = function(letter) {};
+  LettersCtrl.prototype.inputLetter = function(letter) {};
 
   LettersCtrl.prototype.showProgress = function() {
     var value;

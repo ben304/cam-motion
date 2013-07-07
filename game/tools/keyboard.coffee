@@ -69,14 +69,13 @@ class LettersCtrl
     , LETTER_CHECKING_TIME
 
 
-  @inputLetter: (letter)->
+  inputLetter: (letter)->
 
 
   showProgress: ->
     Circle.show().val(0)
     value = 0
     @progressTimer = setInterval ->
-      val = Circle.val()
       Circle.val value++
     , LETTER_CHECKING_TIME / 100
 
