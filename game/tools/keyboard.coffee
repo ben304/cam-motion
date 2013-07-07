@@ -42,6 +42,7 @@ class LettersCtrl
     @delayTimer = null
     @inputTimer = null
     @inLetter = ""
+    @letters = []
     # @bind()
 
   bind: (x, y)->

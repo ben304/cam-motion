@@ -25,7 +25,8 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.init = function() {
     this.delayTimer = null;
     this.inputTimer = null;
-    return this.inLetter = "";
+    this.inLetter = "";
+    return this.letters = [];
   };
 
   LettersCtrl.prototype.bind = function(x, y) {
