@@ -11,30 +11,32 @@ class LettersCtrl
     letters = [
       ["Q", 23, 249]
       ["W", 99, 249]
-      ["E", 0, 0]
-      ["R", 0, 0]
-      ["T", 0, 0]
-      ["Y", 0, 0]
-      ["U", 0, 0]
-      ["I", 0, 0]
-      ["O", 0, 0]
-      ["P", 0, 0]
-      ["A", 0, 0]
-      ["S", 136, 329]
-      ["D", 213, 329]
-      ["F", 0, 0]
-      ["G", 0, 0]
-      ["H", 0, 0]
-      ["J", 0 ,0]
-      ["K", 0, 0]
-      ["L", 0, 0]
-      ["Z", 0, 0]
-      ["X", 0, 0]
-      ["C", 0, 0]
-      ["V", 0, 0]
-      ["B", 0, 0]
-      ["N", 0, 0]
-      ["M", 0, 0]
+      ["E", 175, 249]
+      ["R", 252, 249]
+      ["T", 330, 249]
+      ["Y", 407, 249]
+      ["U", 484, 249]
+      ["I", 561, 249]
+      ["O", 637, 249]
+      ["P", 713, 249]
+      ["A", 60, 328]
+      ["S", 136, 328]
+      ["D", 213, 328]
+      ["F", 289, 328]
+      ["G", 367, 328]
+      ["H", 445, 328]
+      ["J", 521, 328]
+      ["K", 598, 328]
+      ["L", 675, 328]
+      ["Z", 97, 410]
+      ["X", 173, 410]
+      ["C", 250, 410]
+      ["V", 326, 410]
+      ["B", 404, 410]
+      ["N", 481, 410]
+      ["M", 558, 410]
+      ["BackSpace", 531, 110]
+      ["Enter", 655, 110]
     ]
     for letter in letters
       @letters.push new Letter letter[0], letter[1], letter[2]
@@ -73,7 +75,13 @@ class LettersCtrl
   inputLetter: (letter)->
     console.log letter
     val = $('#username').val()
-    $('#username').val val + letter.letter if letter
+    if letter.letter is "BackSpace"
+      $('#username').val ''
+    else if letter.letter is "Enter"
+      game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
+    else
+      val = $('#username').val()
+      $('#username').val val + letter.letter if letter
 
 
   showProgress: ->
