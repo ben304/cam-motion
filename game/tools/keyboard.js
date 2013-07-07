@@ -61,6 +61,9 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.inputLetter = function(letter) {
     var val;
     console.log(letter);
+    if (!letter) {
+      return;
+    }
     val = $('#username').val();
     if (letter.letter === "BackSpace") {
       return $('#username').val('');
@@ -68,9 +71,7 @@ LettersCtrl = (function() {
       return game.nextPhase(Watcher.gameStart.bind(void 0, App.hit.bind(App)));
     } else {
       val = $('#username').val();
-      if (letter) {
-        return $('#username').val(val + letter.letter);
-      }
+      return $('#username').val(val + letter.letter);
     }
   };
 

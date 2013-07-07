@@ -74,6 +74,7 @@ class LettersCtrl
 
   inputLetter: (letter)->
     console.log letter
+    return if !letter
     val = $('#username').val()
     if letter.letter is "BackSpace"
       $('#username').val ''
@@ -81,7 +82,7 @@ class LettersCtrl
       game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
     else
       val = $('#username').val()
-      $('#username').val val + letter.letter if letter
+      $('#username').val val + letter.letter
 
 
   showProgress: ->
