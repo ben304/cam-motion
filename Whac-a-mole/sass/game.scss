@@ -15,12 +15,18 @@ body {
   margin: -300px 0 0 -400px;
 }
 
-.start, .game, .game ul, .game-over {
+.start, .gaming, .gaming ul, .game-over {
   width: 100%;
   height: 100%;
 }
-.start {
+.start, .gaming, .game-over {
   display: none;
+}
+.enabled {
+  display: block;
+}
+
+.start {
   background: url(../image/g_start.png) no-repeat center center;
   text-align: center;
   .btn {
@@ -32,8 +38,7 @@ body {
   }
 }
 
-.game {
-  display: none;
+.gaming {
   ul {
     position: relative;
   }
