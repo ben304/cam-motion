@@ -34,6 +34,7 @@ LettersCtrl = (function() {
       _this = this;
     this.x = x;
     this.y = y;
+    Circle[0].style.cssText = "position: absolute; left: " + x + "px; top: " + y + "px;";
     letter = this.checkInLetter(x, y);
     if (letter === this.preLetter) {
       return;
@@ -41,7 +42,6 @@ LettersCtrl = (function() {
     this.preLetter = letter;
     clearTimeout(this.delayTimer);
     clearTimeout(this.inputTimer);
-    this.hideProgress();
     return this.delayTimer = setTimeout(function() {
       return _this.checkAfterDelay.call(_this);
     }, LETTER_CHECKING_DELAY);
@@ -63,12 +63,12 @@ LettersCtrl = (function() {
     value = 0;
     return this.progressTimer = setInterval(function() {
       var val;
-      return val = Circle.Circle.val(value++);
+      val = Circle.val();
+      return Circle.val(value++);
     }, LETTER_CHECKING_TIME / 100);
   };
 
   LettersCtrl.prototype.hideProgress = function() {
-    Circle.hide();
     return clearInterval(this.progressTimer);
   };
 

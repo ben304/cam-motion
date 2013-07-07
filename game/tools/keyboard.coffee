@@ -49,12 +49,15 @@ class LettersCtrl
   bind: (x, y)->
     @x = x
     @y = y
+    Circle[0].style.cssText = """
+      position: absolute; left: #{x}px; top: #{y}px;
+    """
     letter = @checkInLetter x, y
     return if letter is @preLetter
     @preLetter = letter
     clearTimeout @delayTimer
     clearTimeout @inputTimer
-    @hideProgress()
+    # @hideProgress()
     @delayTimer = setTimeout => 
       @checkAfterDelay.call @
     , LETTER_CHECKING_DELAY
@@ -73,16 +76,15 @@ class LettersCtrl
     Circle.show().val(0)
     value = 0
     @progressTimer = setInterval ->
-      val = Circle.
+      val = Circle.val()
       Circle.val value++
     , LETTER_CHECKING_TIME / 100
 
 
   hideProgress: ->
-    Circle.hide()
+    # Circle.hide()
     clearInterval @progressTimer
     
-
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
