@@ -1,5 +1,5 @@
-LETTER_CHECKING_TIME = 3000
-LETTER_CHECKING_DELAY = 300
+LETTER_CHECKING_TIME = 1500
+LETTER_CHECKING_DELAY = 100
 Circle = $('#J_KeyBoardCircle').knob
   thickness : 0.3
   width     : 60
