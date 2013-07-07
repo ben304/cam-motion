@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>怪兽打打</title>
+  <link rel="stylesheet" href="styles/game.css" />
+  <link rel="stylesheet" href="styles/monster.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+<body>
+  <div id="stage" class="stage">
+    
+    <div class="inspectColor">
+      <div id="wrapper">
+        <video autoplay width="320" height="240"></video>
+        <div id="area"></div>
+      </div>
+    </div>
+
+    <div class="inputName">
+      <input type="text" id="username" />
+      <canvas id="c1" width="800" height="600" style="display:none;"></canvas>
+      <canvas id="c2" width="800" height="600" style="display:none;"></canvas>
+      <table id="gridContainer"></table>
+      <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">
+      <div style="width:66px;height:66px;position:absolute;background:red;left:0px;top:0px;display:none;"></div>
+    </div>
+
+    <!--游戏开始界面
+    <div class="start">
+      <span class="btn"></span>
+    </div>
+    -->
+    
+    <!--游戏进行中-->
+    <div class="gaming">
+      <div class="hammer bang"></div>
+      <ul id="holes">
+        <li class="p1">
+          <div class="monster hit">
+            <b></b>
+            <p class="m1"></p>
+          </div>
+        </li>
+        <li class="p2">
+          <div class="monster disapear-level2">
+            <b></b>
+            <p class="m2"></p>
+          </div>
+        </li>
+        <li class="p3">
+          <div class="monster disapear-level3">
+            <b></b>
+            <p class="m3"></p>
+          </div>
+        </li>
+        <li class="p4">
+          <div class="monster disapear-level4">
+            <b></b>
+            <p class="m4"></p>
+          </div>
+        </li>
+        <li class="p5">
+          <div class="monster">
+            <b></b>
+            <p class="m5"></p>
+          </div>
+        </li>
+        <li class="p6">
+          <div class="monster">
+            <b></b>
+            <p class="m6"></p>
+          </div>
+        </li>
+        <li class="p7">
+          <div class="monster">
+            <b></b>
+            <p class="m7"></p>
+          </div>
+        </li>
+        <li class="p8">
+          <div class="monster">
+            <b></b>
+            <p class="m8"></p>
+          </div>
+        </li>
+        <li class="p9">
+          <div class="monster">
+            <b></b>
+            <p class="m9"></p>
+          </div>
+        </li>
+        <li class="p10">
+          <div class="monster">
+            <b></b>
+            <p class="m10"></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <!--游戏结束-->
+    <div class="game-over">
+      <span>0</span>
+      <a class="restart" href="javascript:void(0)"></a>
+      <a class="board" href="javascript:void(0)"></a>
+    </div>
+  </div>
+  <script src="library/jquery.min.js"></script>
+  <script src="library/jquery.knob.js"></script>
+
+  <script src="tools/config.js"></script>
+  <script src="tools/game.js"></script>
+
+  <script src="tools/keyboard.js"></script>
+  <script src="tools/SoundBox.js"></script>
+  <script src="tools/app.js"></script>
+  <script src="tools/ps.js"></script>
+  <script src="tools/processor.js"></script>
+  <script src="tools/watcher.js"></script>
+  <script>
+    var game = new Game();
+    Watcher.camStart(Watcher.inspectColor);
+  </script>
+</body>
+</html>

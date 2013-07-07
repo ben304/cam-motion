@@ -66,7 +66,7 @@ Watcher = (function() {
 		video.play();
 	};
 
-	var colorer = function() {
+	var colorer = function(callback) {
 		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 		var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
 
@@ -78,13 +78,13 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
-				app.roll();
+				game.nextPhase(Watcher.gameStart);
 			}
 			last = cur;
 		}
 	};
 
-	var inspectColor = function(interval) {
+	var inspectColor = function(callback, interval) {
 		var myInterval = interval || camInterval;
 		__takeAction(myInterval, colorer);
 	};
