@@ -28,6 +28,16 @@ td {
     border-style:solid;
 }
 
+#username {
+	position: absolute;
+	top: 110px;
+	left: 60px;
+	font-size: 50px;
+	width: 430px;
+	z-index: 1;
+	padding: 5px;
+}
+
 #phase1 .outer {
 	background: url("../images/g_detect.png");
 }
