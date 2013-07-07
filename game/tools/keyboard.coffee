@@ -1,6 +1,7 @@
-LETTER_CHECKING_TIME = 1500
-LETTER_CHECKING_DELAY = 100
-Circle = $('#J_KeyBoardCircle').knob
+LETTER_CHECKING_TIME = 600
+LETTER_CHECKING_DELAY = 300
+CircleInput = $('#J_KeyBoardCircle')
+Circle = CircleInput.knob
   thickness : 0.3
   width     : 60
 
@@ -50,14 +51,14 @@ class LettersCtrl
     @x = x
     @y = y
     Circle[0].style.cssText = """
-      position: absolute; left: #{x}px; top: #{y}px;
+      position: absolute; left: #{x - 30}px; top: #{y - 30}px;
     """
     letter = @checkInLetter x, y
     return if letter is @preLetter
     @preLetter = letter
     clearTimeout @delayTimer
     clearTimeout @inputTimer
-    # @hideProgress()
+    @hideProgress()
     @delayTimer = setTimeout => 
       @checkAfterDelay.call @
     , LETTER_CHECKING_DELAY
@@ -70,18 +71,26 @@ class LettersCtrl
 
 
   inputLetter: (letter)->
+    console.log letter
+    val = $('#username').val()
+    $('#username').val val + letter.letter if letter
 
 
   showProgress: ->
-    Circle.show().val(0)
-    value = 0
+    Circle.show()
+    CircleInput.val(6).trigger('change')
+    clearInterval @progressTimer
+    value = 6
     @progressTimer = setInterval ->
-      Circle.val value++
-    , LETTER_CHECKING_TIME / 100
+      value = value + 6
+      CircleInput.val(value).trigger('change')
+    , LETTER_CHECKING_TIME / 17
+    return
 
 
   hideProgress: ->
     # Circle.hide()
+    CircleInput.val(0).trigger('change')
     clearInterval @progressTimer
     
   checkInLetter: (x, y)->

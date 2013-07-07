@@ -5,9 +5,19 @@
   <title>怪兽打打</title>
   <link href="styles/reset.css" rel="stylesheet" />
   <link href="styles/index.css" rel="stylesheet" />
+  <style>
+/*  body>div:first-child {
+    position: absolute;
+    z-index: 99999;
+  }*/
+  video {
+    -webkit-transform: scaleX(-1);
+  }
+  </style>
 </head>
 
 <body>
+
   <div class="container" id="phase1">
     <div class="outer">
       <div id="wrapper">
@@ -19,11 +29,12 @@
   <div class="container" id="phase2">
     <span id="pos" style="position:fixed;top:0px;left:0px;"></span>
     <div class="outer">
-      <input type="text" id="username" />
+      <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">
+      <input type="text" id="username" />  
       <canvas id="c1" width="800" height="600" style="display:none;"></canvas>
       <canvas id="c2" width="800" height="600" style="display:none;"></canvas>
       <table id="gridContainer"></table>
-      <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">
+      
       <div style="width:66px;height:66px;position:absolute;background:red;left:0px;top:0px;display:none;"></div>
     </div>
   </div>
