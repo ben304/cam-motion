@@ -9,7 +9,13 @@
 </head>
 <body>
   <div id="stage" class="stage">
-    
+
+    <!-- 游戏开始界面
+    <div class="start">
+      <span class="btn"></span>
+    </div>
+    -->
+
     <div class="inspectColor">
       <div id="wrapper">
         <video autoplay width="320" height="240"></video>
@@ -23,75 +29,72 @@
       <canvas id="c2" width="800" height="600" style="display:none;"></canvas>
       <table id="gridContainer"></table>
       <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">
+      <!--
       <div style="width:66px;height:66px;position:absolute;background:red;left:0px;top:0px;"></div>
+      -->
     </div>
-
-    <!--游戏开始界面
-    <div class="start">
-      <span class="btn"></span>
-    </div>
-    -->
     
     <!--游戏进行中-->
     <div class="gaming">
-      <div class="hammer bang"></div>
+      <div class="hammer"></div>
+      <span class="pause" style="display:fixed;top:0px;left:0px;">pause</span>
       <ul id="holes">
         <li class="p1">
-          <div class="monster hit">
+          <div class="monster hit" data-hole="1">
             <b></b>
             <p class="m1"></p>
           </div>
         </li>
         <li class="p2">
-          <div class="monster disapear-level2">
+          <div class="monster" data-hole="2">
             <b></b>
             <p class="m2"></p>
           </div>
         </li>
         <li class="p3">
-          <div class="monster disapear-level3">
+          <div class="monster" data-hole="3">
             <b></b>
             <p class="m3"></p>
           </div>
         </li>
         <li class="p4">
-          <div class="monster disapear-level4">
+          <div class="monster" data-hole="4">
             <b></b>
             <p class="m4"></p>
           </div>
         </li>
         <li class="p5">
-          <div class="monster">
+          <div class="monster" data-hole="5">
             <b></b>
             <p class="m5"></p>
           </div>
         </li>
         <li class="p6">
-          <div class="monster">
+          <div class="monster" data-hole="6">
             <b></b>
             <p class="m6"></p>
           </div>
         </li>
         <li class="p7">
-          <div class="monster">
+          <div class="monster" data-hole="7">
             <b></b>
             <p class="m7"></p>
           </div>
         </li>
         <li class="p8">
-          <div class="monster">
+          <div class="monster" data-hole="8">
             <b></b>
             <p class="m8"></p>
           </div>
         </li>
         <li class="p9">
-          <div class="monster">
+          <div class="monster" data-hole="9">
             <b></b>
             <p class="m9"></p>
           </div>
         </li>
         <li class="p10">
-          <div class="monster">
+          <div class="monster" data-hole="10">
             <b></b>
             <p class="m10"></p>
           </div>
@@ -120,6 +123,7 @@
   <script src="tools/watcher.js"></script>
   <script>
     var game = new Game();
+    //Watcher.camStart();
     Watcher.camStart(Watcher.inspectColor);
   </script>
 </body>

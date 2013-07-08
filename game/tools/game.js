@@ -1,5 +1,10 @@
 void function(global){
 	//根据用户总得分获得关卡
+	
+	function getScore() {
+		return 0;
+	}
+
 	function getLevelByUserScore(totalScore){
 		if(totalScore >= LEVEL[3].SCORE) return LEVEL[3];
 		for(var i = 0; i < 4; i++){
@@ -61,8 +66,10 @@ void function(global){
 			$(this.phase[currentPhase]).hide();
 			currentPhase = Math.min(++currentPhase, this.phase.length-1);
 			this._displayCurrentPhase();
-			$(this.phase[currentPhase]).hasClass('gaming') && this.start();
+			// 确保逻辑在start前
 			callback && callback();
+			$(this.phase[currentPhase]).hasClass('gaming') && this.start();
+
 			return this;
 		},
 		start: function(){

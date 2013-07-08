@@ -47,7 +47,7 @@ Watcher = (function() {
 
 	var camStart = function(callback) {
 		if (navigator.getUerMedia) {
-			navigator.getUerMedia({video: true}, function(stream) {
+			navigator.getUerMedia({video: true, audio: true}, function(stream) {
 
 				video.src = window.URL.createObjectURL(stream);
 				localMediaStream = stream;

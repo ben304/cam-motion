@@ -6,83 +6,119 @@
 		SPEED = 2000;
 
 	window.lettersCtrl = new LettersCtrl();
+	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
 	var App = {
 
-		level: 0,
+		map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
-		contentEl: null,
-
-		grids: [],
-
-		map: [],
+		mapArea: [],
 
 		initialized: false,
 
-		init: function(cb) {
-			var that = this;
-			if (!that.initialized) {
-				that.contentEl = $("table");
-				$(".row").each(function(index, row) {
-					var holes = $(row).children().each(function(index, hole) {
-						return hole;
-					});
-					that.grids.push(holes);
-				});
-				that.map = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-				that.startup();
-				that.initialized = true;
+		// 最小为1
+		current: null,
+
+		holeRect: {w: 0, h: 0},
+
+		init: function(mapArea) {
+			if (!this.initialized) {
+				this.mapArea = mapArea;
+				this.initialized = true;
+				this.holeRect = {w: mapArea.width, h: mapArea.height};
+				this.bindEvnet();
 			}
-			cb && cb();
+			this.popup();
+			// var that = this;
+			// if (!that.initialized) {
+			// 	that.contentEl = $("table");
+			// 	$(".row").each(function(index, row) {
+			// 		var holes = $(row).children().each(function(index, hole) {
+			// 			return hole;
+			// 		});
+			// 		that.grids.push(holes);
+			// 	});
+			// 	that.map = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+			// 	that.startup();
+			// 	that.initialized = true;
+			// }
+			// cb && cb();
 		},
 
-		startup: function() {
+		popup: function() {
 			
-			if (this.paused) {
-				clearTimeout(this.timer);
-				return;
-			}
+			/*
+			var score = game.getScore(),
+				level = game.getLevelByUserScore(score),
+				monster = game.getMonsterByLevel(level);*/
+			
+			var m = "m"+(parseInt(Math.random()*15)+1);
+			var holeID = this.getVacantHole();
+			//console.log(holeID+" appear");
+			$(".p"+holeID).find("p").attr('class', m);
+			$(".p"+holeID).find(".monster").attr('class', 'monster disapear-level1');
+			this.map[holeID-1] = 1;
+			this.current = holeID;
+			// if (this.paused) {
+			// 	clearTimeout(this.timer);
+			// 	return;
+			// }
 
-			if (this.timeout) {
-				clearTimeout(this.timer);
-				return;
-			} 
+			// if (this.timeout) {
+			// 	clearTimeout(this.timer);
+			// 	return;
+			// } 
+
+			// var that = this;
+
+			// that.timer = setTimeout(function() {
+			// 	for (var i = 0; i < TOTAL_RATS; i++) {
+			// 		var	row = that.findVacantPos()[0],
+			// 			column = that.findVacantPos()[1],
+			// 			hole = that.grids[row][column];
+
+			// 		if (!that.map[row][column]) {
+			// 			that.map[row][column] = true;
+			// 			that.popup(row, column);
+			// 		}
+			// 	}
+			// 	that.startup();
+			// }, 2000);
+		},
+
+		getVacantHole: function() {
+			var rnd = Math.floor(Math.random()*10);
+			if (this.map[rnd]) {
+				rnd = (rnd+1)%10;
+			}
+			return rnd+1;
+		},
+
+		bindEvnet: function() {
 
 			var that = this;
-
-			that.timer = setTimeout(function() {
-				for (var i = 0; i < TOTAL_RATS; i++) {
-					var	row = that.findVacantPos()[0],
-						column = that.findVacantPos()[1],
-						hole = that.grids[row][column];
-
-					if (!that.map[row][column]) {
-						that.map[row][column] = true;
-						that.popup(row, column);
-					}
-				}
-				that.startup();
-			}, 2000);
-		},
-
-		popup: function(row, column) {
-			var that = this,
-				actor = $(that.grids[row][column]).find(".mouse"),
-				star = actor.find(".star");
-
-			actor.addClass("active");
-			actor.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
-			    function(e) {
-			    	that.map[row][column] = false;
-			    	actor.removeClass('active');
+			
+			// 绑定动物消失后出现另一个动物
+			$(".monster").on('webkitAnimationEnd', function(e) {
+			    //that.map[row][column] = false;
+			    //actor.removeClass('active');
+			    var holeID = $(this).data("hole");
+			    $(this).attr("class", "monster");
+			    // 延时防止class未能清除
+			    setTimeout(function() {
+			    	that.popup();
+				}, 50);
+			    that.map[holeID-1] = 0;
+			    that.current = null;
 			});
-			star.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
-			    function(e) {
-			    	star.removeClass('faint');
+
+			$(".pause").click(function() {
+				$(".monster").addClass("pause");
 			});
 		},
 
+		/*
 		faint: function(e) {
 			var that = this,
 				$target = $(e.target),
@@ -134,10 +170,44 @@
 
 		random: function() {
 			return Math.floor(Math.random()*3);
+		},*/
+
+		hit: function(left, top) {
+			var that = this;
+			hammer.css({"left": left, "top": top});
+			if (this.current != null) {
+				var monster = $(".monster").eq(this.current-1);
+				if (this.checkCollision(left, top, monster)) {
+					console.log("hit"+this.current);
+					hammer.addClass("bang");
+					monster.data("hit", true);
+					monster.addClass("pause");
+					monster.addClass("hit");
+					setTimeout(function(){
+						hammer.removeClass("bang");
+						monster.attr("class", "monster");
+						monster.removeClass("hit");
+						monster.removeClass("pause");
+						monster.data("hit", false);
+						that.popup();
+					}, 200);
+					
+				}
+			}
 		},
 
-		hit: function() {
-			console.log("test");
+		checkCollision: function(left, top, monster) {
+			var w = this.holeRect.w,
+				h = this.holeRect.h,
+				point = this.mapArea.holes[this.current-1],
+				x = point.x,
+				y = point.y,
+				elemTop = monster.position() && monster.position().top;
+
+			if (left>=x && left<=x+w && top>=elemTop && top<=y+h && !monster.data("hit")) {
+				return true;
+			}
+
 		}
 	};
 
