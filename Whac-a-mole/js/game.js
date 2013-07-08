@@ -75,8 +75,8 @@ void function(global){
 			$(this.phase[currentPhase]).hide();
 			currentPhase = Math.min(++currentPhase, this.phase.length-1);
 			this._displayCurrentPhase();
-			$(this.phase[currentPhase]).hasClass('gaming') && this._start();
 			callback && callback();
+			$(this.phase[currentPhase]).hasClass('gaming') && this._start();
 			return this;
 		},
 		restart: function(){
