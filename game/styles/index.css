@@ -44,6 +44,10 @@ td {
 	position: relative;
 }
 
+.inspectColor video {
+	-webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
 .inspectColor #area {
 	position: absolute;
 	width: 20px;
