@@ -1,6 +1,6 @@
 Filters = {};
 
-var SENS = 30;
+var SENS = 20;
 
 Filters.getPixels = function(img) {
   var c = this.getCanvas(img.width, img.height);

@@ -149,6 +149,7 @@ Processor = {
 		for (var i = 0, l = selected.length; i < l; i++) {
 			var x = selected[i].index%this.AREA_IN_ROW,
 				y = Math.floor(selected[i].index/this.AREA_IN_COL);
+			// max region
 			if (x < left) {
 				left = x;
 			}
@@ -161,6 +162,14 @@ Processor = {
 			if (y+1 > down) {
 				down = y+1;
 			}
+			// min region
+			/*
+			if (i == 0) {
+				left = x;
+				right = x+1;
+				up = y;
+				down = y+1;
+			} */
 		}
 		if (!selected.length) {
 			up = this.last.up;

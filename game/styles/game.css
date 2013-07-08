@@ -5,3 +5,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	-o-animation-play-state: paused;
 	animation-play-state: paused;
 }
+.hammer {
+	-webkit-transition: 0.03s;
+	-webkit-transform: scale(0.7);
+}
