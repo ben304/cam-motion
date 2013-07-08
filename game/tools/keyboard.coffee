@@ -116,7 +116,6 @@ class LettersCtrl
         return letter
         break
 
-
 class Letter
   width: 66
   height: 66
