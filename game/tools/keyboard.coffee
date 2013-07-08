@@ -1,5 +1,5 @@
-LETTER_CHECKING_TIME = 600
-LETTER_CHECKING_DELAY = 300
+LETTER_CHECKING_TIME = 300
+LETTER_CHECKING_DELAY = 100
 CircleInput = $('#J_KeyBoardCircle')
 Circle = CircleInput.knob
   thickness : 0.3
@@ -47,25 +47,25 @@ class LettersCtrl
     @inputTimer = null
     @inLetter = ""
 
-    Circle.bind 'change', (ev)->
-      if ev.value >= 100
+    Circle.bind 'change', (ev)=>
+      if ev.target.value >= 100
         @inputLetter @preLetter
 
     # @bind()
 
   bind: (x, y)->
-    @x = x + 35
-    @y = y + 35
+    @x = x - 33
+    @y = y - 33
     letter = @checkInLetter x, y
     Circle[0].style.cssText = """
-      position: absolute; left: #{@x - 30}px; top: #{@y - 30}px;
+      position: absolute; left: #{@x}px; top: #{@y}px;
     """
-    return if letter is @preLetter
+    return if (letter is @preLetter) # and @isStart
     clearTimeout @delayTimer
     clearTimeout @inputTimer
     @hideProgress()
-    return if !letter
     @preLetter = letter
+    return if !letter
     @delayTimer = setTimeout => 
       @checkAfterDelay.call @
     , LETTER_CHECKING_DELAY
@@ -80,6 +80,7 @@ class LettersCtrl
   inputLetter: (letter)->
     console.log letter
     return if !letter
+    SoundBox.play('ding')
     val = $('#username').val()
     if letter.letter is "BackSpace"
       $('#username').val val.substring(0, val.length - 2)
@@ -97,7 +98,8 @@ class LettersCtrl
 
 
   showProgress: ->
-    Circle.show()
+    @isStart = true
+    #Circle.show()
     CircleInput.val(6).trigger('change')
     clearInterval @progressTimer
     value = 6
@@ -111,6 +113,7 @@ class LettersCtrl
 
   hideProgress: ->
     # Circle.hide()
+    @isStart = false
     CircleInput.val(0).trigger('change')
     clearInterval @progressTimer
     
@@ -119,6 +122,7 @@ class LettersCtrl
       if letter.checkIsSelf(x, y)
         @x = letter.x
         @y = letter.y
+        console.log letter
         return letter
         break
     return false

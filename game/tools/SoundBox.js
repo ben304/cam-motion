@@ -3,11 +3,11 @@ var DING, HIT, SoundBox;
 
 DING = new Audio;
 
-DING.src = "../sound/013kt008.mp3";
+DING.src = "./sound/013kt096.mp3";
 
 HIT = new Audio;
 
-HIT.src = "../sound/013kt096.mp3";
+HIT.src = "./sound/013kt008.mp3";
 
 SoundBox = (function() {
 
