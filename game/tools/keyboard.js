@@ -72,7 +72,7 @@ LettersCtrl = (function() {
     SoundBox.play('ding');
     val = $('#username').val();
     if (letter.letter === "BackSpace") {
-      return $('#username').val(val.substring(0, val.length - 2));
+      return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
       Watcher.clearTimer();
       return game.nextPhase(function() {

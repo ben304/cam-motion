@@ -83,7 +83,7 @@ class LettersCtrl
     SoundBox.play('ding')
     val = $('#username').val()
     if letter.letter is "BackSpace"
-      $('#username').val val.substring(0, val.length - 2)
+      $('#username').val val.substring(0, val.length - 1)
     else if letter.letter is "Enter"
       Watcher.clearTimer()
       game.nextPhase ->
