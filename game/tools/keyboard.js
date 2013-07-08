@@ -78,6 +78,10 @@ LettersCtrl = (function() {
       return game.nextPhase(function() {
         game.on('start', function(mapArea) {
           return App.init(mapArea);
+        }).on("process", function(i) {
+          return App.process(i);
+        }).on('over', function(score) {
+          return App.stop(score);
         });
         return Watcher.gameStart.bind(void 0, App.hit.bind(App))();
       });

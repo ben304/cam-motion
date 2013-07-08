@@ -87,8 +87,13 @@ class LettersCtrl
     else if letter.letter is "Enter"
       Watcher.clearTimer()
       game.nextPhase ->
-        game.on 'start', (mapArea)->
+        game.on('start', (mapArea)->
           App.init(mapArea)
+        ).on("process", (i)->
+          App.process(i)
+        ).on('over', (score)->
+          App.stop(score)
+        )
         Watcher.gameStart.bind(undefined, App.hit.bind(App))()
 
       #game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
