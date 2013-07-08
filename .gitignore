@@ -1,0 +1,6 @@
+.idea
+*.pyc
+browser-plugins/spm-chrome/spm.zip
+browser-plugins/udata-chrome/udata.zip
+.DS_Store
+*.iml
