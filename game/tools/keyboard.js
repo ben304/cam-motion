@@ -28,7 +28,12 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.init = function() {
     this.delayTimer = null;
     this.inputTimer = null;
-    return this.inLetter = "";
+    this.inLetter = "";
+    return Circle.bind('change', function(ev) {
+      if (ev.value >= 100) {
+        return this.inputLetter(this.preLetter);
+      }
+    });
   };
 
   LettersCtrl.prototype.bind = function(x, y) {
@@ -41,21 +46,20 @@ LettersCtrl = (function() {
     if (letter === this.preLetter) {
       return;
     }
-    this.preLetter = letter;
     clearTimeout(this.delayTimer);
     clearTimeout(this.inputTimer);
     this.hideProgress();
+    if (!letter) {
+      return;
+    }
+    this.preLetter = letter;
     return this.delayTimer = setTimeout(function() {
       return _this.checkAfterDelay.call(_this);
     }, LETTER_CHECKING_DELAY);
   };
 
   LettersCtrl.prototype.checkAfterDelay = function() {
-    var _this = this;
-    this.showProgress();
-    return this.inputTimer = setTimeout(function() {
-      return _this.inputLetter(_this.preLetter);
-    }, LETTER_CHECKING_TIME);
+    return this.showProgress();
   };
 
   LettersCtrl.prototype.inputLetter = function(letter) {
@@ -88,6 +92,9 @@ LettersCtrl = (function() {
     clearInterval(this.progressTimer);
     value = 6;
     this.progressTimer = setInterval(function() {
+      if (value >= 100) {
+        return;
+      }
       value = value + 6;
       return CircleInput.val(value).trigger('change');
     }, LETTER_CHECKING_TIME / 17);
@@ -110,6 +117,7 @@ LettersCtrl = (function() {
         break;
       }
     }
+    return false;
   };
 
   return LettersCtrl;

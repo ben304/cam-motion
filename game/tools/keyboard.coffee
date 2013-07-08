@@ -47,6 +47,10 @@ class LettersCtrl
     @inputTimer = null
     @inLetter = ""
 
+    Circle.bind 'change', (ev)->
+      if ev.value >= 100
+        @inputLetter @preLetter
+
     # @bind()
 
   bind: (x, y)->
@@ -57,19 +61,20 @@ class LettersCtrl
       position: absolute; left: #{@x - 30}px; top: #{@y - 30}px;
     """
     return if letter is @preLetter
-    @preLetter = letter
     clearTimeout @delayTimer
     clearTimeout @inputTimer
     @hideProgress()
+    return if !letter
+    @preLetter = letter
     @delayTimer = setTimeout => 
       @checkAfterDelay.call @
     , LETTER_CHECKING_DELAY
 
   checkAfterDelay: ->
     @showProgress()
-    @inputTimer = setTimeout =>
-      @inputLetter @preLetter
-    , LETTER_CHECKING_TIME
+    # @inputTimer = setTimeout =>
+    #   @inputLetter @preLetter
+    # , LETTER_CHECKING_TIME
 
 
   inputLetter: (letter)->
@@ -97,6 +102,7 @@ class LettersCtrl
     clearInterval @progressTimer
     value = 6
     @progressTimer = setInterval ->
+      return if value >= 100
       value = value + 6
       CircleInput.val(value).trigger('change')
     , LETTER_CHECKING_TIME / 17
@@ -115,6 +121,7 @@ class LettersCtrl
         @y = letter.y
         return letter
         break
+    return false
 
 class Letter
   width: 66
