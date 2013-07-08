@@ -20,7 +20,13 @@ Watcher = (function() {
 		currentColor,
 		last,
 		timer,
-		currentColor;
+		currentColor,
+		bg,
+		cloneBg,
+		enter,
+		detect = [false, false, false],
+		current = 0,
+		stopTimes = 0;
 
 	var DETECT_WIDTH = 640,
 		DETECT_HEIGHT = 480;
@@ -49,7 +55,7 @@ Watcher = (function() {
 
 	var camStart = function(callback) {
 		if (navigator.getUerMedia) {
-			navigator.getUerMedia({video: true, audio: true}, function(stream) {
+			navigator.getUerMedia({video: true}, function(stream) {
 
 				video.src = window.URL.createObjectURL(stream);
 				localMediaStream = stream;
@@ -68,8 +74,57 @@ Watcher = (function() {
 		video.play();
 	};
 
-	var inspectBg = function() {
+	var inspectBg = function(callback) {
+		bg = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+		cloneBg = bg;
+		ctx3.putImageData(bg, 0, 0);
+		if (callback && __isFunction(callback)) {
+			callback();
+		}
+	};
 
+	var inspectPerson = function() {
+		__takeAction(200, function() {
+			var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
+			var black = 0, white = 0;
+			var pixels = d.data;
+
+			Filters.differenceAccuracy(d.data, cur.data, cloneBg.data);
+			for (var i = 0; i < DETECT_WIDTH*DETECT_HEIGHT*4; i+=4) {
+				if (pixels[i] == 0 || pixels[i+1] == 0 || pixels[i+2] == 0) {
+					black++;
+				} else {
+					white++;
+				}
+			}
+			rate = black/(white+black);
+
+			if (!enter) {
+				if (rate > 0.05) {
+					console.log("ok");
+					enter = true;
+				}
+			} else {
+				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
+					console.log("next");
+					Watcher.clearTimer();
+					$("#showProject").hide();
+					game.nextPhase(Watcher.inspectColor);
+				}
+				if ((1-rate) < 0.02) {
+					detect[current] = true;
+					stopTimes++;
+					console.log(stopTimes);
+				} else {
+					detect[current] = false;
+					stopTimes = 0;
+				}
+				cloneBg = cur;
+				current = (current+1)%3;
+			}
+			ctx3.putImageData(d, 0, 0);
+		});
 	};
 
 	var colorer = function() {
@@ -126,6 +181,8 @@ Watcher = (function() {
 		camPlay: camPlay,
 		inspectColor: inspectColor,
 		gameStart: gameStart,
-		clearTimer: clearTimer
+		clearTimer: clearTimer,
+		inspectBg: inspectBg,
+		inspectPerson: inspectPerson
 	}
 })();

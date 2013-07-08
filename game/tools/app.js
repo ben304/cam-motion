@@ -174,6 +174,7 @@
 					monster.data("hit", true);
 					monster.addClass("pause");
 					monster.addClass("hit");
+					SoundBox.play('HIT');
 					setTimeout(function(){
 						hammer.removeClass("bang");
 						monster.attr("class", "monster");

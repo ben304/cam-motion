@@ -10,11 +10,10 @@
 <body>
   <div id="stage" class="stage">
 
-    <!-- 游戏开始界面 
+    <!-- 游戏开始界面 -->
     <div class="start">
       <span class="btn"></span>
     </div>
-    -->
 
     <div class="inspectColor">
       <div id="wrapper">
@@ -109,7 +108,7 @@
       <a class="board" href="javascript:void(0)"></a>
     </div>
   </div>
-  <div id="showProject" style="display:none;position:fixed;top:50%;left:50%;margin-left:-400px;margin-top:-300px;">
+  <div id="showProject" style="position:fixed;top:50%;left:50%;margin-left:-400px;margin-top:-300px;">
     <canvas id="c3" width="800" height="600"></canvas>
   </div>
   <script src="library/jquery.min.js"></script>
@@ -127,7 +126,7 @@
   <script>
     var game = new Game();
     //Watcher.camStart();
-    Watcher.camStart(Watcher.inspectColor);
+    Watcher.camStart(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));//Watcher.inspectColor);
   </script>
 </body>
 </html>

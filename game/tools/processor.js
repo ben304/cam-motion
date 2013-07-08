@@ -76,7 +76,7 @@ Processor = {
 	collectData: function(pixels) {
 		var d = pixels.data;
 		$.extend(true, this.cloneMatrix, this.matrix);
-		for (var i = 0, l = d.length; i < l; i++) {
+		for (var i = 0, l = d.length; i < l; i+=4) {
 			if (d[i] == 0 && d[i+1] == 0 && d[i+2] == 0) {
 				var pixel = i/4,
 					x = pixel % this.WIDTH,
