@@ -9,5 +9,3 @@ class SoundBox
     audio.currentTime = 0
     audio.pause()
     audio.play()
-
-
