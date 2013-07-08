@@ -36,8 +36,8 @@ LettersCtrl = (function() {
       _this = this;
     this.x = x;
     this.y = y;
-    Circle[0].style.cssText = "position: absolute; left: " + (x - 30) + "px; top: " + (y - 30) + "px;";
     letter = this.checkInLetter(x, y);
+    Circle[0].style.cssText = "position: absolute; left: " + (this.x - 30) + "px; top: " + (this.y - 30) + "px;";
     if (letter === this.preLetter) {
       return;
     }
@@ -66,14 +66,14 @@ LettersCtrl = (function() {
     }
     val = $('#username').val();
     if (letter.letter === "BackSpace") {
-      return $('#username').val('');
+      return $('#username').val(val.substring(0, val.length - 2));
     } else if (letter.letter === "Enter") {
       Watcher.clearTimer();
-      game.nextPhase(function() {
+      return game.nextPhase(function() {
         game.on('start', function(mapArea) {
-          App.init(mapArea);
+          return App.init(mapArea);
         });
-        Watcher.gameStart.bind(void 0, App.hit.bind(App))();
+        return Watcher.gameStart.bind(void 0, App.hit.bind(App))();
       });
     } else {
       val = $('#username').val();
@@ -104,6 +104,8 @@ LettersCtrl = (function() {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       letter = _ref[_i];
       if (letter.checkIsSelf(x, y)) {
+        this.x = letter.x;
+        this.y = letter.y;
         return letter;
         break;
       }

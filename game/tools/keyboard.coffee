@@ -52,10 +52,10 @@ class LettersCtrl
   bind: (x, y)->
     @x = x
     @y = y
-    Circle[0].style.cssText = """
-      position: absolute; left: #{x - 30}px; top: #{y - 30}px;
-    """
     letter = @checkInLetter x, y
+    Circle[0].style.cssText = """
+      position: absolute; left: #{@x - 30}px; top: #{@y - 30}px;
+    """
     return if letter is @preLetter
     @preLetter = letter
     clearTimeout @delayTimer
@@ -77,9 +77,15 @@ class LettersCtrl
     return if !letter
     val = $('#username').val()
     if letter.letter is "BackSpace"
-      $('#username').val ''
+      $('#username').val val.substring(0, val.length - 2)
     else if letter.letter is "Enter"
-      game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
+      Watcher.clearTimer()
+      game.nextPhase ->
+        game.on 'start', (mapArea)->
+          App.init(mapArea)
+        Watcher.gameStart.bind(undefined, App.hit.bind(App))()
+
+      #game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
     else
       val = $('#username').val()
       $('#username').val val + letter.letter
@@ -105,6 +111,8 @@ class LettersCtrl
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
+        @x = letter.x
+        @y = letter.y
         return letter
         break
 
