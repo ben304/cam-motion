@@ -34,8 +34,8 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.bind = function(x, y) {
     var letter,
       _this = this;
-    this.x = x;
-    this.y = y;
+    this.x = x + 35;
+    this.y = y + 35;
     letter = this.checkInLetter(x, y);
     Circle[0].style.cssText = "position: absolute; left: " + (this.x - 30) + "px; top: " + (this.y - 30) + "px;";
     if (letter === this.preLetter) {

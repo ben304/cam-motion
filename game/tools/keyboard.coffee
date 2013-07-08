@@ -50,8 +50,8 @@ class LettersCtrl
     # @bind()
 
   bind: (x, y)->
-    @x = x
-    @y = y
+    @x = x + 35
+    @y = y + 35
     letter = @checkInLetter x, y
     Circle[0].style.cssText = """
       position: absolute; left: #{@x - 30}px; top: #{@y - 30}px;
@@ -115,7 +115,7 @@ class LettersCtrl
         @y = letter.y
         return letter
         break
-        
+
 class Letter
   width: 66
   height: 66

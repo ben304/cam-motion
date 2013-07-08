@@ -5,5 +5,8 @@ HIT.src = "../sound/013kt096.mp3"
 
 class SoundBox
   @play: (type)->
-    window[type.toUpperCase()].play()
+    audio = window[type.toUpperCase()]
+    audio.currentTime = 0
+    audio.pause()
+    audio.play()
 
