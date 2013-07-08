@@ -18,6 +18,7 @@ void function(global){
 	
 	var totalScore = 0,
 		currentPhase = 0,
+		tf = 'bounceInDown',
 		f = function() { },
 		evts = {
 			start: f,
@@ -29,11 +30,17 @@ void function(global){
 		this.phase = $('#stage>div');
 		this.evts = evts;
 		this._reset();
+		this._addPhaseEvent();
 		this._displayCurrentPhase();
 	}
 	$.extend(Game.prototype, {
 		_displayCurrentPhase: function(){
-			$(this.phase[currentPhase]).show();
+			$(this.phase[currentPhase]).show().addClass(tf);
+		},
+		_addPhaseEvent: function(){
+			this.phase.bind('webkitAnimationEnd', function(){
+				$(this).removeClass(tf);
+			});
 		},
 		_start: function(){
 			var i = 0, end = GAME_TIME/1000, context = this;
@@ -95,7 +102,6 @@ void function(global){
 			return totalScore += n;
 		}
 	});
-	
 	global.Game = Game;
 		
 }(window);
