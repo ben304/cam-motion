@@ -115,7 +115,7 @@ class LettersCtrl
         @y = letter.y
         return letter
         break
-
+        
 class Letter
   width: 66
   height: 66
