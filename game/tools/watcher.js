@@ -9,8 +9,10 @@ Watcher = (function() {
 	var video = document.querySelector("video"),
 		c1 = document.querySelector("#c1"),
 		c2 = document.querySelector("#c2"),
+		c3 = document.querySelector("#c3"),
 		ctx1 = c1.getContext("2d"),
 		ctx2 = c2.getContext("2d"),
+		ctx3 = c3.getContext("2d"),
 		localMediaStream = null,
 		last,
 		camInterval = 500,
@@ -66,7 +68,11 @@ Watcher = (function() {
 		video.play();
 	};
 
-	var colorer = function(callback) {
+	var inspectBg = function() {
+
+	};
+
+	var colorer = function() {
 		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 		var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
 
@@ -78,7 +84,7 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
-				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl)));
+				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
 			}
 			last = cur;
 		}
@@ -94,6 +100,7 @@ Watcher = (function() {
 		ctx1.setTransform(-1.25, 0, 0, 1.25, 800, 0);
 		var cur = ctx1.getImageData(0, 0, 800, 600);
 		var d = Filters.filter(cur, [currentColor.r, currentColor.g, currentColor.b]);
+		ctx3.putImageData(d, 0, 0);
 		Processor.startup(d, callback);
 		ctx2.putImageData(d, 0, 0);
 		//console.log((new Date().getTime()) - start);

@@ -30,34 +30,20 @@
 				this.bindEvnet();
 			}
 			this.popup();
-			// var that = this;
-			// if (!that.initialized) {
-			// 	that.contentEl = $("table");
-			// 	$(".row").each(function(index, row) {
-			// 		var holes = $(row).children().each(function(index, hole) {
-			// 			return hole;
-			// 		});
-			// 		that.grids.push(holes);
-			// 	});
-			// 	that.map = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-			// 	that.startup();
-			// 	that.initialized = true;
-			// }
-			// cb && cb();
 		},
 
 		popup: function() {
 			
-			/*
-			var score = game.getScore(),
-				level = game.getLevelByUserScore(score),
-				monster = game.getMonsterByLevel(level);*/
-			
-			var m = "m"+(parseInt(Math.random()*15)+1);
+			var info = game.getMonster(),
+				level = info.level,
+				monster = info.monster;
+
+			console.log(level.CLSNAME);
+
 			var holeID = this.getVacantHole();
 			//console.log(holeID+" appear");
-			$(".p"+holeID).find("p").attr('class', m);
-			$(".p"+holeID).find(".monster").attr('class', 'monster disapear-level1');
+			$(".p"+holeID).find("p").attr('class', monster.CLSNAME);
+			$(".p"+holeID).find(".monster").attr('class', 'monster '+level.CLSNAME).data("score", monster.SCORE);
 			this.map[holeID-1] = 1;
 			this.current = holeID;
 			// if (this.paused) {
@@ -176,8 +162,13 @@
 			var that = this;
 			hammer.css({"left": left, "top": top});
 			if (this.current != null) {
-				var monster = $(".monster").eq(this.current-1);
+				var monster = $(".monster").eq(this.current-1),
+					score = monster.data("score");
+
 				if (this.checkCollision(left, top, monster)) {
+					var totalScore = game.addScore(score);
+					this.showScore(totalScore);
+
 					console.log("hit"+this.current);
 					hammer.addClass("bang");
 					monster.data("hit", true);
@@ -191,7 +182,6 @@
 						monster.data("hit", false);
 						that.popup();
 					}, 200);
-					
 				}
 			}
 		},
@@ -202,12 +192,29 @@
 				point = this.mapArea.holes[this.current-1],
 				x = point.x,
 				y = point.y,
-				elemTop = monster.position() && monster.position().top;
+				elemTop = monster.offset().top - $("#stage").offset().top;
 
 			if (left>=x && left<=x+w && top>=elemTop && top<=y+h && !monster.data("hit")) {
 				return true;
 			}
+			return false;
+		},
 
+		showScore: function(score) {
+			console.log(score);
+		},
+
+		process: function(time) {
+			//TODO: 刷新计时条
+			//console.log(time);
+		},
+
+		// 停止游戏
+		stop: function(score) {
+			$(".monster").attr("class", "monster");
+			Watcher.clearTimer();
+			//TODO: 显示分数
+			//game.nexePhase();
 		}
 	};
 
