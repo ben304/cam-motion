@@ -130,7 +130,7 @@ Watcher = (function() {
 					reset();
 
 
-					var letterCtrl = new LetterCtrl('Page1', '#J_KeyBoardCircle');
+					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 
 
 					game.nextPhase(Watcher.inspectColor);
