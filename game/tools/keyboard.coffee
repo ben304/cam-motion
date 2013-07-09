@@ -33,13 +33,17 @@ Page1_Letters = [
 ]
 
 Page2_Letters = [
-  ["Restart", 0, 0]
-  ["Rank", 0, 0]
+  ["Restart", 238, 295]
+  ["Rank", 447, 295]
 ]
 
 Page3_Letters = [
-  ["Restart", 0, 0]
+  ["Restart", 362, 445]
 ]
+
+Page1_Width = 66
+Page2_Width = 120
+Page3_Width = 80
 
 
 # CircleInput = $('#J_KeyBoardCircle')
@@ -55,8 +59,9 @@ class LettersCtrl
       thickness : 0.3
       width     : 60
     letters = window[page + "_Letters"]
+    @width = window[page + "_Width"]
     for letter in letters
-      @letters.push new Letter letter[0], letter[1], letter[2]
+      @letters.push new Letter letter[0], letter[1], letter[2], @width
     @init()
 
   init: ->
@@ -71,8 +76,8 @@ class LettersCtrl
     # @bind()
 
   bind: (x, y)->
-    @x = x - 33
-    @y = y - 33
+    @x = x - @width/2
+    @y = y - @width/2
     letter = @checkInLetter x, y
     @circle[0].style.cssText = """
       position: absolute; left: #{@x}px; top: #{@y}px;
@@ -102,24 +107,17 @@ class LettersCtrl
     if letter.letter is "BackSpace"
       $('#username').val val.substring(0, val.length - 1)
     else if letter.letter is "Enter"
-      user = UserCtrl.addUser $('#username').val()
+      user = UserCtrl.addUser($('#username').val() || "GUY")
       UserCtrl.setUser user
-      Watcher.clearTimer()
-      game.nextPhase ->
-        game.on('start', (mapArea)->
-          App.init(mapArea)
-        ).on("process", (i)->
-          App.process(i)
-        ).on('over', (score)->
-          App.stop(score)
-        )
-        Watcher.gameStart.bind(undefined, App.hit.bind(App))()
+      App.start()
 
     else if letter.letter is "Restart" 
       game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson)); 
 
     else if letter.letter is "Rank"
       list = UserCtrl.listScore();
+      list.sort (a,b)->
+        a.score - b.score
       tpl = $('.rank-item').html();
       str = (for item in list
         tpl.replace('{name}', item.name).replace('{score}', item.score)
@@ -156,21 +154,19 @@ class LettersCtrl
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
-        @x = letter.x
-        @y = letter.y
+        @x = letter.x + (@width - 60)/2
+        @y = letter.y + (@width - 60)/2
         console.log letter
         return letter
         break
     return false
 
 class Letter
-  width: 66
-  height: 66
-
-  constructor: (letter, x, y)->
+  constructor: (letter, x, y, width)->
     @letter = letter
     @x = x
     @y = y
+    @width = @height = width
     @r = x + @width
     @b = y + @height
 
