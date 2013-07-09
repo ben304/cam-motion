@@ -1,5 +1,5 @@
 //游戏时长设置（毫秒）
-var GAME_TIME = 60000;
+var GAME_TIME = 6000;
 
 //怪物对象集
 var MONSTER = [

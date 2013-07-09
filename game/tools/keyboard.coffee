@@ -1,43 +1,60 @@
 LETTER_CHECKING_TIME = 300
 LETTER_CHECKING_DELAY = 100
-CircleInput = $('#J_KeyBoardCircle')
-Circle = CircleInput.knob
-  thickness : 0.3
-  width     : 60
+
+Page1_Letters = [
+  ["Q", 23, 249]
+  ["W", 99, 249]
+  ["E", 175, 249]
+  ["R", 252, 249]
+  ["T", 330, 249]
+  ["Y", 407, 249]
+  ["U", 484, 249]
+  ["I", 561, 249]
+  ["O", 637, 249]
+  ["P", 713, 249]
+  ["A", 60, 328]
+  ["S", 136, 328]
+  ["D", 213, 328]
+  ["F", 289, 328]
+  ["G", 367, 328]
+  ["H", 445, 328]
+  ["J", 521, 328]
+  ["K", 598, 328]
+  ["L", 675, 328]
+  ["Z", 97, 410]
+  ["X", 173, 410]
+  ["C", 250, 410]
+  ["V", 326, 410]
+  ["B", 404, 410]
+  ["N", 481, 410]
+  ["M", 558, 410]
+  ["BackSpace", 531, 110]
+  ["Enter", 655, 110]
+]
+
+Page2_Letters = [
+  ["Restart", 0, 0]
+  ["Rank", 0, 0]
+]
+
+Page3_Letters = [
+  ["Restart", 0, 0]
+]
+
+
+# CircleInput = $('#J_KeyBoardCircle')
+# Circle = CircleInput.knob
+#   thickness : 0.3
+#   width     : 60
 
 class LettersCtrl
-  constructor: ->
+  constructor: (page, circleSelector)->
     @letters = []
-    letters = [
-      ["Q", 23, 249]
-      ["W", 99, 249]
-      ["E", 175, 249]
-      ["R", 252, 249]
-      ["T", 330, 249]
-      ["Y", 407, 249]
-      ["U", 484, 249]
-      ["I", 561, 249]
-      ["O", 637, 249]
-      ["P", 713, 249]
-      ["A", 60, 328]
-      ["S", 136, 328]
-      ["D", 213, 328]
-      ["F", 289, 328]
-      ["G", 367, 328]
-      ["H", 445, 328]
-      ["J", 521, 328]
-      ["K", 598, 328]
-      ["L", 675, 328]
-      ["Z", 97, 410]
-      ["X", 173, 410]
-      ["C", 250, 410]
-      ["V", 326, 410]
-      ["B", 404, 410]
-      ["N", 481, 410]
-      ["M", 558, 410]
-      ["BackSpace", 531, 110]
-      ["Enter", 655, 110]
-    ]
+    @circleInput = $(circleSelector)
+    @circle = @circleInput.knob
+      thickness : 0.3
+      width     : 60
+    letters = window[page + "_Letters"]
     for letter in letters
       @letters.push new Letter letter[0], letter[1], letter[2]
     @init()
@@ -47,7 +64,7 @@ class LettersCtrl
     @inputTimer = null
     @inLetter = ""
 
-    Circle.bind 'change', (ev)=>
+    @circle.bind 'change', (ev)=>
       if ev.target.value >= 100
         @inputLetter @preLetter
 
@@ -57,7 +74,7 @@ class LettersCtrl
     @x = x - 33
     @y = y - 33
     letter = @checkInLetter x, y
-    Circle[0].style.cssText = """
+    @circle[0].style.cssText = """
       position: absolute; left: #{@x}px; top: #{@y}px;
     """
     return if (letter is @preLetter) # and @isStart
@@ -105,13 +122,13 @@ class LettersCtrl
   showProgress: ->
     @isStart = true
     #Circle.show()
-    CircleInput.val(6).trigger('change')
+    @circleInput.val(6).trigger('change')
     clearInterval @progressTimer
     value = 6
-    @progressTimer = setInterval ->
+    @progressTimer = setInterval =>
       return if value >= 100
       value = value + 6
-      CircleInput.val(value).trigger('change')
+      @circleInput.val(value).trigger('change')
     , LETTER_CHECKING_TIME / 17
     return
 
@@ -119,7 +136,7 @@ class LettersCtrl
   hideProgress: ->
     # Circle.hide()
     @isStart = false
-    CircleInput.val(0).trigger('change')
+    @circleInput.val(0).trigger('change')
     clearInterval @progressTimer
     
   checkInLetter: (x, y)->
