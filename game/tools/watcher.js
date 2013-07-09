@@ -23,7 +23,7 @@ Watcher = (function() {
 		currentColor,
 		bg,
 		cloneBg,
-		enter,
+		enter = false,
 		detect = [false, false, false],
 		current = 0,
 		stopTimes = 0;
@@ -74,6 +74,18 @@ Watcher = (function() {
 		video.play();
 	};
 
+	var reset = function() {
+		enter = false;
+		detect = [false, false, false];
+		current = 0;
+		stopTimes = 0;
+	};
+
+	/**
+	 * 检测背景
+	 * @param  {Function} callback [回调]
+	 * @return {[type]}            []
+	 */
 	var inspectBg = function(callback) {
 		bg = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 		cloneBg = bg;
@@ -83,7 +95,12 @@ Watcher = (function() {
 		}
 	};
 
+	/**
+	 * 检测人物进入
+	 * @return {[type]} [description]
+	 */
 	var inspectPerson = function() {
+		clearTimer();
 		__takeAction(200, function() {
 			var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
@@ -102,14 +119,15 @@ Watcher = (function() {
 
 			if (!enter) {
 				if (rate > 0.05) {
-					console.log("ok");
+					//console.log("ok");
 					enter = true;
 				}
 			} else {
 				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
-					console.log("next");
+					//console.log("next");
 					Watcher.clearTimer();
 					$("#showProject").hide();
+					reset();
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
@@ -126,6 +144,47 @@ Watcher = (function() {
 			ctx3.putImageData(d, 0, 0);
 		});
 	};
+
+	/**
+	 * 判断人离开或者继续操作
+	 * @return {[type]} [description]
+	 */
+	var leaveOrRestart = function() {
+		$("#showProject").show();
+		//先清除timer
+		clearTimer();
+		callback = function() {}
+		__takeAction(30, function(callback) {
+			cloneBg = bg;
+			var cur_diff = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
+
+			ctx1.setTransform(-1.25, 0, 0, 1.25, 800, 0);
+			var cur_detect = ctx1.getImageData(0, 0, 800, 600);
+			var d2 = Filters.filter(cur_detect, [currentColor.r, currentColor.g, currentColor.b]);
+			ctx3.putImageData(d2, 0, 0);
+			Processor.startup(d2, callback);
+
+			var black = 0, white = 0;
+			var pixels = d.data;
+
+			Filters.differenceAccuracy(d.data, cur_diff.data, cloneBg.data);
+			for (var i = 0; i < DETECT_WIDTH*DETECT_HEIGHT*4; i+=4) {
+				if (pixels[i] == 0 || pixels[i+1] == 0 || pixels[i+2] == 0) {
+					black++;
+				} else {
+					white++;
+				}
+			}
+			rate = white/(white+black);
+
+			if (rate >= 1) {
+				console.log("first");
+			}
+			//ctx3.putImageData(d, 0, 0);
+		});
+	};
+
 
 	var colorer = function() {
 		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
@@ -147,6 +206,7 @@ Watcher = (function() {
 
 	var inspectColor = function(callback, interval) {
 		var myInterval = interval || camInterval;
+		clearTimer();
 		__takeAction(myInterval, colorer);
 	};
 
@@ -183,6 +243,7 @@ Watcher = (function() {
 		gameStart: gameStart,
 		clearTimer: clearTimer,
 		inspectBg: inspectBg,
-		inspectPerson: inspectPerson
+		inspectPerson: inspectPerson,
+		leaveOrRestart: leaveOrRestart
 	}
 })();

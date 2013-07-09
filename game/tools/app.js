@@ -207,15 +207,15 @@
 
 		process: function(time) {
 			//TODO: 刷新计时条
-			//console.log(time);
+			console.log(time);
 		},
 
 		// 停止游戏
 		stop: function(score) {
 			$(".monster").attr("class", "monster");
 			Watcher.clearTimer();
-			//TODO: 显示分数
-			//game.nexePhase();
+			$("#endScore").html(score);
+			game.nextPhase();
 		}
 	};
 
