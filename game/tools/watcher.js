@@ -150,7 +150,6 @@ Watcher = (function() {
 	 * @return {[type]} [description]
 	 */
 	var leaveOrRestart = function() {
-		$("#showProject").show();
 		//先清除timer
 		clearTimer();
 		callback = function() {}
@@ -179,7 +178,7 @@ Watcher = (function() {
 			rate = white/(white+black);
 
 			if (rate >= 1) {
-				console.log("first");
+				game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));
 			}
 			//ctx3.putImageData(d, 0, 0);
 		});
