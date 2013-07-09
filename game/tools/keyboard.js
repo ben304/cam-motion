@@ -110,7 +110,6 @@ LettersCtrl = (function() {
       return game.nextPhase(function() {
         return Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));
       });
->>>>>>> 07a958911ceea1d4cabbafe634eb83bbe056b917
     } else {
       val = $('#username').val();
       return $('#username').val(val + letter.letter);
