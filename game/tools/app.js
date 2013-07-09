@@ -5,7 +5,6 @@
 		TOTAL_RATS = 1,
 		SPEED = 2000;
 
-	window.lettersCtrl = new LettersCtrl();
 	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
@@ -215,7 +214,10 @@
 			$(".monster").attr("class", "monster");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
-			game.nextPhase(Watcher.leaveOrRestart);
+			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
+			game.nextPhase(function() {
+				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));	
+			});
 		}
 	};
 

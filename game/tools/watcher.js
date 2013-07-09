@@ -149,11 +149,11 @@ Watcher = (function() {
 	 * 判断人离开或者继续操作
 	 * @return {[type]} [description]
 	 */
-	var leaveOrRestart = function() {
+	var leaveOrRestart = function(callback) {
+		//$("#showProject").show();
 		//先清除timer
 		clearTimer();
-		callback = function() {}
-		__takeAction(30, function(callback) {
+		__takeAction(30, function() {
 			cloneBg = bg;
 			var cur_diff = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
@@ -197,6 +197,7 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
+				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
 			}
 			last = cur;
