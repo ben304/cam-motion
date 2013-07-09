@@ -109,16 +109,7 @@ class LettersCtrl
     else if letter.letter is "Enter"
       user = UserCtrl.addUser($('#username').val() || "GUY")
       UserCtrl.setUser user
-      Watcher.clearTimer()
-      game.nextPhase ->
-        game.on('start', (mapArea)->
-          App.init(mapArea)
-        ).on("process", (i)->
-          App.process(i)
-        ).on('over', (score)->
-          App.stop(score)
-        )
-        Watcher.gameStart.bind(undefined, App.hit.bind(App))()
+      App.start()
 
     else if letter.letter is "Restart" 
       game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson)); 

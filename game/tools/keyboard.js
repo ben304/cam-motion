@@ -87,17 +87,7 @@ LettersCtrl = (function() {
     } else if (letter.letter === "Enter") {
       user = UserCtrl.addUser($('#username').val() || "GUY");
       UserCtrl.setUser(user);
-      Watcher.clearTimer();
-      return game.nextPhase(function() {
-        game.on('start', function(mapArea) {
-          return App.init(mapArea);
-        }).on("process", function(i) {
-          return App.process(i);
-        }).on('over', function(score) {
-          return App.stop(score);
-        });
-        return Watcher.gameStart.bind(void 0, App.hit.bind(App))();
-      });
+      return App.start();
     } else if (letter.letter === "Restart") {
       return game.reset(Watcher.inspectBg.bind(void 0, Watcher.inspectPerson));
     } else if (letter.letter === "Rank") {
