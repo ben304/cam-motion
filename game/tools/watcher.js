@@ -128,6 +128,11 @@ Watcher = (function() {
 					Watcher.clearTimer();
 					$("#showProject").hide();
 					reset();
+
+
+					var letterCtrl = new LetterCtrl('Page1', '#J_KeyBoardCircle');
+
+
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {

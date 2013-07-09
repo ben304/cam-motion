@@ -16,7 +16,7 @@ LettersCtrl = (function() {
   function LettersCtrl(page, cirleSelector) {
     var letter, letters, _i, _len;
     this.letters = [];
-    this.cirleInput = $(cirleSelector);
+    this.circleInput = $(cirleSelector);
     this.circle = this.circleInput.knob({
       thickness: 0.3,
       width: 60

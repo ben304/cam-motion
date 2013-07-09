@@ -50,7 +50,7 @@ Page3_Letters = [
 class LettersCtrl
   constructor: (page, cirleSelector)->
     @letters = []
-    @cirleInput = $(cirleSelector)
+    @circleInput = $(cirleSelector)
     @circle = @circleInput.knob
       thickness : 0.3
       width     : 60

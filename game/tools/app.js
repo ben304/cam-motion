@@ -4,7 +4,7 @@
 		GRID_COLUMN = 3,
 		TOTAL_RATS = 1,
 		SPEED = 2000;
-
+		
 	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
