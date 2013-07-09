@@ -145,7 +145,7 @@ body {
   font-size: 0;
   line-height: 0;
   height: 10px;
-  opacity: .5;
+  opacity: .7;
   -webkit-border-radius: 5px; }
   .gaming .process-bar .status {
     height: 10px;
@@ -160,7 +160,7 @@ body {
   margin-left: -100px;
   position: absolute;
   left: 50%;
-  top: 20px; }
+  top: 50px; }
   .gaming .score span {
     display: block;
     padding: 10px 0 0 75px;

@@ -121,7 +121,7 @@ body {
     font-size: 0;
     line-height: 0;
     height: 10px;
-    opacity: .5;
+    opacity: .7;
     -webkit-border-radius: 5px;
     .status {
       height: 10px;
@@ -133,13 +133,13 @@ body {
     }
   }
   .score {
-    background: url(../image/g_score.png) no-repeat left top;
+    background: url(../images/g_score.png) no-repeat left top;
     width: 200px;
     height: 100px;
     margin-left: -100px;
     position: absolute;
     left: 50%;
-    top: 20px;
+    top: 40px;
     span {
       display: block;
       padding: 10px 0 0 75px;
