@@ -224,47 +224,74 @@ body {
     left: 395px;
     top: 290px;
     color: #fff;
-    font: bold normal 26px/120% "Microsoft Yahei"; }
+    font-size: 36px; }
   /* line 173, ../sass/game.scss */
   .game-over a {
     background: transparent;
     opacity: 0;
     width: 145px;
     height: 125px;
-    position: absolute; }
-    /* line 179, ../sass/game.scss */
+    position: absolute;
+    top: 293px; }
+    /* line 180, ../sass/game.scss */
     .game-over a.restart {
-      left: 225px;
-      top: 385px; }
+      left: 225px; }
     /* line 183, ../sass/game.scss */
     .game-over a.board {
-      left: 435px;
-      top: 385px; }
+      left: 435px; }
+  /* line 187, ../sass/game.scss */
+  .game-over .recruit {
+    background: #09696d url(../images/g_ad.png) no-repeat center center;
+    background-size: 22%;
+    border-top: #6bc2c9 1px solid;
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    bottom: 0px; }
+    /* line 195, ../sass/game.scss */
+    .game-over .recruit div {
+      padding-top: 50px;
+      width: 350px;
+      text-align: center;
+      color: #fff;
+      opacity: .7; }
+      /* line 201, ../sass/game.scss */
+      .game-over .recruit div.f2e {
+        float: left; }
+      /* line 204, ../sass/game.scss */
+      .game-over .recruit div.designer {
+        float: right; }
+      /* line 207, ../sass/game.scss */
+      .game-over .recruit div .email {
+        font-family: Arial; }
+      /* line 210, ../sass/game.scss */
+      .game-over .recruit div .leader {
+        font-size: 28px; }
 
-/* line 189, ../sass/game.scss */
+/* line 216, ../sass/game.scss */
 .rank {
   background: url(../images/g_rank.png) no-repeat center center;
   position: relative;
   color: #fff; }
-  /* line 193, ../sass/game.scss */
+  /* line 220, ../sass/game.scss */
   .rank ul {
     position: absolute;
     left: 126px;
     top: 134px; }
-    /* line 197, ../sass/game.scss */
+    /* line 224, ../sass/game.scss */
     .rank ul li {
       float: left;
       width: 270px;
       margin: 0 65px 46px 0; }
-    /* line 202, ../sass/game.scss */
+    /* line 229, ../sass/game.scss */
     .rank ul .name {
       float: left;
       font-size: 18px; }
-    /* line 206, ../sass/game.scss */
+    /* line 233, ../sass/game.scss */
     .rank ul .score {
       margin-left: 110px;
       font-size: 14px; }
-  /* line 211, ../sass/game.scss */
+  /* line 238, ../sass/game.scss */
   .rank a {
     background: transparent;
     opacity: 0;
@@ -275,114 +302,114 @@ body {
     top: 385px; }
 
 @-webkit-keyframes 'bang' {
-  /* line 223, ../sass/game.scss */
+  /* line 250, ../sass/game.scss */
   50% {
     -webkit-transform: rotate(-90deg); }
 
-  /* line 226, ../sass/game.scss */
+  /* line 253, ../sass/game.scss */
   100% {
     -webkit-transform: rotate(0deg); } }
 
 @-webkit-keyframes 'disapear' {
-  /* line 231, ../sass/game.scss */
+  /* line 258, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 234, ../sass/game.scss */
+  /* line 261, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 237, ../sass/game.scss */
+  /* line 264, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 240, ../sass/game.scss */
+  /* line 267, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear2' {
-  /* line 245, ../sass/game.scss */
+  /* line 272, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 248, ../sass/game.scss */
+  /* line 275, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 251, ../sass/game.scss */
+  /* line 278, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 254, ../sass/game.scss */
+  /* line 281, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear3' {
-  /* line 259, ../sass/game.scss */
+  /* line 286, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 262, ../sass/game.scss */
+  /* line 289, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 265, ../sass/game.scss */
+  /* line 292, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 268, ../sass/game.scss */
+  /* line 295, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear4' {
-  /* line 273, ../sass/game.scss */
+  /* line 300, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 276, ../sass/game.scss */
+  /* line 303, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 279, ../sass/game.scss */
+  /* line 306, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 282, ../sass/game.scss */
+  /* line 309, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'gameprocess' {
-  /* line 287, ../sass/game.scss */
+  /* line 314, ../sass/game.scss */
   0% {
     width: 100%; }
 
-  /* line 290, ../sass/game.scss */
+  /* line 317, ../sass/game.scss */
   80% {
     background: #fcd207; }
 
-  /* line 293, ../sass/game.scss */
+  /* line 320, ../sass/game.scss */
   82% {
     background: #ff0000; }
 
-  /* line 296, ../sass/game.scss */
+  /* line 323, ../sass/game.scss */
   100% {
     background: #ff0000;
     width: 0%; } }
 
 @-webkit-keyframes 'raise' {
-  /* line 302, ../sass/game.scss */
+  /* line 329, ../sass/game.scss */
   0% {
     top: 60px; }
 
-  /* line 305, ../sass/game.scss */
+  /* line 332, ../sass/game.scss */
   40% {
     opacity: 1; }
 
-  /* line 308, ../sass/game.scss */
+  /* line 335, ../sass/game.scss */
   60% {
     opacity: 1; }
 
-  /* line 311, ../sass/game.scss */
+  /* line 338, ../sass/game.scss */
   100% {
     top: 20px;
     opacity: 0; } }
