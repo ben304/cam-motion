@@ -102,6 +102,8 @@ class LettersCtrl
     if letter.letter is "BackSpace"
       $('#username').val val.substring(0, val.length - 1)
     else if letter.letter is "Enter"
+      user = UserCtrl.addUser $('#username').val()
+      UserCtrl.setUser user
       Watcher.clearTimer()
       game.nextPhase ->
         game.on('start', (mapArea)->
@@ -113,7 +115,19 @@ class LettersCtrl
         )
         Watcher.gameStart.bind(undefined, App.hit.bind(App))()
 
-      #game.nextPhase(Watcher.gameStart.bind(undefined, App.hit.bind(App)))
+    else if letter.letter is "Restart" 
+      game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson)); 
+
+    else if letter.letter is "Rank"
+      list = UserCtrl.listScore();
+      tpl = $('.rank-item').html();
+      str = (for item in list
+        tpl.replace('{name}', item.name).replace('{score}', item.score)
+      ).join("")
+      $('.rank ul').append str
+      lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2')
+      game.nextPhase ->
+          Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl))
     else
       val = $('#username').val()
       $('#username').val val + letter.letter

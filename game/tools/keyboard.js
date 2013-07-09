@@ -68,7 +68,7 @@ LettersCtrl = (function() {
   };
 
   LettersCtrl.prototype.inputLetter = function(letter) {
-    var val;
+    var item, lettersCtrl, list, str, tpl, user, val;
     console.log(letter);
     if (!letter) {
       return;
@@ -78,6 +78,8 @@ LettersCtrl = (function() {
     if (letter.letter === "BackSpace") {
       return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
+      user = UserCtrl.addUser($('#username').val());
+      UserCtrl.setUser(user);
       Watcher.clearTimer();
       return game.nextPhase(function() {
         game.on('start', function(mapArea) {
@@ -88,6 +90,25 @@ LettersCtrl = (function() {
           return App.stop(score);
         });
         return Watcher.gameStart.bind(void 0, App.hit.bind(App))();
+      });
+    } else if (letter.letter === "Restart") {
+      return game.reset(Watcher.inspectBg.bind(void 0, Watcher.inspectPerson));
+    } else if (letter.letter === "Rank") {
+      list = UserCtrl.listScore();
+      tpl = $('.rank-item').html();
+      str = ((function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = list.length; _i < _len; _i++) {
+          item = list[_i];
+          _results.push(tpl.replace('{name}', item.name).replace('{score}', item.score));
+        }
+        return _results;
+      })()).join("");
+      $('.rank ul').append(str);
+      lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
+      return game.nextPhase(function() {
+        return Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));
       });
     } else {
       val = $('#username').val();
