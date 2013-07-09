@@ -15,9 +15,10 @@ html, body {
 }
 body {
   background: #6bc2c9 url(../image/g_sky.jpg) no-repeat center top;
+  font-family: 'WawaSC';
 }
 .stage {
-  border: #fff 1px dashed;
+  //border: #fff 1px dashed;
   width: 800px;
   height: 600px;
   position: fixed;
@@ -115,16 +116,59 @@ body {
   .bang {
     -webkit-animation: 'bang' 0.2s ease-in-out 2;
   }
+  .process-bar {
+    background: #fff;
+    font-size: 0;
+    line-height: 0;
+    height: 10px;
+    opacity: .7;
+    -webkit-border-radius: 5px;
+    .status {
+      height: 10px;
+      -webkit-border-radius: 5px;
+      &.onprocess {
+        background: #fcd207;
+        -webkit-animation: 'gameprocess' 60s linear;
+      }
+    }
+  }
+  .score {
+    background: url(../image/g_score.png) no-repeat left top;
+    width: 200px;
+    height: 100px;
+    margin-left: -100px;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    span {
+      display: block;
+      padding: 10px 0 0 75px;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+    }
+    .add {
+      width: 125px;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      font-size: 32px;
+      opacity: 0;
+      &.raise {
+        -webkit-animation: 'raise' 1.5s ease-in-out;
+      }
+    }
+  }
 }
 .game-over {
-  background: url(../image/g_gameover.png) no-repeat center center;
+  background: url(../image/g_gameover.png) no-repeat center top;
   position: relative;
   span {
     position: absolute;
     left: 395px;
-    top: 290px;
+    top: 195px;
     color: #fff;
-    font: bold normal 26px/120% "Microsoft Yahei";
+    font-size: 36px;
   }
   a {
     background: transparent;
@@ -132,20 +176,46 @@ body {
     width: 145px;
     height: 125px;
     position: absolute;
+    top: 293px;
     &.restart {
       left: 225px;
-      top: 385px;
     }
     &.board {
       left: 435px;
-      top: 385px;
+    }
+  }
+  .recruit {
+    background: #09696d url(../image/g_ad.png) no-repeat center center;
+    background-size: 22%;
+    border-top: #6bc2c9 1px solid;
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    bottom: 0px;
+    div {
+      padding-top: 50px;
+      width: 350px;
+      text-align: center;
+      color: #fff;
+      opacity: .7;
+      &.f2e {
+        float: left;
+      }
+      &.designer {
+        float: right;
+      }
+      .email {
+        font-family: Arial;
+      }
+      .leader {
+        font-size: 28px;
+      }
     }
   }
 }
 .rank {
   background: url(../image/g_rank.png) no-repeat center center;
   position: relative;
-  font-family: 'WawaSC';
   color: #fff;
   ul {
     position: absolute;
@@ -238,5 +308,35 @@ body {
   }
   100% {
     top: 120px;
+  }
+}
+@-webkit-keyframes 'gameprocess' {
+  0% {
+    width: 100%;
+  }
+  80% {
+    background: #fcd207;
+  }
+  82% {
+    background: #ff0000;
+  }
+  100% {
+    background: #ff0000;
+    width: 0%;
+  }
+}
+@-webkit-keyframes 'raise' {
+  0% {
+    top: 60px;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    top: 20px;
+    opacity: 0;
   }
 }
