@@ -5,7 +5,7 @@
 		TOTAL_RATS = 1,
 		SPEED = 2000;
 
-	window.lettersCtrl = new LettersCtrl();
+	//window.lettersCtrl = new LettersCtrl();
 	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
