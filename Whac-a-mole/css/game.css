@@ -58,7 +58,6 @@ body {
   background: #6bc2c9 url(../image/g_sky.jpg) no-repeat center top; }
 
 .stage {
-  border: white 1px dashed;
   width: 800px;
   height: 600px;
   position: fixed;
@@ -140,6 +139,19 @@ body {
   -webkit-transform: scale(0.7); }
 .gaming .bang {
   -webkit-animation: "bang" 0.2s ease-in-out 2; }
+.gaming .process-bar {
+  background: #fff;
+  font-size: 0;
+  line-height: 0;
+  height: 10px;
+  opacity: .5;
+  -webkit-border-radius: 5px; }
+  .gaming .process-bar .status {
+    height: 10px;
+    -webkit-border-radius: 5px; }
+    .gaming .process-bar .status.onprocess {
+      background: #fcd207;
+      -webkit-animation: "gameprocess" 60s linear 1; }
 
 .game-over {
   background: url(../image/g_gameover.png) no-repeat center center;
@@ -249,3 +261,17 @@ body {
 
   100% {
     top: 120px; } }
+
+@-webkit-keyframes 'gameprocess' {
+  0% {
+    width: 100%; }
+
+  80% {
+    background: #fcd207; }
+
+  82% {
+    background: #ff0000; }
+
+  100% {
+    background: #ff0000;
+    width: 0%; } }

@@ -17,7 +17,7 @@ body {
   background: #6bc2c9 url(../image/g_sky.jpg) no-repeat center top;
 }
 .stage {
-  border: #fff 1px dashed;
+  //border: #fff 1px dashed;
   width: 800px;
   height: 600px;
   position: fixed;
@@ -114,6 +114,22 @@ body {
   }
   .bang {
     -webkit-animation: 'bang' 0.2s ease-in-out 2;
+  }
+  .process-bar {
+    background: #fff;
+    font-size: 0;
+    line-height: 0;
+    height: 10px;
+    opacity: .5;
+    -webkit-border-radius: 5px;
+    .status {
+      height: 10px;
+      -webkit-border-radius: 5px;
+      &.onprocess {
+        background: #fcd207;
+        -webkit-animation: 'gameprocess' 60s linear 1;
+      }
+    }
   }
 }
 .game-over {
@@ -238,5 +254,20 @@ body {
   }
   100% {
     top: 120px;
+  }
+}
+@-webkit-keyframes 'gameprocess' {
+  0% {
+    width: 100%;
+  }
+  80% {
+    background: #fcd207;
+  }
+  82% {
+    background: #ff0000;
+  }
+  100% {
+    background: #ff0000;
+    width: 0%;
   }
 }

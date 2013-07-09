@@ -116,6 +116,13 @@ body {
   .bang {
     -webkit-animation: 'bang' 0.2s ease-in-out 2;
   }
+  .process-bar {
+    background: #fff;
+    font-size: 0;
+    line-height: 0;
+    height: 10px;
+    -webkit-border-radius: 3px;
+  }
 }
 .game-over {
   background: url(../images/g_gameover.png) no-repeat center center;
