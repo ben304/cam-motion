@@ -121,7 +121,43 @@ body {
     font-size: 0;
     line-height: 0;
     height: 10px;
-    -webkit-border-radius: 3px;
+    opacity: .5;
+    -webkit-border-radius: 5px;
+    .status {
+      height: 10px;
+      -webkit-border-radius: 5px;
+      &.onprocess {
+        background: #fcd207;
+        -webkit-animation: 'gameprocess' 60s linear;
+      }
+    }
+  }
+  .score {
+    background: url(../image/g_score.png) no-repeat left top;
+    width: 200px;
+    height: 100px;
+    margin-left: -100px;
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    span {
+      display: block;
+      padding: 10px 0 0 75px;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+    }
+    .add {
+      width: 125px;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      font-size: 32px;
+      opacity: 0;
+      &.raise {
+        -webkit-animation: 'raise' 1.5s ease-in-out;
+      }
+    }
   }
 }
 .game-over {
@@ -245,5 +281,35 @@ body {
   }
   100% {
     top: 120px;
+  }
+}
+@-webkit-keyframes 'gameprocess' {
+  0% {
+    width: 100%;
+  }
+  80% {
+    background: #fcd207;
+  }
+  82% {
+    background: #ff0000;
+  }
+  100% {
+    background: #ff0000;
+    width: 0%;
+  }
+}
+@-webkit-keyframes 'raise' {
+  0% {
+    top: 60px;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    top: 20px;
+    opacity: 0;
   }
 }

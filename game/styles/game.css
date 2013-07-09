@@ -176,59 +176,95 @@ body {
   font-size: 0;
   line-height: 0;
   height: 10px;
-  -webkit-border-radius: 3px; }
+  opacity: .5;
+  -webkit-border-radius: 5px; }
+  /* line 126, ../sass/game.scss */
+  .gaming .process-bar .status {
+    height: 10px;
+    -webkit-border-radius: 5px; }
+    /* line 129, ../sass/game.scss */
+    .gaming .process-bar .status.onprocess {
+      background: #fcd207;
+      -webkit-animation: "gameprocess" 60s linear; }
+/* line 135, ../sass/game.scss */
+.gaming .score {
+  background: url(../image/g_score.png) no-repeat left top;
+  width: 200px;
+  height: 100px;
+  margin-left: -100px;
+  position: absolute;
+  left: 50%;
+  top: 20px; }
+  /* line 143, ../sass/game.scss */
+  .gaming .score span {
+    display: block;
+    padding: 10px 0 0 75px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center; }
+  /* line 150, ../sass/game.scss */
+  .gaming .score .add {
+    width: 125px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    font-size: 32px;
+    opacity: 0; }
+    /* line 157, ../sass/game.scss */
+    .gaming .score .add.raise {
+      -webkit-animation: "raise" 1.5s ease-in-out; }
 
-/* line 127, ../sass/game.scss */
+/* line 163, ../sass/game.scss */
 .game-over {
   background: url(../images/g_gameover.png) no-repeat center center;
   position: relative; }
-  /* line 130, ../sass/game.scss */
+  /* line 166, ../sass/game.scss */
   .game-over span {
     position: absolute;
     left: 395px;
     top: 290px;
     color: #fff;
     font: bold normal 26px/120% "Microsoft Yahei"; }
-  /* line 137, ../sass/game.scss */
+  /* line 173, ../sass/game.scss */
   .game-over a {
     background: transparent;
     opacity: 0;
     width: 145px;
     height: 125px;
     position: absolute; }
-    /* line 143, ../sass/game.scss */
+    /* line 179, ../sass/game.scss */
     .game-over a.restart {
       left: 225px;
       top: 385px; }
-    /* line 147, ../sass/game.scss */
+    /* line 183, ../sass/game.scss */
     .game-over a.board {
       left: 435px;
       top: 385px; }
 
-/* line 153, ../sass/game.scss */
+/* line 189, ../sass/game.scss */
 .rank {
   background: url(../images/g_rank.png) no-repeat center center;
   position: relative;
   color: #fff; }
-  /* line 157, ../sass/game.scss */
+  /* line 193, ../sass/game.scss */
   .rank ul {
     position: absolute;
     left: 126px;
     top: 134px; }
-    /* line 161, ../sass/game.scss */
+    /* line 197, ../sass/game.scss */
     .rank ul li {
       float: left;
       width: 270px;
       margin: 0 65px 46px 0; }
-    /* line 166, ../sass/game.scss */
+    /* line 202, ../sass/game.scss */
     .rank ul .name {
       float: left;
       font-size: 18px; }
-    /* line 170, ../sass/game.scss */
+    /* line 206, ../sass/game.scss */
     .rank ul .score {
       margin-left: 110px;
       font-size: 14px; }
-  /* line 175, ../sass/game.scss */
+  /* line 211, ../sass/game.scss */
   .rank a {
     background: transparent;
     opacity: 0;
@@ -239,78 +275,114 @@ body {
     top: 385px; }
 
 @-webkit-keyframes 'bang' {
-  /* line 187, ../sass/game.scss */
+  /* line 223, ../sass/game.scss */
   50% {
     -webkit-transform: rotate(-90deg); }
 
-  /* line 190, ../sass/game.scss */
+  /* line 226, ../sass/game.scss */
   100% {
     -webkit-transform: rotate(0deg); } }
 
 @-webkit-keyframes 'disapear' {
-  /* line 195, ../sass/game.scss */
+  /* line 231, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 198, ../sass/game.scss */
+  /* line 234, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 201, ../sass/game.scss */
+  /* line 237, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 204, ../sass/game.scss */
+  /* line 240, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear2' {
-  /* line 209, ../sass/game.scss */
+  /* line 245, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 212, ../sass/game.scss */
+  /* line 248, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 215, ../sass/game.scss */
+  /* line 251, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 218, ../sass/game.scss */
+  /* line 254, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear3' {
-  /* line 223, ../sass/game.scss */
+  /* line 259, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 226, ../sass/game.scss */
+  /* line 262, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 229, ../sass/game.scss */
+  /* line 265, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 232, ../sass/game.scss */
+  /* line 268, ../sass/game.scss */
   100% {
     top: 120px; } }
 
 @-webkit-keyframes 'disapear4' {
-  /* line 237, ../sass/game.scss */
+  /* line 273, ../sass/game.scss */
   0% {
     top: 120px; }
 
-  /* line 240, ../sass/game.scss */
+  /* line 276, ../sass/game.scss */
   30% {
     top: 0px; }
 
-  /* line 243, ../sass/game.scss */
+  /* line 279, ../sass/game.scss */
   70% {
     top: 0px; }
 
-  /* line 246, ../sass/game.scss */
+  /* line 282, ../sass/game.scss */
   100% {
     top: 120px; } }
+
+@-webkit-keyframes 'gameprocess' {
+  /* line 287, ../sass/game.scss */
+  0% {
+    width: 100%; }
+
+  /* line 290, ../sass/game.scss */
+  80% {
+    background: #fcd207; }
+
+  /* line 293, ../sass/game.scss */
+  82% {
+    background: #ff0000; }
+
+  /* line 296, ../sass/game.scss */
+  100% {
+    background: #ff0000;
+    width: 0%; } }
+
+@-webkit-keyframes 'raise' {
+  /* line 302, ../sass/game.scss */
+  0% {
+    top: 60px; }
+
+  /* line 305, ../sass/game.scss */
+  40% {
+    opacity: 1; }
+
+  /* line 308, ../sass/game.scss */
+  60% {
+    opacity: 1; }
+
+  /* line 311, ../sass/game.scss */
+  100% {
+    top: 20px;
+    opacity: 0; } }

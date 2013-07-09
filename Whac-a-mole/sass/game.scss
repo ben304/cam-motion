@@ -15,6 +15,7 @@ html, body {
 }
 body {
   background: #6bc2c9 url(../image/g_sky.jpg) no-repeat center top;
+  font-family: 'WawaSC';
 }
 .stage {
   //border: #fff 1px dashed;
@@ -127,7 +128,34 @@ body {
       -webkit-border-radius: 5px;
       &.onprocess {
         background: #fcd207;
-        -webkit-animation: 'gameprocess' 60s linear 1;
+        -webkit-animation: 'gameprocess' 60s linear;
+      }
+    }
+  }
+  .score {
+    background: url(../image/g_score.png) no-repeat left top;
+    width: 200px;
+    height: 100px;
+    margin-left: -100px;
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    span {
+      display: block;
+      padding: 10px 0 0 75px;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+    }
+    .add {
+      width: 125px;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      font-size: 32px;
+      opacity: 0;
+      &.raise {
+        -webkit-animation: 'raise' 1.5s ease-in-out;
       }
     }
   }
@@ -161,7 +189,6 @@ body {
 .rank {
   background: url(../image/g_rank.png) no-repeat center center;
   position: relative;
-  font-family: 'WawaSC';
   color: #fff;
   ul {
     position: absolute;
@@ -269,5 +296,20 @@ body {
   100% {
     background: #ff0000;
     width: 0%;
+  }
+}
+@-webkit-keyframes 'raise' {
+  0% {
+    top: 60px;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    top: 20px;
+    opacity: 0;
   }
 }
