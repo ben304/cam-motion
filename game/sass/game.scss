@@ -31,7 +31,7 @@ body {
   width: 100%;
   height: 100%;
 }
-.start, .gaming, .game-over, .rank {
+.start, .inspectColor, .inputName, .gaming, .game-over, .rank {
   display: none;
   @include animate;
 }
@@ -73,13 +73,13 @@ body {
         -webkit-animation: 'disapear' 3s ease-in-out 1;
       }
       &.disapear-level2 {
-        -webkit-animation: 'disapear2' 2s ease-in-out 1;
+        -webkit-animation: 'disapear2' 2.2s ease-in-out 1;
       }
       &.disapear-level3 {
-        -webkit-animation: 'disapear3' 1s ease-in-out 1;
+        -webkit-animation: 'disapear3' 1.5s ease-in-out 1;
       }
       &.disapear-level4 {
-        -webkit-animation: 'disapear4' 0.5s ease-in-out 1;
+        -webkit-animation: 'disapear4' 1s ease-in-out 1;
       }
       &.hit b {
         background: url(../images/g_hit.png) no-repeat center top;
