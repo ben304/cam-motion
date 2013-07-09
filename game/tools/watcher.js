@@ -123,25 +123,24 @@ Watcher = (function() {
 					enter = true;
 				}
 			} else {
+				// 下一步
 				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
 					//console.log("next");
 					Watcher.clearTimer();
 					$("#showProject").hide();
 					reset();
-
-
 					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
-
-
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
 					detect[current] = true;
 					stopTimes++;
-					console.log(stopTimes);
+					$(".bigCircle1").val(stopTimes*5).trigger("change");
+					//console.log(stopTimes);
 				} else {
 					detect[current] = false;
 					stopTimes = 0;
+					$(".bigCircle1").val(0).trigger("change");
 				}
 				cloneBg = cur;
 				current = (current+1)%3;

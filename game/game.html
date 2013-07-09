@@ -13,12 +13,17 @@
 
     <!-- 游戏开始界面 -->
     <div class="start">
-      <span class="btn"></span>
+      <div class="big1">
+        <input id="J_KeyBoardCircle_0" data-width="100" value="0" class="keyboard-circle bigCircle1">
+      </div>
     </div>
 
     <div class="inspectColor">
       <div id="wrapper">
         <video autoplay width="320" height="240"></video>
+        <div class="big2">
+          <input id="J_KeyBoardCircle_1" data-width="80" value="0" data-displayInput="false" class="keyboard-circle bigCircle2">
+        </div>
         <div id="area"></div>
       </div>
     </div>
@@ -38,11 +43,11 @@
     <div class="gaming">
       <div class="hammer"></div>
       <div class="process-bar">
-        <div class="status"></div>
+        <div id="timer" class="status"></div>
       </div>
       <div class="score">
-        <span class="total">0</span>
-        <span class="add">+0</span>
+        <span id="totalScore" class="total">0</span>
+        <span id="oneScore" class="add">+0</span>
       </div>
       <span class="pause" style="display:fixed;top:0px;left:0px;">pause</span>
       <ul id="holes">
@@ -196,6 +201,8 @@
     var game = new Game();
     //Watcher.camStart();
     Watcher.camStart(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));//Watcher.inspectColor);
+    $(".bigCircle1").knob();
+    $(".bigCircle2").knob();
   </script>
 </body>
 </html>

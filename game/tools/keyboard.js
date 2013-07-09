@@ -78,17 +78,7 @@ LettersCtrl = (function() {
     if (letter.letter === "BackSpace") {
       return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
-      Watcher.clearTimer();
-      return game.nextPhase(function() {
-        game.on('start', function(mapArea) {
-          return App.init(mapArea);
-        }).on("process", function(i) {
-          return App.process(i);
-        }).on('over', function(score) {
-          return App.stop(score);
-        });
-        return Watcher.gameStart.bind(void 0, App.hit.bind(App))();
-      });
+      App.start();
     } else {
       val = $('#username').val();
       return $('#username').val(val + letter.letter);

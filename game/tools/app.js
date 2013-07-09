@@ -4,7 +4,7 @@
 		GRID_COLUMN = 3,
 		TOTAL_RATS = 1,
 		SPEED = 2000;
-		
+
 	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
@@ -28,6 +28,7 @@
 				this.holeRect = {w: mapArea.width, h: mapArea.height};
 				this.bindEvnet();
 			}
+			$("#timer").addClass("onprocess");
 			this.popup();
 		},
 
@@ -98,6 +99,14 @@
 			    that.current = null;
 			});
 
+			$("#timer").on('webkitAnimationEnd', function() {
+				$(this).removeClass("onprocess");
+			});
+
+			$("#oneScore").on('webkitAnimationEnd', function() {
+				$(this).removeClass("raise");
+			});
+
 			$(".pause").click(function() {
 				$(".monster").addClass("pause");
 			});
@@ -166,7 +175,7 @@
 
 				if (this.checkCollision(left, top, monster)) {
 					var totalScore = game.addScore(score);
-					this.showScore(totalScore);
+					this.showScore(score, totalScore);
 
 					console.log("hit"+this.current);
 					hammer.addClass("bang");
@@ -200,8 +209,23 @@
 			return false;
 		},
 
-		showScore: function(score) {
-			console.log(score);
+		showScore: function(score, total) {
+			$("#oneScore").html("+"+score).removeClass("raise").addClass("raise");
+			$("#totalScore").html(total);
+		},
+
+		start: function() {
+			Watcher.clearTimer();
+		    game.nextPhase(function() {
+		        game.on('start', function(mapArea) {
+		          App.init(mapArea);
+		        }).on("process", function(i) {
+		          App.process(i);
+		        }).on('over', function(score) {
+		          App.stop(score);
+		        });
+		        Watcher.gameStart.bind(undefined, App.hit.bind(App))();
+		    });
 		},
 
 		process: function(time) {
