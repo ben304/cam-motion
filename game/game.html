@@ -130,8 +130,14 @@
     <!--积分排行榜-->
     <div class="rank">
       <input id="J_KeyBoardCircle3" type="hidden" value="0" class="keyboard-circle">
+      <div class="rank-item" style="display: none">
+        <li>
+          <span class="name">{name}</span>
+          <span class="score">{score}</span>
+        </li>
+      </div>
       <ul>
-        <li>
+<!--         <li>
           <span class="name">RACHAEL</span>
           <span class="score">1000</span>
         </li>
@@ -170,7 +176,7 @@
         <li>
           <span class="name">RACHAEL</span>
           <span class="score">1000</span>
-        </li>
+        </li> -->
       </ul>
       <a href="javascript:void(0)"></a>
     </div>
@@ -181,7 +187,8 @@
   </div>
   <script src="library/jquery.min.js"></script>
   <script src="library/jquery.knob.js"></script>
-
+  
+  <script src="tools/user.js"></script>
   <script src="tools/keyboard.js"></script>
   <script src="tools/SoundBox.js"></script>
 
