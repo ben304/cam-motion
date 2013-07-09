@@ -61,6 +61,22 @@ void function(global){
 				v.className = 'monster';
 			});
 		},
+		_goto: function(name, callback){
+			var index = currentPhase;
+			[].some.call(this.phase, function(v, i){
+				console.log(v);
+				if(v.className == name) {
+					index = i;
+					return true;
+				}
+			});
+			if(index != currentPhase){
+				$(this.phase[currentPhase]).hide();
+				currentPhase = index;
+				this._displayCurrentPhase();
+				callback && callback();
+			}
+		},
 		_getHoles: function(){
 			var holeEles = $('#holes li'),
 				result = { width: 120, height: 120, holes: [] }
@@ -86,9 +102,17 @@ void function(global){
 			$(this.phase[currentPhase]).hasClass('gaming') && this._start();
 			return this;
 		},
-		restart: function(){
+		restart: function(callback) {
+			$(this.phase[currentPhase]).hide();
 			this._reset();
-			this.nextPhase();
+			currentPhase = 2;
+			this.nextPhase(callback);
+		},
+		reset: function(callback) {
+			$(this.phase[currentPhase]).hide();
+			this._reset();
+			this._displayCurrentPhase();
+			callback && callback();
 		},
 		getMonster: function(){
 			var level = getLevelByUserScore(totalScore),

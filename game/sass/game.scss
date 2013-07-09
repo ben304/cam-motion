@@ -1,0 +1,242 @@
+@import "compass/reset";
+
+@font-face {
+    font-family: 'WawaSC';
+    src: url("../font/WawaSC-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+@mixin animate {
+  -webkit-animation-duration: .5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+html, body {
+  height: 100%;
+}
+body {
+  background: #6bc2c9 url(../images/g_sky.jpg) no-repeat center top;
+  font-family: 'WawaSC';
+}
+.stage {
+  border: #fff 1px dashed;
+  width: 800px;
+  height: 600px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -300px 0 0 -400px;
+}
+
+.start, .gaming, .gaming ul, .game-over, .rank {
+  width: 100%;
+  height: 100%;
+}
+.start, .inspectColor, .inputName, .gaming, .game-over, .rank {
+  display: none;
+  @include animate;
+}
+.enabled {
+  display: block;
+}
+
+.start {
+  background: url(../images/g_start.png) no-repeat center center;
+  text-align: center;
+  .btn {
+    display: inline-block;
+    background: url(../images/g_start_btn.png) no-repeat left top;
+    width: 183px;
+    height: 153px;
+    margin-top: 55%;
+  }
+}
+
+.gaming {
+  ul {
+    position: relative;
+  }
+  li {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    div {
+      background: url(../images/g_cloud.png) no-repeat center bottom;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      position: absolute;
+      top: 120px;
+      &.disapear-level1 {
+        -webkit-animation: 'disapear' 3s ease-in-out 1;
+      }
+      &.disapear-level2 {
+        -webkit-animation: 'disapear2' 2.2s ease-in-out 1;
+      }
+      &.disapear-level3 {
+        -webkit-animation: 'disapear3' 1.5s ease-in-out 1;
+      }
+      &.disapear-level4 {
+        -webkit-animation: 'disapear4' 1s ease-in-out 1;
+      }
+      &.hit b {
+        background: url(../images/g_hit.png) no-repeat center top;
+        width: 100%;
+        height: 71px;
+        position: absolute;
+        top: 0px;
+        left: 0;
+      }
+      &.pause {
+        -webkit-animation-play-state: paused;
+      }
+    }
+    p {
+      display: inline-block;
+      background-image: url(../images/g_monster.png);
+      background-repeat: no-repeat;
+      width: 75px;
+      height: 111px;
+      -webkit-animation-timing-function: step-start;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-iteration-count: infinite;
+    }
+  }
+  .hammer {
+    background: url(../images/g_hammer.png) no-repeat left top;
+    width: 90px;
+    height: 98px;
+    position: absolute;
+    z-index: 999;
+    -webkit-transition: 0.03s;
+    -webkit-transform: scale(0.7);
+  }
+  .bang {
+    -webkit-animation: 'bang' 0.2s ease-in-out 2;
+  }
+}
+.game-over {
+  background: url(../images/g_gameover.png) no-repeat center center;
+  position: relative;
+  span {
+    position: absolute;
+    left: 395px;
+    top: 290px;
+    color: #fff;
+    font: bold normal 26px/120% "Microsoft Yahei";
+  }
+  a {
+    background: transparent;
+    opacity: 0;
+    width: 145px;
+    height: 125px;
+    position: absolute;
+    &.restart {
+      left: 225px;
+      top: 385px;
+    }
+    &.board {
+      left: 435px;
+      top: 385px;
+    }
+  }
+}
+.rank {
+  background: url(../images/g_rank.png) no-repeat center center;
+  position: relative;
+  color: #fff;
+  ul {
+    position: absolute;
+    left: 126px;
+    top: 134px;
+    li{
+      float: left;
+      width: 270px;
+      margin: 0 65px 46px 0;
+    }
+    .name {
+      float: left;
+      font-size: 18px;
+    }
+    .score {
+      margin-left: 110px;
+      font-size: 14px;
+    }
+  }
+  a {
+    background: transparent;
+    opacity: 0;
+    width: 90px;
+    height: 78px;
+    position: absolute;
+    left: 225px;
+    top: 385px;
+  }
+}
+
+@-webkit-keyframes 'bang' {
+  50% {
+    -webkit-transform: rotate(-90deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes 'disapear' {
+  0% {
+    top: 120px;
+  }
+  30% {
+    top: 0px;
+  }
+  70% {
+    top: 0px;
+  }
+  100% {
+    top: 120px;
+  }
+}
+@-webkit-keyframes 'disapear2' {
+  0% {
+    top: 120px;
+  }
+  30% {
+    top: 0px;
+  }
+  70% {
+    top: 0px;
+  }
+  100% {
+    top: 120px;
+  }
+}
+@-webkit-keyframes 'disapear3' {
+  0% {
+    top: 120px;
+  }
+  30% {
+    top: 0px;
+  }
+  70% {
+    top: 0px;
+  }
+  100% {
+    top: 120px;
+  }
+}
+@-webkit-keyframes 'disapear4' {
+  0% {
+    top: 120px;
+  }
+  30% {
+    top: 0px;
+  }
+  70% {
+    top: 0px;
+  }
+  100% {
+    top: 120px;
+  }
+}
