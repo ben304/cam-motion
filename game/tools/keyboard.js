@@ -13,10 +13,10 @@ Page3_Letters = [["Restart", 0, 0]];
 
 LettersCtrl = (function() {
 
-  function LettersCtrl(page, cirleSelector) {
+  function LettersCtrl(page, circleSelector) {
     var letter, letters, _i, _len;
     this.letters = [];
-    this.circleInput = $(cirleSelector);
+    this.circleInput = $(circleSelector);
     this.circle = this.circleInput.knob({
       thickness: 0.3,
       width: 60
@@ -34,7 +34,7 @@ LettersCtrl = (function() {
     this.delayTimer = null;
     this.inputTimer = null;
     this.inLetter = "";
-    return this.cirle.bind('change', function(ev) {
+    return this.circle.bind('change', function(ev) {
       if (ev.target.value >= 100) {
         return _this.inputLetter(_this.preLetter);
       }
@@ -47,7 +47,7 @@ LettersCtrl = (function() {
     this.x = x - 33;
     this.y = y - 33;
     letter = this.checkInLetter(x, y);
-    this.cirle[0].style.cssText = "position: absolute; left: " + this.x + "px; top: " + this.y + "px;";
+    this.circle[0].style.cssText = "position: absolute; left: " + this.x + "px; top: " + this.y + "px;";
     if (letter === this.preLetter) {
       return;
     }
@@ -99,7 +99,7 @@ LettersCtrl = (function() {
     var value,
       _this = this;
     this.isStart = true;
-    this.cirleInput.val(6).trigger('change');
+    this.circleInput.val(6).trigger('change');
     clearInterval(this.progressTimer);
     value = 6;
     this.progressTimer = setInterval(function() {
@@ -107,13 +107,13 @@ LettersCtrl = (function() {
         return;
       }
       value = value + 6;
-      return _this.cirleInput.val(value).trigger('change');
+      return _this.circleInput.val(value).trigger('change');
     }, LETTER_CHECKING_TIME / 17);
   };
 
   LettersCtrl.prototype.hideProgress = function() {
     this.isStart = false;
-    this.cirleInput.val(0).trigger('change');
+    this.circleInput.val(0).trigger('change');
     return clearInterval(this.progressTimer);
   };
 

@@ -48,9 +48,9 @@ Page3_Letters = [
 #   width     : 60
 
 class LettersCtrl
-  constructor: (page, cirleSelector)->
+  constructor: (page, circleSelector)->
     @letters = []
-    @circleInput = $(cirleSelector)
+    @circleInput = $(circleSelector)
     @circle = @circleInput.knob
       thickness : 0.3
       width     : 60
@@ -64,7 +64,7 @@ class LettersCtrl
     @inputTimer = null
     @inLetter = ""
 
-    @cirle.bind 'change', (ev)=>
+    @circle.bind 'change', (ev)=>
       if ev.target.value >= 100
         @inputLetter @preLetter
 
@@ -74,7 +74,7 @@ class LettersCtrl
     @x = x - 33
     @y = y - 33
     letter = @checkInLetter x, y
-    @cirle[0].style.cssText = """
+    @circle[0].style.cssText = """
       position: absolute; left: #{@x}px; top: #{@y}px;
     """
     return if (letter is @preLetter) # and @isStart
@@ -122,13 +122,13 @@ class LettersCtrl
   showProgress: ->
     @isStart = true
     #Circle.show()
-    @cirleInput.val(6).trigger('change')
+    @circleInput.val(6).trigger('change')
     clearInterval @progressTimer
     value = 6
     @progressTimer = setInterval =>
       return if value >= 100
       value = value + 6
-      @cirleInput.val(value).trigger('change')
+      @circleInput.val(value).trigger('change')
     , LETTER_CHECKING_TIME / 17
     return
 
@@ -136,7 +136,7 @@ class LettersCtrl
   hideProgress: ->
     # Circle.hide()
     @isStart = false
-    @cirleInput.val(0).trigger('change')
+    @circleInput.val(0).trigger('change')
     clearInterval @progressTimer
     
   checkInLetter: (x, y)->
