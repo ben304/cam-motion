@@ -248,6 +248,14 @@ Watcher = (function() {
 		clearInterval(timer);
 	};
 
+	var debug = function() {
+		$("#showProject").show();
+	};
+
+	var undebug = function() {
+		$("#showProject").hide();
+	}
+
 	return {
 		camStart: camStart,
 		camPause: camPause,
@@ -257,6 +265,8 @@ Watcher = (function() {
 		clearTimer: clearTimer,
 		inspectBg: inspectBg,
 		inspectPerson: inspectPerson,
-		leaveOrRestart: leaveOrRestart
+		leaveOrRestart: leaveOrRestart,
+		debug: debug,
+		undebug: undebug
 	}
 })();

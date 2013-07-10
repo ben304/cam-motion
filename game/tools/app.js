@@ -27,12 +27,12 @@
 				this.mapArea = mapArea;
 				this.initialized = true;
 				this.holeRect = {w: mapArea.width, h: mapArea.height};
-				this.bindEvnet();
 			}
 			this.map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 			this.current = null;
 			$("#timer").addClass("onprocess");
 			this.popup();
+			this.bindEvnet();
 		},
 
 		popup: function() {
@@ -75,7 +75,7 @@
 			var that = this;
 			
 			// 绑定动物消失后出现另一个动物
-			$(".monster").on('webkitAnimationEnd', function(e) {
+			$(".monster").bind('webkitAnimationEnd', function(e) {
 			    //that.map[row][column] = false;
 			    //actor.removeClass('active');
 			    var holeID = $(this).data("hole");
@@ -87,13 +87,15 @@
 				}, 50);
 			});
 
-			$("#oneScore").on('webkitAnimationEnd', function() {
+			$("#oneScore").bind('webkitAnimationEnd', function() {
 				$(this).removeClass("raise");
 			});
+		},
 
-			$(".pause").click(function() {
-				$(".monster").addClass("pause");
-			});
+		unbindEvent: function() {
+			// 绑定动物消失后出现另一个动物
+			$(".monster").unbind();
+			$("#oneScore").unbind();
 		},
 
 		hit: function(left, top) {
@@ -178,8 +180,10 @@
 
 		// 停止游戏
 		stop: function(score) {
+			this.unbindEvent();
 			UserCtrl.setScore(UserCtrl.getUser(), score);
 			$(".monster").attr("class", "monster");
+			$(".monster").find("p").attr("class", "");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
 			$("#timer").removeClass("onprocess");
