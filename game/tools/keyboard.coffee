@@ -110,22 +110,10 @@ class LettersCtrl
       user = UserCtrl.addUser($('#username').val() || "GUY")
       UserCtrl.setUser user
       App.start()
-
     else if letter.letter is "Restart" 
-      game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson)); 
-
+      game.restart App.restart
     else if letter.letter is "Rank"
-      list = UserCtrl.listScore();
-      list.sort (a,b)->
-        a.score - b.score
-      tpl = $('.rank-item').html();
-      str = (for item in list
-        tpl.replace('{name}', item.name).replace('{score}', item.score)
-      ).join("")
-      $('.rank ul').append str
-      lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2')
-      game.nextPhase ->
-          Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl))
+      game.showScoreList()
     else
       val = $('#username').val()
       $('#username').val val + letter.letter

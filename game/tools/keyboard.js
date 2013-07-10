@@ -75,7 +75,7 @@ LettersCtrl = (function() {
   };
 
   LettersCtrl.prototype.inputLetter = function(letter) {
-    var item, lettersCtrl, list, str, tpl, user, val;
+    var user, val;
     console.log(letter);
     if (!letter) {
       return;
@@ -89,27 +89,9 @@ LettersCtrl = (function() {
       UserCtrl.setUser(user);
       return App.start();
     } else if (letter.letter === "Restart") {
-      return game.reset(Watcher.inspectBg.bind(void 0, Watcher.inspectPerson));
+      return game.restart(App.restart);
     } else if (letter.letter === "Rank") {
-      list = UserCtrl.listScore();
-      list.sort(function(a, b) {
-        return a.score - b.score;
-      });
-      tpl = $('.rank-item').html();
-      str = ((function() {
-        var _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = list.length; _i < _len; _i++) {
-          item = list[_i];
-          _results.push(tpl.replace('{name}', item.name).replace('{score}', item.score));
-        }
-        return _results;
-      })()).join("");
-      $('.rank ul').append(str);
-      lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
-      return game.nextPhase(function() {
-        return Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));
-      });
+      return game.showScoreList();
     } else {
       val = $('#username').val();
       return $('#username').val(val + letter.letter);
