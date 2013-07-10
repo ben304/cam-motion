@@ -30,20 +30,26 @@ void function(global){
 		this.phase = $('#stage>div');
 		this.evts = evts;
 		this._reset();
-		this._addPhaseEvent();
+		this._bindEvents();
 		this._displayCurrentPhase();
 	}
 	$.extend(Game.prototype, {
 		_displayCurrentPhase: function(){
 			$(this.phase[currentPhase]).show().addClass(tf);
 		},
-		_addPhaseEvent: function(){
+		_bindEvents: function(){
+			var context = this;
 			this.phase.bind('webkitAnimationEnd', function(){
 				$(this).removeClass(tf);
 			});
+			$('#timer').bind('webkitAnimationEnd',function(){
+				context.evts.over(totalScore);
+			});
 		},
 		_start: function(){
-			var i = 0, end = GAME_TIME/1000, context = this;
+			this.evts.start(this._getHoles());
+			
+			/*var i = 0, end = GAME_TIME/1000, context = this;
 			var timer = setInterval(function(){
 				if(i >= end){
 					clearInterval(timer);
@@ -53,7 +59,7 @@ void function(global){
 				}
 				context.evts.process(i++);
 			}, 1000);
-			this.evts.start(this._getHoles());
+			this.evts.start(this._getHoles());*/
 		},
 		_reset: function(){
 			totalScore = 0, currentPhase = 0;

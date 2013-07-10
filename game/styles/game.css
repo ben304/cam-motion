@@ -285,10 +285,10 @@ body {
     /* line 228, ../sass/game.scss */
     .rank ul .name {
       float: left;
+      width: 200px;
       font-size: 18px; }
-    /* line 232, ../sass/game.scss */
+    /* line 233, ../sass/game.scss */
     .rank ul .score {
-      margin-left: 110px;
       font-size: 14px; }
   /* line 237, ../sass/game.scss */
   .rank a {
