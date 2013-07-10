@@ -28,8 +28,8 @@ Page1_Letters = [
   ["B", 404, 410]
   ["N", 481, 410]
   ["M", 558, 410]
-  ["BackSpace", 531, 110]
-  ["Enter", 655, 110]
+  ["BackSpace", 531, 96, 100]
+  ["Enter", 638, 96, 100]
 ]
 
 Page2_Letters = [
@@ -61,7 +61,7 @@ class LettersCtrl
     letters = window[page + "_Letters"]
     @width = window[page + "_Width"]
     for letter in letters
-      @letters.push new Letter letter[0], letter[1], letter[2], @width
+      @letters.push new Letter letter[0], letter[1], letter[2], letter[3] || @width
     @init()
 
   init: ->
@@ -140,8 +140,8 @@ class LettersCtrl
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
-        @x = letter.x + (@width - 60)/2
-        @y = letter.y + (@width - 60)/2
+        @x = letter.x + (letter.width - 60)/2
+        @y = letter.y + (letter.width - 60)/2
         console.log letter
         return letter
         break
