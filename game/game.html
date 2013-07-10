@@ -221,41 +221,5 @@
     $(".bigCircle1").knob();
     $(".bigCircle2").knob();
   </script>
-  
-      <script>
-      //~function(){
-        
-        var LauncherMonster = {
-          init: function(){
-            var m = $('#sm li'), th = this;
-            $.extend(th, {
-              _m: m,
-              _l: m.length,
-              _tf: 'bounce',
-              _timer: null,
-              _i: 300
-            });
-            m.bind('webkitAnimationEnd', function(){
-              $(this).removeClass(th._tf);
-            });
-          },
-          start: function(){
-            var th = this;
-            th._timer = setInterval(function(){
-              $(th._m[(Math.random()*th._l)|0]).addClass(th._tf);
-            }, th._i);
-          },
-          stop: function(){
-            clearInterval(this._timer);
-            this._timer = null;
-            this._m.removeClass(this._tf);
-          }
-        }
-        
-        LauncherMonster.init();
-        LauncherMonster.start();
-        
-      //}();
-      </script>
 </body>
 </html>
