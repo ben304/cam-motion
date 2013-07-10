@@ -99,10 +99,6 @@
 			    that.current = null;
 			});
 
-			$("#timer").on('webkitAnimationEnd', function() {
-				$(this).removeClass("onprocess");
-			});
-
 			$("#oneScore").on('webkitAnimationEnd', function() {
 				$(this).removeClass("raise");
 			});
@@ -219,8 +215,6 @@
 		    game.nextPhase(function() {
 		        game.on('start', function(mapArea) {
 		          App.init(mapArea);
-		        }).on("process", function(i) {
-		          App.process(i);
 		        }).on('over', function(score) {
 		          App.stop(score);
 		        });
@@ -229,8 +223,7 @@
 		},
 
 		process: function(time) {
-			//TODO: 刷新计时条
-			console.log(time);
+			// donothing
 		},
 
 		// 停止游戏
@@ -238,6 +231,7 @@
 			$(".monster").attr("class", "monster");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
+			$("#timer").removeClass("onprocess");
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			game.nextPhase(function() {
 				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));	
