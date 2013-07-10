@@ -182,7 +182,7 @@ Watcher = (function() {
 			}
 			rate = white/(white+black);
 
-			if (rate >= 1) {
+			if (rate >= 0.9) {
 				game.reset(Watcher.inspectPerson);
 			}
 			//ctx3.putImageData(d, 0, 0);
@@ -202,6 +202,9 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
+				$(".colorCon").css("background", "#"+__dec2hex(currentColor.r)+__dec2hex(currentColor.g)+__dec2hex(currentColor.b));
+				$(".colorVal").html("("+currentColor.r+", "+currentColor.g+", "+currentColor.b+")");
+				
 				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
 			}
