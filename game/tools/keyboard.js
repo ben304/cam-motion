@@ -5,7 +5,7 @@ LETTER_CHECKING_TIME = 300;
 
 LETTER_CHECKING_DELAY = 100;
 
-Page1_Letters = [["Q", 23, 249], ["W", 99, 249], ["E", 175, 249], ["R", 252, 249], ["T", 330, 249], ["Y", 407, 249], ["U", 484, 249], ["I", 561, 249], ["O", 637, 249], ["P", 713, 249], ["A", 60, 328], ["S", 136, 328], ["D", 213, 328], ["F", 289, 328], ["G", 367, 328], ["H", 445, 328], ["J", 521, 328], ["K", 598, 328], ["L", 675, 328], ["Z", 97, 410], ["X", 173, 410], ["C", 250, 410], ["V", 326, 410], ["B", 404, 410], ["N", 481, 410], ["M", 558, 410], ["BackSpace", 531, 110], ["Enter", 655, 110]];
+Page1_Letters = [["Q", 23, 249], ["W", 99, 249], ["E", 175, 249], ["R", 252, 249], ["T", 330, 249], ["Y", 407, 249], ["U", 484, 249], ["I", 561, 249], ["O", 637, 249], ["P", 713, 249], ["A", 60, 328], ["S", 136, 328], ["D", 213, 328], ["F", 289, 328], ["G", 367, 328], ["H", 445, 328], ["J", 521, 328], ["K", 598, 328], ["L", 675, 328], ["Z", 97, 410], ["X", 173, 410], ["C", 250, 410], ["V", 326, 410], ["B", 404, 410], ["N", 481, 410], ["M", 558, 410], ["BackSpace", 531, 96, 100], ["Enter", 638, 96, 100]];
 
 Page2_Letters = [["Restart", 238, 295], ["Rank", 447, 295]];
 
@@ -31,7 +31,7 @@ LettersCtrl = (function() {
     this.width = window[page + "_Width"];
     for (_i = 0, _len = letters.length; _i < _len; _i++) {
       letter = letters[_i];
-      this.letters.push(new Letter(letter[0], letter[1], letter[2], this.width));
+      this.letters.push(new Letter(letter[0], letter[1], letter[2], letter[3] || this.width));
     }
     this.init();
   }
@@ -124,8 +124,8 @@ LettersCtrl = (function() {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       letter = _ref[_i];
       if (letter.checkIsSelf(x, y)) {
-        this.x = letter.x + (this.width - 60) / 2;
-        this.y = letter.y + (this.width - 60) / 2;
+        this.x = letter.x + (letter.width - 60) / 2;
+        this.y = letter.y + (letter.width - 60) / 2;
         console.log(letter);
         return letter;
         break;
