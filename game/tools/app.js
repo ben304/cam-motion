@@ -191,7 +191,7 @@
 
 		showScoreList: function() {
 			var list = UserCtrl.listScore();
-			list.sort(function(a,b){return a.score - b.score});
+			list.sort(function(a,b){return b.score - a.score});
 			list.splice(10);
 			var tpl = $('.rank-item').html();
 			var str = ((function() {

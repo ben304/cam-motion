@@ -23,7 +23,8 @@ var UserList = {
   add: function(name){
     var new_name;
     if(this.get(name)) {
-      new_name = name.match(/[A-Z]+/i) + (parseInt(0 + name.match(/\d+/)) + 1);
+      name = name.match(/[A-Z]+/i) + (parseInt(0 + name.match(/\d+/)) + 1);
+      return this.add(name);
     }
     else {
       new_name = name;
@@ -36,11 +37,12 @@ var UserList = {
   set: function(name, score) {
     var list = this.list();
     for(var i=0; i<list.length; i++){
-      if(list[i] == name) {
+      if(list[i].name == name) {
         list[i]['score'] = score;
         break;
       }
     }
+    localStorage['userlist'] = JSON.stringify(list);
   }
 };
 
