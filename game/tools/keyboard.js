@@ -75,7 +75,7 @@ LettersCtrl = (function() {
   };
 
   LettersCtrl.prototype.inputLetter = function(letter) {
-    var user, val;
+    var val;
     console.log(letter);
     if (!letter) {
       return;
@@ -85,8 +85,6 @@ LettersCtrl = (function() {
     if (letter.letter === "BackSpace") {
       return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
-      user = UserCtrl.addUser($('#username').val() || "GUY");
-      UserCtrl.setUser(user);
       return App.start();
     } else if (letter.letter === "Restart") {
       return game.restart(App.restart);

@@ -107,8 +107,6 @@ class LettersCtrl
     if letter.letter is "BackSpace"
       $('#username').val val.substring(0, val.length - 1)
     else if letter.letter is "Enter"
-      user = UserCtrl.addUser($('#username').val() || "GUY")
-      UserCtrl.setUser user
       App.start()
     else if letter.letter is "Restart" 
       game.restart App.restart
