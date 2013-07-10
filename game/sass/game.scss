@@ -6,15 +6,15 @@
     font-weight: normal;
     font-style: normal;
 }
-@mixin animate {
-  -webkit-animation-duration: .5s;
+@mixin animate($s) {
+  -webkit-animation-duration: $s;
   -webkit-animation-timing-function: ease-in-out;
 }
 html, body {
   height: 100%;
 }
 body {
-  background: #6bc2c9 url(../images/g_sky.jpg) no-repeat center top;
+  background: #6bc2c9 url(../images/g_sky.jpg) repeat-x center top;
   font-family: 'WawaSC';
 }
 .stage {
@@ -32,7 +32,7 @@ body {
 }
 .start, .inspectColor, .inputName, .gaming, .game-over, .rank {
   display: none;
-  @include animate;
+  @include animate(.5s);
 }
 .enabled {
   display: block;
@@ -42,13 +42,58 @@ body {
   background: url(../images/g_start.png) no-repeat center 25%;
   background-size: 60%;
   text-align: center;
-  .btn {
+  ul {
+    position: relative;
+  }
+  li {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 60%;
+    @include animate(1s);
+    &.sm1 {
+      background-image: url(../images/g_m_1.png);
+      width: 188px;
+      height: 211px;
+      top: 155px;
+      left: 170px;
+    }
+    &.sm2 {
+      background-image: url(../images/g_m_2.png);
+      width: 157px;
+      height: 162px;
+      top: 100px;
+      left: 290px;
+    }
+    &.sm3 {
+      background-image: url(../images/g_m_3.png);
+      width: 117px;
+      height: 117px;
+      top: 134px;
+      left: 378px;
+    }
+    &.sm4 {
+      background-image: url(../images/g_m_4.png);
+      width: 87px;
+      height: 80px;
+      top: 140px;
+      left: 485px;
+    }
+    &.sm5 {
+      background-image: url(../images/g_m_5.png);
+      width: 124px;
+      height: 145px;
+      top: 228px;
+      left: 558px;
+    }
+  }
+  /*.btn {
     display: inline-block;
     background: url(../images/g_start_btn.png) no-repeat left top;
     width: 183px;
     height: 153px;
     margin-top: 55%;
-  }
+  }*/
 }
 
 .gaming {
@@ -128,7 +173,7 @@ body {
       -webkit-border-radius: 5px;
       &.onprocess {
         background: #fcd207;
-        -webkit-animation: 'gameprocess' 60s linear;
+        -webkit-animation: 'gameprocess' 6s linear;
       }
     }
   }
