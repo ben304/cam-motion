@@ -182,7 +182,7 @@ Watcher = (function() {
 			}
 			rate = white/(white+black);
 
-			if (rate >= 0.9) {
+			if (rate >= 1) {
 				game.reset(Watcher.inspectPerson);
 			}
 			//ctx3.putImageData(d, 0, 0);
