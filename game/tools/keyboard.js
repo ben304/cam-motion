@@ -134,7 +134,6 @@ LettersCtrl = (function() {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       letter = _ref[_i];
       if (letter.checkIsSelf(x, y)) {
-        console.log(letter);
         return letter;
         break;
       }

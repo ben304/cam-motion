@@ -38,7 +38,8 @@ var UserList = {
     var list = this.list();
     for(var i=0; i<list.length; i++){
       if(list[i].name == name) {
-        list[i]['score'] = score;
+        if(score > list[i]['score'])
+          list[i]['score'] = score;
         break;
       }
     }
