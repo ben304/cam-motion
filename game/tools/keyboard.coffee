@@ -85,7 +85,7 @@ class LettersCtrl
     rx = if letter then letter.x + (letter.width - 60)/2 else x
     ry = if letter then letter.y + (letter.height - 60)/2 else y
     @circle[0].style.cssText = """
-      position: absolute; left: #{}px; top: #{@y}px;
+      position: absolute; left: #{rx}px; top: #{ry}px;
     """
     return if (letter is @preLetter) # and @isStart
     clearTimeout @delayTimer

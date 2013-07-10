@@ -61,7 +61,7 @@ LettersCtrl = (function() {
     letter = this.checkInLetter(x, y);
     rx = letter ? letter.x + (letter.width - 60) / 2 : x;
     ry = letter ? letter.y + (letter.height - 60) / 2 : y;
-    this.circle[0].style.cssText = "position: absolute; left: " + "px; top: " + this.y + "px;";
+    this.circle[0].style.cssText = "position: absolute; left: " + rx + "px; top: " + ry + "px;";
     if (letter === this.preLetter) {
       return;
     }
