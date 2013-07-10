@@ -146,6 +146,10 @@
 		},
 
 		start: function() {
+			// 存用户名
+			var user = UserCtrl.addUser($('#username').val() || "GUY")
+      		UserCtrl.setUser(user);
+      		$('#username').val('');
 			Watcher.clearTimer();
 		    game.nextPhase(function() {
 		        game.on('start', function(mapArea) {
@@ -174,6 +178,7 @@
 
 		// 停止游戏
 		stop: function(score) {
+			UserCtrl.setScore(UserCtrl.getUser(), score);
 			$(".monster").attr("class", "monster");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
@@ -181,6 +186,26 @@
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			game.nextPhase(function() {
 				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));	
+			});
+		},
+
+		showScoreList: function() {
+			var list = UserCtrl.listScore();
+			list.sort(function(a,b){return a.score - b.score});
+			list.splice(10);
+			var tpl = $('.rank-item').html();
+			var str = ((function() {
+	        	var _i, _len, _results = [];
+		        for (_i = 0, _len = list.length; _i < _len; _i++) {
+		          item = list[_i];
+		          _results.push(tpl.replace('{name}', item.name).replace('{score}', item.score));
+		        }
+		        return _results;
+			})()).join("");
+			$('.rank ul').html("").append(str);
+			var lettersCtrl = new LettersCtrl('Page3', '#J_KeyBoardCircle3');
+			game.nextPhase(function() {
+				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));
 			});
 		}
 	};

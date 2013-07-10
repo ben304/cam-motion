@@ -129,6 +129,7 @@ Watcher = (function() {
 					//console.log("next");
 					Watcher.clearTimer();
 					$("#showProject").hide();
+					$(".bigCircle1").val(0);
 					reset();
 					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 					game.nextPhase(Watcher.inspectColor);
