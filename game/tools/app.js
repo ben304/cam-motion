@@ -85,7 +85,7 @@
 			    setTimeout(function() {
 			    	that.map[holeID-1] = 0;
 			    	that.popup();
-				}, 50);
+				}, 10);
 			});
 
 			$("#oneScore").bind('webkitAnimationEnd', function() {
@@ -110,7 +110,7 @@
 					var totalScore = game.addScore(score);
 					this.showScore(score, totalScore);
 
-					console.log("hit"+this.current);
+					//console.log("hit"+this.current);
 					hammer.addClass("bang");
 					monster.data("hit", true);
 					monster.addClass("pause");
@@ -124,7 +124,7 @@
 						monster.data("hit", false);
 						//this.map[this.current-1] = 0;
 						that.popup();
-					}, 200);
+					}, 10);
 				}
 			}
 		},
@@ -144,7 +144,8 @@
 		},
 
 		showScore: function(score, total) {
-			$("#oneScore").html("+"+score).removeClass("raise").addClass("raise");
+			$("#oneScore").removeClass("raise").html("+"+score);
+			$("#oneScore").addClass("raise");
 			$("#totalScore").html(total);
 		},
 
@@ -188,6 +189,7 @@
 			$(".monster").find("p").attr("class", "");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
+			$("#oneScore").html("");
 			$("#timer").removeClass("onprocess");
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			game.nextPhase(function() {
@@ -213,7 +215,34 @@
 			game.nextPhase(function() {
 				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));
 			});
-		}
+		},
+
+		LauncherMonster: {
+			init: function(){
+				var m = $('#sm li'), th = this;
+				$.extend(th, {
+				  _m: m,
+				  _l: m.length,
+				  _tf: 'bounce',
+				  _timer: null,
+				  _i: 300
+				});
+				m.bind('webkitAnimationEnd', function(){
+				  $(this).removeClass(th._tf);
+				});
+			},
+			start: function(){
+				var th = this;
+				th._timer = setInterval(function(){
+		            $(th._m[(Math.random()*th._l)|0]).addClass(th._tf);
+            	}, th._i);
+          	},
+          	stop: function(){
+            	clearInterval(this._timer);
+            	this._timer = null;
+            	this._m.removeClass(this._tf);
+          	}
+        }
 	};
 
 	window.App = App;
