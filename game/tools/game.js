@@ -63,9 +63,9 @@ void function(global){
 		},
 		_reset: function(){
 			totalScore = 0, currentPhase = 0;
-			$('#holds .monster').each(function(i, v){
+			/*$('#holes .monster').each(function(i, v){
 				v.className = 'monster';
-			});
+			});*/
 		},
 		_goto: function(name, callback){
 			var index = currentPhase;
