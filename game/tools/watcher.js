@@ -15,7 +15,7 @@ Watcher = (function() {
 		ctx3 = c3.getContext("2d"),
 		localMediaStream = null,
 		last,
-		camInterval = 500,
+		camInterval = 50,
 		gameInterval = 30,
 		currentColor,
 		last,
@@ -101,6 +101,7 @@ Watcher = (function() {
 	 */
 	var inspectPerson = function() {
 		clearTimer();
+		cloneBg = bg;
 		__takeAction(200, function() {
 			var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
@@ -123,25 +124,24 @@ Watcher = (function() {
 					enter = true;
 				}
 			} else {
+				// 下一步
 				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
 					//console.log("next");
 					Watcher.clearTimer();
 					$("#showProject").hide();
 					reset();
-
-
 					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
-
-
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
 					detect[current] = true;
 					stopTimes++;
-					console.log(stopTimes);
+					$(".bigCircle1").val(stopTimes*5).trigger("change");
+					//console.log(stopTimes);
 				} else {
 					detect[current] = false;
 					stopTimes = 0;
+					$(".bigCircle1").val(0).trigger("change");
 				}
 				cloneBg = cur;
 				current = (current+1)%3;
@@ -183,7 +183,7 @@ Watcher = (function() {
 			rate = white/(white+black);
 
 			if (rate >= 1) {
-				game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));
+				game.reset(Watcher.inspectPerson);
 			}
 			//ctx3.putImageData(d, 0, 0);
 		});
@@ -192,6 +192,8 @@ Watcher = (function() {
 
 	var colorer = function() {
 		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+		//ctx3.putImageData(cur, 0, 0);
+		//$("#showProject").show();
 		var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
 
 		if (!last) {
@@ -202,6 +204,9 @@ Watcher = (function() {
 			if (currentColor = Processor.detectColor(d, cur)) {
 				timer = clearInterval(timer);
 				//console.dir(currentColor);
+				$(".colorCon").css("background", "#"+__dec2hex(currentColor.r)+__dec2hex(currentColor.g)+__dec2hex(currentColor.b));
+				$(".colorVal").html("("+currentColor.r+", "+currentColor.g+", "+currentColor.b+")");
+				
 				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
 			}

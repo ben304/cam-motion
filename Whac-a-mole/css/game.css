@@ -234,9 +234,9 @@ body {
       margin: 0 65px 46px 0; }
     .rank ul .name {
       float: left;
+      width: 200px;
       font-size: 18px; }
     .rank ul .score {
-      margin-left: 110px;
       font-size: 14px; }
   .rank a {
     background: transparent;

@@ -4,12 +4,13 @@
 		GRID_COLUMN = 3,
 		TOTAL_RATS = 1,
 		SPEED = 2000;
-		
+
 	var hammer = $(".hammer");
 
 	/* 用于控制地鼠出现 */
 	var App = {
 
+		// 其实没用上
 		map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 		mapArea: [],
@@ -28,11 +29,13 @@
 				this.holeRect = {w: mapArea.width, h: mapArea.height};
 				this.bindEvnet();
 			}
+			this.map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+			this.current = null;
+			$("#timer").addClass("onprocess");
 			this.popup();
 		},
 
 		popup: function() {
-			
 			var info = game.getMonster(),
 				level = info.level,
 				monster = info.monster;
@@ -45,37 +48,24 @@
 			$(".p"+holeID).find(".monster").attr('class', 'monster '+level.CLSNAME).data("score", monster.SCORE);
 			this.map[holeID-1] = 1;
 			this.current = holeID;
-			// if (this.paused) {
-			// 	clearTimeout(this.timer);
-			// 	return;
-			// }
-
-			// if (this.timeout) {
-			// 	clearTimeout(this.timer);
-			// 	return;
-			// } 
-
-			// var that = this;
-
-			// that.timer = setTimeout(function() {
-			// 	for (var i = 0; i < TOTAL_RATS; i++) {
-			// 		var	row = that.findVacantPos()[0],
-			// 			column = that.findVacantPos()[1],
-			// 			hole = that.grids[row][column];
-
-			// 		if (!that.map[row][column]) {
-			// 			that.map[row][column] = true;
-			// 			that.popup(row, column);
-			// 		}
-			// 	}
-			// 	that.startup();
-			// }, 2000);
 		},
 
 		getVacantHole: function() {
+			// var res = [];
+			// this.map.reduce(function(arr, val, i) {
+			// 	if (!val) {
+			// 		arr.push(i);
+			// 	}
+			// 	return arr;
+			// }, res);
 			var rnd = Math.floor(Math.random()*10);
-			if (this.map[rnd]) {
-				rnd = (rnd+1)%10;
+			if (this.lastChoice) {
+				if (this.lastChoice == rnd) {
+					rnd = (rnd+1)%10;
+				}
+				this.lastChoice = rnd
+			} else {
+				this.lastChoice = rnd;
 			}
 			return rnd+1;
 		},
@@ -92,70 +82,19 @@
 			    $(this).attr("class", "monster");
 			    // 延时防止class未能清除
 			    setTimeout(function() {
+			    	that.map[holeID-1] = 0;
 			    	that.popup();
 				}, 50);
-			    that.map[holeID-1] = 0;
-			    that.current = null;
+			});
+
+			$("#oneScore").on('webkitAnimationEnd', function() {
+				$(this).removeClass("raise");
 			});
 
 			$(".pause").click(function() {
 				$(".monster").addClass("pause");
 			});
 		},
-
-		/*
-		faint: function(e) {
-			var that = this,
-				$target = $(e.target),
-				$star = $target.prev(),
-				$actor = $target.closest(".mouse"),
-				column = $target.closest(".hole").data("column"),
-				row = $target.closest(".row").data("row");
-
-			setTimeout(function() {
-				$star.removeClass("faint");
-				$actor.removeClass("active pause");
-				that.map[row][column] = false;
-			}, 2000);
-			$star.addClass("faint");
-			$actor.addClass("pause");
-		},
-
-		toggle: function(paused) {
-			this.paused = paused;
-			this.toggleMouse(paused);
-			this.startup();
-		},
-
-		toggleMouse: function(paused) {
-			var method = paused ? "addClass" : "removeClass";
-			for (var i = 0; i < GRID_ROW; i++) {
-				for (var j = 0; j < GRID_COLUMN; j++) {
-					if (this.map[i][j]) {
-						var actor = $(this.grids[i][j]).find(".mouse");
-						actor[method]("pause");
-						actor.find(".star")[method]("pause");
-					}
-				}
-			}
-		},
-
-		// TODO: find a better way to solve conflict
-		findVacantPos: function() {
-			var that = this,
-				row = that.random(),
-				column = that.random();
-
-			if (that.map[row][column]) {
-				return [(row+1)%3, (column+1)%3];
-			} else {
-				return [row, column];
-			}
-		},
-
-		random: function() {
-			return Math.floor(Math.random()*3);
-		},*/
 
 		hit: function(left, top) {
 			var that = this;
@@ -166,7 +105,7 @@
 
 				if (this.checkCollision(left, top, monster)) {
 					var totalScore = game.addScore(score);
-					this.showScore(totalScore);
+					this.showScore(score, totalScore);
 
 					console.log("hit"+this.current);
 					hammer.addClass("bang");
@@ -180,6 +119,7 @@
 						monster.removeClass("hit");
 						monster.removeClass("pause");
 						monster.data("hit", false);
+						//this.map[this.current-1] = 0;
 						that.popup();
 					}, 200);
 				}
@@ -200,13 +140,36 @@
 			return false;
 		},
 
-		showScore: function(score) {
-			console.log(score);
+		showScore: function(score, total) {
+			$("#oneScore").html("+"+score).removeClass("raise").addClass("raise");
+			$("#totalScore").html(total);
+		},
+
+		start: function() {
+			Watcher.clearTimer();
+		    game.nextPhase(function() {
+		        game.on('start', function(mapArea) {
+		          App.init(mapArea);
+		        }).on('over', function(score) {
+		          App.stop(score);
+		        });
+		        Watcher.gameStart.bind(undefined, App.hit.bind(App))();
+		    });
+		},
+
+		restart: function() {
+			Watcher.clearTimer();
+			game.on('start', function(mapArea) {
+			  $("#totalScore").html(0);
+	          App.init(mapArea);
+	        }).on('over', function(score) {
+	          App.stop(score);
+	        });
+	        Watcher.gameStart.bind(undefined, App.hit.bind(App))();
 		},
 
 		process: function(time) {
-			//TODO: 刷新计时条
-			console.log(time);
+			// donothing
 		},
 
 		// 停止游戏
@@ -214,6 +177,7 @@
 			$(".monster").attr("class", "monster");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
+			$("#timer").removeClass("onprocess");
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			game.nextPhase(function() {
 				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));	

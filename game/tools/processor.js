@@ -20,6 +20,7 @@ Processor = {
 	initialized: false,
 
 	// 用于缓存侦测的值
+	nTimes: 0,
 	res: [false, false, false],
 	current: 0,
 	// 1代表边框的线
@@ -275,10 +276,20 @@ Processor = {
 		once = this.isStop(pixels);
 		this.res[this.current] = once;
 		this.current = (this.current+1)%3;
-		if (this.res[0] && this.res[1] && this.res[2]) {
+		if (this.res[0] && this.res[1] && this.res[2] && this.nTimes>=100) {
 			console.log(this.res);
+			this.nTimes = 0;
+			this.res = [false, false, false];
+			this.current = 0;
 			return this.takeColor(real);
+		} 
+		if (once) {
+			this.nTimes++;
+			$(".bigCircle2").val(this.nTimes).trigger("change");
+			return false;
 		} else {
+			this.nTimes = 0;
+			$(".bigCircle2").val(0).trigger("change");
 			return false;
 		}
 	},
