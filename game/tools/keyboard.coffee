@@ -106,7 +106,7 @@ class LettersCtrl
 
   inputLetter: (letter)->
     console.log letter
-    return if !letter
+    return if !letter or @disabled
     SoundBox.play('ding')
     val = $('#username').val()
     if letter.letter is "BackSpace"

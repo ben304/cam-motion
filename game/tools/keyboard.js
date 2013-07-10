@@ -84,7 +84,7 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.inputLetter = function(letter) {
     var val;
     console.log(letter);
-    if (!letter) {
+    if (!letter || this.disabled) {
       return;
     }
     SoundBox.play('ding');
