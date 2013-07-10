@@ -129,7 +129,6 @@ Watcher = (function() {
 					//console.log("next");
 					Watcher.clearTimer();
 					$("#showProject").hide();
-					$(".bigCircle1").val(0);
 					reset();
 					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 					game.nextPhase(Watcher.inspectColor);
@@ -184,7 +183,10 @@ Watcher = (function() {
 			rate = white/(white+black);
 
 			if (rate >= 1) {
-				game.reset(Watcher.inspectPerson);
+				game.reset(function() {
+					$(".bigCircle1").val(0).trigger("change");
+					setTimeout(Watcher.inspectPerson, 100);
+				});
 			}
 			//ctx3.putImageData(d, 0, 0);
 		});
