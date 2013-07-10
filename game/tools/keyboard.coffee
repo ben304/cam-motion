@@ -148,7 +148,7 @@ class LettersCtrl
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
-        console.log letter
+        #console.log letter
         return letter
         break
     return false
