@@ -101,6 +101,7 @@ Watcher = (function() {
 	 */
 	var inspectPerson = function() {
 		clearTimer();
+		cloneBg = bg;
 		__takeAction(200, function() {
 			var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 			var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
@@ -182,7 +183,7 @@ Watcher = (function() {
 			rate = white/(white+black);
 
 			if (rate >= 1) {
-				game.reset(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));
+				game.reset(Watcher.inspectPerson);
 			}
 			//ctx3.putImageData(d, 0, 0);
 		});
