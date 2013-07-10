@@ -82,8 +82,10 @@ class LettersCtrl
     @x = x - @width/2
     @y = y - @width/2
     letter = @checkInLetter x, y
+    rx = if letter then letter.x + (letter.width - 60)/2 else x
+    ry = if letter then letter.y + (letter.height - 60)/2 else y
     @circle[0].style.cssText = """
-      position: absolute; left: #{@x}px; top: #{@y}px;
+      position: absolute; left: #{}px; top: #{@y}px;
     """
     return if (letter is @preLetter) # and @isStart
     clearTimeout @delayTimer
@@ -146,8 +148,6 @@ class LettersCtrl
   checkInLetter: (x, y)->
     for letter in @letters
       if letter.checkIsSelf(x, y)
-        @x = letter.x + (letter.width - 60)/2
-        @y = letter.y + (letter.width - 60)/2
         console.log letter
         return letter
         break

@@ -51,7 +51,7 @@ LettersCtrl = (function() {
   };
 
   LettersCtrl.prototype.bind = function(x, y) {
-    var letter,
+    var letter, rx, ry,
       _this = this;
     if (this.disabled) {
       return;
@@ -59,7 +59,9 @@ LettersCtrl = (function() {
     this.x = x - this.width / 2;
     this.y = y - this.width / 2;
     letter = this.checkInLetter(x, y);
-    this.circle[0].style.cssText = "position: absolute; left: " + this.x + "px; top: " + this.y + "px;";
+    rx = letter ? letter.x + (letter.width - 60) / 2 : x;
+    ry = letter ? letter.y + (letter.height - 60) / 2 : y;
+    this.circle[0].style.cssText = "position: absolute; left: " + "px; top: " + this.y + "px;";
     if (letter === this.preLetter) {
       return;
     }
@@ -132,8 +134,6 @@ LettersCtrl = (function() {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       letter = _ref[_i];
       if (letter.checkIsSelf(x, y)) {
-        this.x = letter.x + (letter.width - 60) / 2;
-        this.y = letter.y + (letter.width - 60) / 2;
         console.log(letter);
         return letter;
         break;
