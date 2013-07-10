@@ -89,7 +89,7 @@ LettersCtrl = (function() {
     } else if (letter.letter === "Restart") {
       return game.restart(App.restart);
     } else if (letter.letter === "Rank") {
-      return game.showScoreList();
+      return App.showScoreList();
     } else {
       val = $('#username').val();
       return $('#username').val(val + letter.letter);

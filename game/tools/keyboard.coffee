@@ -111,7 +111,7 @@ class LettersCtrl
     else if letter.letter is "Restart" 
       game.restart App.restart
     else if letter.letter is "Rank"
-      game.showScoreList()
+      App.showScoreList()
     else
       val = $('#username').val()
       $('#username').val val + letter.letter
