@@ -52,6 +52,8 @@ Page3_Width = 80
 #   width     : 60
 
 class LettersCtrl
+  disabled : false
+
   constructor: (page, circleSelector)->
     @letters = []
     @circleInput = $(circleSelector)
@@ -76,6 +78,7 @@ class LettersCtrl
     # @bind()
 
   bind: (x, y)->
+    return if @disabled
     @x = x - @width/2
     @y = y - @width/2
     letter = @checkInLetter x, y
@@ -107,10 +110,13 @@ class LettersCtrl
     if letter.letter is "BackSpace"
       $('#username').val val.substring(0, val.length - 1)
     else if letter.letter is "Enter"
+      @disabled = true
       App.start()
     else if letter.letter is "Restart" 
+      @disabled = true
       game.restart App.restart
     else if letter.letter is "Rank"
+      @disabled = true
       App.showScoreList()
     else
       val = $('#username').val()
@@ -146,6 +152,7 @@ class LettersCtrl
         return letter
         break
     return false
+
 
 class Letter
   constructor: (letter, x, y, width)->

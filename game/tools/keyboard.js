@@ -19,6 +19,8 @@ Page3_Width = 80;
 
 LettersCtrl = (function() {
 
+  LettersCtrl.prototype.disabled = false;
+
   function LettersCtrl(page, circleSelector) {
     var letter, letters, _i, _len;
     this.letters = [];
@@ -51,6 +53,9 @@ LettersCtrl = (function() {
   LettersCtrl.prototype.bind = function(x, y) {
     var letter,
       _this = this;
+    if (this.disabled) {
+      return;
+    }
     this.x = x - this.width / 2;
     this.y = y - this.width / 2;
     letter = this.checkInLetter(x, y);
@@ -85,10 +90,13 @@ LettersCtrl = (function() {
     if (letter.letter === "BackSpace") {
       return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
+      this.disabled = true;
       return App.start();
     } else if (letter.letter === "Restart") {
+      this.disabled = true;
       return game.restart(App.restart);
     } else if (letter.letter === "Rank") {
+      this.disabled = true;
       return App.showScoreList();
     } else {
       val = $('#username').val();
