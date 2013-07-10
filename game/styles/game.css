@@ -185,7 +185,7 @@ body {
     /* line 129, ../sass/game.scss */
     .gaming .process-bar .status.onprocess {
       background: #fcd207;
-      -webkit-animation: "gameprocess" 60s linear; }
+      -webkit-animation: "gameprocess" 2s linear; }
 /* line 135, ../sass/game.scss */
 .gaming .score {
   background: url(../images/g_score.png) no-repeat left top;

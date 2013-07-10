@@ -279,6 +279,8 @@ Processor = {
 		if (this.res[0] && this.res[1] && this.res[2] && this.nTimes>=10) {
 			console.log(this.res);
 			this.nTimes = 0;
+			this.res = [false, false, false];
+			this.current = 0;
 			return this.takeColor(real);
 		} 
 		if (once) {
