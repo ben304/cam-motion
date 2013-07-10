@@ -27,12 +27,13 @@
 				this.mapArea = mapArea;
 				this.initialized = true;
 				this.holeRect = {w: mapArea.width, h: mapArea.height};
+
+				this.bindEvnet();
+				this.map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+				this.current = null;
+				$("#timer").addClass("onprocess");
+				this.popup();
 			}
-			this.map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-			this.current = null;
-			$("#timer").addClass("onprocess");
-			this.popup();
-			this.bindEvnet();
 		},
 
 		popup: function() {
@@ -180,6 +181,7 @@
 
 		// 停止游戏
 		stop: function(score) {
+			this.initialized = false;
 			this.unbindEvent();
 			UserCtrl.setScore(UserCtrl.getUser(), score);
 			$(".monster").attr("class", "monster");
