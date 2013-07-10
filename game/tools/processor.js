@@ -276,7 +276,7 @@ Processor = {
 		once = this.isStop(pixels);
 		this.res[this.current] = once;
 		this.current = (this.current+1)%3;
-		if (this.res[0] && this.res[1] && this.res[2] && this.nTimes>=10) {
+		if (this.res[0] && this.res[1] && this.res[2] && this.nTimes>=100) {
 			console.log(this.res);
 			this.nTimes = 0;
 			this.res = [false, false, false];
@@ -285,7 +285,7 @@ Processor = {
 		} 
 		if (once) {
 			this.nTimes++;
-			$(".bigCircle2").val(this.nTimes*10).trigger("change");
+			$(".bigCircle2").val(this.nTimes).trigger("change");
 			return false;
 		} else {
 			this.nTimes = 0;

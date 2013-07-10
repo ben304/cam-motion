@@ -89,7 +89,7 @@ LettersCtrl = (function() {
       UserCtrl.setUser(user);
       return App.start();
     } else if (letter.letter === "Restart") {
-      return game.reset(Watcher.inspectBg.bind(void 0, Watcher.inspectPerson));
+      return game.restart(App.restart);
     } else if (letter.letter === "Rank") {
       list = UserCtrl.listScore();
       list.sort(function(a, b) {

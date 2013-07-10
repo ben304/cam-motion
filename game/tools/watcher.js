@@ -15,7 +15,7 @@ Watcher = (function() {
 		ctx3 = c3.getContext("2d"),
 		localMediaStream = null,
 		last,
-		camInterval = 500,
+		camInterval = 50,
 		gameInterval = 30,
 		currentColor,
 		last,
@@ -192,6 +192,8 @@ Watcher = (function() {
 
 	var colorer = function() {
 		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+		//ctx3.putImageData(cur, 0, 0);
+		//$("#showProject").show();
 		var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);
 
 		if (!last) {
