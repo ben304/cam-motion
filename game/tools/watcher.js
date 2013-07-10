@@ -125,8 +125,10 @@ Watcher = (function() {
 				}
 			} else {
 				// 下一步
+				App.LauncherMonster.start();
 				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
 					//console.log("next");
+					App.LauncherMonster.stop();
 					Watcher.clearTimer();
 					$("#showProject").hide();
 					reset();
