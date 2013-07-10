@@ -39,7 +39,8 @@ body {
 }
 
 .start {
-  background: url(../images/g_start.png) no-repeat center center;
+  background: url(../images/g_start.png) no-repeat center 25%;
+  background-size: 60%;
   text-align: center;
   .btn {
     display: inline-block;
