@@ -10,6 +10,7 @@
 	/* 用于控制地鼠出现 */
 	var App = {
 
+		// 其实没用上
 		map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 		mapArea: [],
@@ -50,9 +51,21 @@
 		},
 
 		getVacantHole: function() {
+			// var res = [];
+			// this.map.reduce(function(arr, val, i) {
+			// 	if (!val) {
+			// 		arr.push(i);
+			// 	}
+			// 	return arr;
+			// }, res);
 			var rnd = Math.floor(Math.random()*10);
-			if (this.map[rnd]) {
-				rnd = (rnd+1)%10;
+			if (this.lastChoice) {
+				if (this.lastChoice == rnd) {
+					rnd = (rnd+1)%10;
+				}
+				this.lastChoice = rnd
+			} else {
+				this.lastChoice = rnd;
 			}
 			return rnd+1;
 		},
@@ -69,10 +82,9 @@
 			    $(this).attr("class", "monster");
 			    // 延时防止class未能清除
 			    setTimeout(function() {
+			    	that.map[holeID-1] = 0;
 			    	that.popup();
 				}, 50);
-			    that.map[holeID-1] = 0;
-			    that.current = null;
 			});
 
 			$("#oneScore").on('webkitAnimationEnd', function() {
@@ -107,6 +119,7 @@
 						monster.removeClass("hit");
 						monster.removeClass("pause");
 						monster.data("hit", false);
+						//this.map[this.current-1] = 0;
 						that.popup();
 					}, 200);
 				}
@@ -147,6 +160,7 @@
 		restart: function() {
 			Watcher.clearTimer();
 			game.on('start', function(mapArea) {
+			  $("#totalScore").html(0);
 	          App.init(mapArea);
 	        }).on('over', function(score) {
 	          App.stop(score);
