@@ -10,17 +10,14 @@ Watcher = (function() {
 		c0 = document.querySelector("#c0"),
 		c1 = document.querySelector("#c1"),
 		c2 = document.querySelector("#c2"),
-		c3 = document.querySelector("#c3"),
 		ctx0 = c0.getContext("2d"),
 		ctx1 = c1.getContext("2d"),
 		ctx2 = c2.getContext("2d"),
-		ctx3 = c3.getContext("2d"),
 		localMediaStream = null,
 		last,
 		camInterval = 50,
 		gameInterval = 30,
 		currentColor,
-		last,
 		timer,
 		currentColor,
 		bg,
@@ -29,10 +26,24 @@ Watcher = (function() {
 		detect = [false, false, false],
 		current = 0,
 		stopTimes = 0,
-		personFlag = true;
+		personFlag = true, 
+		state = "init";
 
 	var DETECT_WIDTH = 640,
 		DETECT_HEIGHT = 480;
+
+	var debugMode = true,
+		d1 = document.querySelector("#debug1"),
+		d2 = document.querySelector("#debug2"),
+		d3 = document.querySelector("#debug3"),
+		d4 = document.querySelector("#debug4"),
+		d_ctx1 = d1.getContext("2d"),
+		d_ctx2 = d2.getContext("2d"),
+		d_ctx3 = d3.getContext("2d"),
+		d_ctx4 = d4.getContext("2d"),
+		d_first = true,
+		d_last,
+		d_bg;
 
 	var __isFunction = function(func) {
 		return Object.prototype.toString.call(func) == "[object Function]";
@@ -66,6 +77,29 @@ Watcher = (function() {
 				if (callback && __isFunction(callback)) {
 					callback();
 				}
+				if (debugMode) {
+					setInterval(function() {
+						d_ctx1.drawImage(video, 0, 0, 160, 120);
+						var cur = d_ctx1.getImageData(0, 0, 160, 120);
+						var newCanvas1 = d_ctx2.createImageData(160, 120),
+							newCanvas2 = d_ctx2.createImageData(160, 120);
+						// background
+						if (d_first) {
+							d_last = d_bg = cur;
+							d_ctx2.putImageData(cur, 0, 0);
+							d_first = false;
+						} else {
+							Filters.differenceAccuracy(newCanvas1.data, cur.data, d_bg.data);
+							d_ctx3.putImageData(newCanvas1, 0, 0);
+
+							Filters.differenceAccuracy(newCanvas2.data, cur.data, d_last.data);
+							d_ctx4.putImageData(newCanvas2, 0, 0);
+
+							d_last = cur;
+						}
+
+					}, 30);
+				}
 			}, __onFail);
 		}
 	};
@@ -79,8 +113,9 @@ Watcher = (function() {
 	};
 
 	var reset = function() {
-		$("#showProject").hide();
+		//$("#showProject").hide();
 		$(".bigCircle1").val(0).trigger("change");
+		state = "init";
 		personFlag = true;
 		App.LauncherMonster.stop();
 		enter = false;
@@ -95,9 +130,7 @@ Watcher = (function() {
 	 * @return {[type]}            []
 	 */
 	var inspectBg = function(callback) {
-		bg = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
-		cloneBg = bg;
-		ctx3.putImageData(bg, 0, 0);
+		bg = d_ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 		if (callback && __isFunction(callback)) {
 			callback();
 		}
@@ -107,6 +140,81 @@ Watcher = (function() {
 	 * 检测人物进入
 	 * @return {[type]} [description]
 	 */
+	
+	/*
+	var inspectPerson = function() {
+		clearTimer();
+		var first = true, last;
+		__takeAction(200, function() {
+			var cur = d_ctx1.getImageData(0, 0, 160, 120);
+			var d = d_ctx2.createImageData(160, 120),
+				d2 = d_ctx2.createImageData(160, 120);
+
+			var black = 0, white = 0, black2 = 0, white2 = 0;
+			var pixels = d.data;
+
+			if (first) {
+				last = cur;
+				first = false;
+			} else {
+				// 与背景比较
+				Filters.differenceAccuracy(d.data, cur.data, bg.data);
+				// 与前一次比较
+				Filters.differenceAccuracy(d2.data, cur.data, last.data);
+
+				var pixels = d.data, pixels2 = d2.data;
+				for (var i = 0; i < 160*120*4; i+=4) {
+					if (pixels[i] == 0 && pixels[i+1] == 0 && pixels[i+2] == 0) {
+						black++;
+					} else {
+						white++;
+					}
+
+					if (pixels2[i] == 0 && pixels2[i+1] == 0 && pixels2[i+2] == 0) {
+						black2++;
+					} else {
+						white2++;
+					}
+				}
+
+				var rate = black/(black+white),
+					rate2 = white2/(black2+white2);
+
+				if (state == "init") {
+					if (rate >= 0.2 && rate2 >= 0.2) {
+						state = "enter";
+					}
+				} else if (state == "enter") {
+					if (personFlag) {
+						App.LauncherMonster.start();
+						personFlag = false;
+					}
+					if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
+						//console.log("next");
+						Watcher.clearTimer();
+						reset();
+						var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+						game.nextPhase(Watcher.inspectColor);
+					}
+					if (rate2 < 0.02) {
+						if (rate < 0.02) {
+							reset();
+						} else {
+							detect[current] = true;
+							stopTimes++;
+							$(".bigCircle1").val(stopTimes*5).trigger("change");
+						}
+					} else {
+						detect[current] = false;
+						stopTimes = 0;
+						$(".bigCircle1").val(0).trigger("change");
+					}
+					current = (current+1)%3;
+				}
+			}
+		});
+	}; */
+	
 	var inspectPerson = function() {
 		clearTimer();
 		cloneBg = bg;
@@ -128,7 +236,7 @@ Watcher = (function() {
 			console.log(rate);
 
 			if (!enter) {
-				if (rate > 0.05) {
+				if (rate > 0.02) {
 					//console.log("ok");
 					enter = true;
 				}
@@ -157,7 +265,8 @@ Watcher = (function() {
 							white++;
 						}
 					}
-					if (white/(white+black) >= 0.95) {
+					var newRate = white/(white+black);
+					if (newRate >= 0.98) {
 						reset();
 					} else {
 						detect[current] = true;
@@ -173,9 +282,9 @@ Watcher = (function() {
 				cloneBg = cur;
 				current = (current+1)%3;
 			}
-			//ctx3.putImageData(d, 0, 0);
+			
 		});
-	};
+	}; 
 
 	/**
 	 * 判断人离开或者继续操作
@@ -193,7 +302,6 @@ Watcher = (function() {
 			ctx1.setTransform(-1.25, 0, 0, 1.25, 800, 0);
 			var cur_detect = ctx1.getImageData(0, 0, 800, 600);
 			var d2 = Filters.filter(cur_detect, [currentColor.r, currentColor.g, currentColor.b]);
-			ctx3.putImageData(d2, 0, 0);
 			Processor.startup(d2, callback);
 
 			var black = 0, white = 0;
@@ -209,13 +317,12 @@ Watcher = (function() {
 			}
 			rate = white/(white+black);
 
-			if (rate >= 0.95) {
+			if (rate >= 1) {
 				game.reset(function() {
 					$(".bigCircle1").val(0).trigger("change");
 					setTimeout(Watcher.inspectPerson, 100);
 				});
 			}
-			//ctx3.putImageData(d, 0, 0);
 		});
 	};
 
@@ -255,7 +362,6 @@ Watcher = (function() {
 		ctx1.setTransform(-1.25, 0, 0, 1.25, 800, 0);
 		var cur = ctx1.getImageData(0, 0, 800, 600);
 		var d = Filters.filter(cur, [currentColor.r, currentColor.g, currentColor.b]);
-		ctx3.putImageData(d, 0, 0);
 		Processor.startup(d, callback);
 		ctx2.putImageData(d, 0, 0);
 		//console.log((new Date().getTime()) - start);
@@ -276,12 +382,10 @@ Watcher = (function() {
 	};
 
 	var debug = function() {
-		$("#showProject").show();
+		if (debugMode) {
+			$("#debug").show();
+		}
 	};
-
-	var undebug = function() {
-		$("#showProject").hide();
-	}
 
 	return {
 		camStart: camStart,
@@ -293,7 +397,6 @@ Watcher = (function() {
 		inspectBg: inspectBg,
 		inspectPerson: inspectPerson,
 		leaveOrRestart: leaveOrRestart,
-		debug: debug,
-		undebug: undebug
+		debug: debug
 	}
 })();
