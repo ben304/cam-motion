@@ -1,7 +1,7 @@
 Watcher = (function() {
 
 	window.URL = window.URL || window.webkitURL;
-	navigator.getUerMedia = navigator.getUerMedia
+	navigator.getUserMedia = navigator.getUserMedia
 		|| navigator.webkitGetUserMedia
 		|| navigator.mozGetUserMedia
 		|| navigator.msGetUserMedia;
@@ -69,8 +69,8 @@ Watcher = (function() {
 	}
 
 	var camStart = function(callback) {
-		if (navigator.getUerMedia) {
-			navigator.getUerMedia({video: true}, function(stream) {
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia({video: true}, function(stream) {
 
 				video.src = window.URL.createObjectURL(stream);
 				localMediaStream = stream;
