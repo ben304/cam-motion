@@ -84,4 +84,16 @@ td {
 	display: block;
 }
 
+.big1 .bigCircle1 {
+	width: 28px !important;
+	text-align: right !important;
+}
 
+.big1 .percent {
+	display: inline-block;
+	position: absolute;
+	color: #87CEEB;
+	font-size: 20px;
+	top: 39px;
+	left: 52px;
+}
