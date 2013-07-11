@@ -347,9 +347,11 @@ Watcher = (function() {
 				var name = UserCtrl.addUser("UED-0");
 				UserCtrl.setUser(name);
 				$('.id').text(name);
+				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+				lettersCtrl.circle.hide()
 				game.nextPhase(function() {
 					setTimeout(function() {
-						var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+						lettersCtrl.circle.show()
 						Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
 					}, 3000);
 				});
