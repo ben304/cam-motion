@@ -80,6 +80,10 @@
 				}, 10);
 			});
 
+			$("#gameScore").delegate(".raise", "webkitAnimationEnd", function() {
+				$(this).remove();
+			});
+
 			$("#oneScore").bind('webkitAnimationEnd', function() {
 				$(this).removeClass("raise");
 			});
@@ -89,6 +93,7 @@
 			// 绑定动物消失后出现另一个动物
 			$(".monster").unbind();
 			$("#oneScore").unbind();
+			$("#gameScore").undelegate();
 		},
 
 		hit: function(left, top) {
@@ -136,8 +141,7 @@
 		},
 
 		showScore: function(score, total) {
-			$("#oneScore").removeClass("raise").html("+"+score);
-			$("#oneScore").addClass("raise");
+			$("<span class='add raise'>+"+score+"</span>").appendTo("#gameScore");
 			$("#totalScore").html(total);
 		},
 
@@ -181,7 +185,7 @@
 			$(".monster").find("p").attr("class", "");
 			Watcher.clearTimer();
 			$("#endScore").html(score);
-			$("#oneScore").html("");
+			$("#gameScore").empty().append($('<span id="totalScore" class="total">0</span>'));
 			$("#timer").removeClass("onprocess");
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			game.nextPhase(function() {

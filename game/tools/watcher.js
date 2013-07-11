@@ -32,7 +32,7 @@ Watcher = (function() {
 	var DETECT_WIDTH = 640,
 		DETECT_HEIGHT = 480;
 
-	var debugMode = false,
+	var debugMode = true,
 		d1 = document.querySelector("#debug1"),
 		d2 = document.querySelector("#debug2"),
 		d3 = document.querySelector("#debug3"),
