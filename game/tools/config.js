@@ -25,8 +25,8 @@ var MONSTER = [
 
 //关卡等级集（4个关卡出现的怪物类别概率和速度不同）
 var LEVEL = [ 
-	{ CLSNAME: 'disapear-level1', SCORE: 50, CHANCE: [0,0,0,0,0,0,1,1,1,2] },
-	{ CLSNAME: 'disapear-level2', SCORE: 120, CHANCE: [0,0,0,0,0,1,1,1,2,2] },
-	{ CLSNAME: 'disapear-level3', SCORE: 300, CHANCE: [0,0,0,0,1,1,1,2,2,2] },
-	{ CLSNAME: 'disapear-level4', SCORE: 400, CHANCE: [0,0,0,1,1,1,2,2,2,2] }
+	{ CLSNAME: 'disapear-level1', SCORE: 50,  CHANCE: [0,0,0,0,0,1,1,1,2,2] },
+	{ CLSNAME: 'disapear-level2', SCORE: 120, CHANCE: [0,0,0,1,1,1,1,2,2,2] },
+	{ CLSNAME: 'disapear-level3', SCORE: 300, CHANCE: [0,0,1,1,1,1,2,2,2,2] },
+	{ CLSNAME: 'disapear-level4', SCORE: 400, CHANCE: [0,1,1,1,1,2,2,2,2,2] }
 ];
