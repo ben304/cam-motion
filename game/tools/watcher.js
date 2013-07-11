@@ -250,7 +250,7 @@ Watcher = (function() {
 					//console.log("next");
 					Watcher.clearTimer();
 					reset();
-					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+					//var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
@@ -348,8 +348,12 @@ Watcher = (function() {
 				var name = UserCtrl.addUser("UED-0");
 				UserCtrl.setUser(name);
 				$('.id').text(name);
-				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
-				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
+				game.nextPhase(function() {
+					setTimeout(function() {
+						var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+						Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
+					}, 3000);
+				});
 			}
 			last = cur;
 		}
