@@ -317,7 +317,7 @@ Watcher = (function() {
 			}
 			rate = white/(white+black);
 
-			if (rate >= 1) {
+			if (rate >= 0.98) {
 				game.reset(function() {
 					$(".bigCircle1").val(0).trigger("change");
 					setTimeout(Watcher.inspectPerson, 100);
