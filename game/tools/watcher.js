@@ -7,9 +7,11 @@ Watcher = (function() {
 		|| navigator.msGetUserMedia;
 
 	var video = document.querySelector("video"),
+		c0 = document.querySelector("#c0"),
 		c1 = document.querySelector("#c1"),
 		c2 = document.querySelector("#c2"),
 		c3 = document.querySelector("#c3"),
+		ctx0 = c0.getContext("2d"),
 		ctx1 = c1.getContext("2d"),
 		ctx2 = c2.getContext("2d"),
 		ctx3 = c3.getContext("2d"),
@@ -26,7 +28,8 @@ Watcher = (function() {
 		enter = false,
 		detect = [false, false, false],
 		current = 0,
-		stopTimes = 0;
+		stopTimes = 0,
+		personFlag = true;
 
 	var DETECT_WIDTH = 640,
 		DETECT_HEIGHT = 480;
@@ -46,6 +49,7 @@ Watcher = (function() {
 
 	var __takeAction = function(interval, callback) {
 		timer = setInterval(function() {
+			ctx0.drawImage(video, 0, 0);
 			ctx1.drawImage(video, 0, 0);
 			if (callback && __isFunction(callback)) {
 				callback();
@@ -75,6 +79,10 @@ Watcher = (function() {
 	};
 
 	var reset = function() {
+		$("#showProject").hide();
+		$(".bigCircle1").val(0).trigger("change");
+		personFlag = true;
+		App.LauncherMonster.stop();
 		enter = false;
 		detect = [false, false, false];
 		current = 0;
@@ -117,6 +125,7 @@ Watcher = (function() {
 				}
 			}
 			rate = black/(white+black);
+			console.log(rate);
 
 			if (!enter) {
 				if (rate > 0.05) {
@@ -125,20 +134,36 @@ Watcher = (function() {
 				}
 			} else {
 				// 下一步
-				App.LauncherMonster.start();
+				if (personFlag) {
+					App.LauncherMonster.start();
+					personFlag = false;
+				}
 				if (detect[0] && detect[1] && detect[2] && stopTimes>=20) {
 					//console.log("next");
-					App.LauncherMonster.stop();
 					Watcher.clearTimer();
-					$("#showProject").hide();
 					reset();
 					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
-					detect[current] = true;
-					stopTimes++;
-					$(".bigCircle1").val(stopTimes*5).trigger("change");
+					// 再次查看是否和背景相同
+					white = black = 0;
+					Filters.differenceAccuracy(d.data, cur.data, bg.data);
+					pixels = d.data;
+					for (var i = 0; i < DETECT_WIDTH*DETECT_HEIGHT*4; i+=4) {
+						if (pixels[i] == 0 || pixels[i+1] == 0 || pixels[i+2] == 0) {
+							black++;
+						} else {
+							white++;
+						}
+					}
+					if (white/(white+black) >= 0.95) {
+						reset();
+					} else {
+						detect[current] = true;
+						stopTimes++;
+						$(".bigCircle1").val(stopTimes*5).trigger("change");
+					}
 					//console.log(stopTimes);
 				} else {
 					detect[current] = false;
@@ -148,7 +173,7 @@ Watcher = (function() {
 				cloneBg = cur;
 				current = (current+1)%3;
 			}
-			ctx3.putImageData(d, 0, 0);
+			//ctx3.putImageData(d, 0, 0);
 		});
 	};
 
@@ -184,7 +209,7 @@ Watcher = (function() {
 			}
 			rate = white/(white+black);
 
-			if (rate >= 1) {
+			if (rate >= 0.95) {
 				game.reset(function() {
 					$(".bigCircle1").val(0).trigger("change");
 					setTimeout(Watcher.inspectPerson, 100);
@@ -196,7 +221,7 @@ Watcher = (function() {
 
 
 	var colorer = function() {
-		var cur = ctx1.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
+		var cur = ctx0.getImageData(0, 0, DETECT_WIDTH, DETECT_HEIGHT);
 		//ctx3.putImageData(cur, 0, 0);
 		//$("#showProject").show();
 		var d = ctx2.createImageData(DETECT_WIDTH, DETECT_HEIGHT);

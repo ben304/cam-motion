@@ -52,13 +52,6 @@
 		},
 
 		getVacantHole: function() {
-			// var res = [];
-			// this.map.reduce(function(arr, val, i) {
-			// 	if (!val) {
-			// 		arr.push(i);
-			// 	}
-			// 	return arr;
-			// }, res);
 			var rnd = Math.floor(Math.random()*10);
 			if (this.lastChoice) {
 				if (this.lastChoice == rnd) {
@@ -74,7 +67,6 @@
 		bindEvnet: function() {
 
 			var that = this;
-			
 			// 绑定动物消失后出现另一个动物
 			$(".monster").bind('webkitAnimationEnd', function(e) {
 			    //that.map[row][column] = false;
