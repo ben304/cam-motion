@@ -1,5 +1,7 @@
 @import "compass/reset";
 
+$GAME_TIME: 60s;
+
 @font-face {
     font-family: 'WawaSC';
     src: url("../font/WawaSC-Regular.otf");
@@ -206,7 +208,7 @@ body {
       -webkit-border-radius: 5px;
       &.onprocess {
         background: #fcd207;
-        -webkit-animation: 'gameprocess' 6s linear;
+        -webkit-animation: 'gameprocess' $GAME_TIME linear;
       }
     }
   }
