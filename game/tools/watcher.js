@@ -345,7 +345,7 @@ Watcher = (function() {
 				$(".colorVal").html("("+currentColor.r+", "+currentColor.g+", "+currentColor.b+")");
 				
 
-				var name = UserCtrl.addUser("UED-");
+				var name = UserCtrl.addUser("UED-0");
 				$('.id').text(name);
 				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
