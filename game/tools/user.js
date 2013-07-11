@@ -23,7 +23,7 @@ var UserList = {
   add: function(name){
     var new_name;
     if(this.get(name)) {
-      name = name.match(/[A-Z]+/i) + (parseInt(0 + name.match(/\d+/)) + 1);
+      name = name.match(/[A-Z-]+/i) + (parseInt(0 + name.match(/\d+/)) + 1);
       return this.add(name);
     }
     else {
