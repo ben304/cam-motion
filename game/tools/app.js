@@ -147,9 +147,8 @@
 
 		start: function() {
 			// 存用户名
-			var user = UserCtrl.addUser($('#username').val() || "GUY")
-      		UserCtrl.setUser(user);
-      		$('#username').val('');
+			// var user = UserCtrl.addUser($('#username').val() || "UED-0")
+   //    		UserCtrl.setUser(user);
 			Watcher.clearTimer();
 		    game.nextPhase(function() {
 		        game.on('start', function(mapArea) {
