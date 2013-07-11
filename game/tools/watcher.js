@@ -1,7 +1,7 @@
 Watcher = (function() {
 
 	window.URL = window.URL || window.webkitURL;
-	navigator.getUerMedia = navigator.getUerMedia
+	navigator.getUserMedia = navigator.getUserMedia
 		|| navigator.webkitGetUserMedia
 		|| navigator.mozGetUserMedia
 		|| navigator.msGetUserMedia;
@@ -32,7 +32,7 @@ Watcher = (function() {
 	var DETECT_WIDTH = 640,
 		DETECT_HEIGHT = 480;
 
-	var debugMode = false,
+	var debugMode = true,
 		d1 = document.querySelector("#debug1"),
 		d2 = document.querySelector("#debug2"),
 		d3 = document.querySelector("#debug3"),
@@ -69,8 +69,8 @@ Watcher = (function() {
 	}
 
 	var camStart = function(callback) {
-		if (navigator.getUerMedia) {
-			navigator.getUerMedia({video: true}, function(stream) {
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia({video: true}, function(stream) {
 
 				video.src = window.URL.createObjectURL(stream);
 				localMediaStream = stream;
@@ -250,7 +250,7 @@ Watcher = (function() {
 					//console.log("next");
 					Watcher.clearTimer();
 					reset();
-					var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+					//var letterCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 					game.nextPhase(Watcher.inspectColor);
 				}
 				if ((1-rate) < 0.02) {
@@ -347,8 +347,12 @@ Watcher = (function() {
 				var name = UserCtrl.addUser("UED-0");
 				UserCtrl.setUser(name);
 				$('.id').text(name);
-				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
-				game.nextPhase(Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30));
+				game.nextPhase(function() {
+					setTimeout(function() {
+						var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+						Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
+					}, 3000);
+				});
 			}
 			last = cur;
 		}
