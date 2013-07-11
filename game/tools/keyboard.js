@@ -88,8 +88,8 @@ LettersCtrl = (function() {
       return;
     }
     SoundBox.play('ding');
-    val = $('#username').val();
     if (letter.letter === "BackSpace") {
+      val = $('#username').val();
       return $('#username').val(val.substring(0, val.length - 1));
     } else if (letter.letter === "Enter") {
       this.disabled = true;
