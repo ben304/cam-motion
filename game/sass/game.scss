@@ -28,6 +28,22 @@ body {
   top: 20px;
   right: 20px;
 }
+.ued-ad {
+  background: url(../images/g_ad_qrcode.png) no-repeat center center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+}
+.ued-ad:after {
+  display: block;
+  margin-top: 100px;
+  content: "TaobaoUED招聘";
+  text-align: center;
+  font-size: 14px;
+}
 .stage {
   width: 800px;
   height: 600px;
