@@ -80,6 +80,7 @@ Watcher = (function() {
 				if (debugMode) {
 					setInterval(function() {
 						d_ctx1.drawImage(video, 0, 0, 160, 120);
+						d_ctx1.setTransform(-1, 0, 0, 1, 160, 0);
 						var cur = d_ctx1.getImageData(0, 0, 160, 120);
 						var newCanvas1 = d_ctx2.createImageData(160, 120),
 							newCanvas2 = d_ctx2.createImageData(160, 120);
