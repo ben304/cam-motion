@@ -80,6 +80,7 @@ Watcher = (function() {
 				if (debugMode) {
 					setInterval(function() {
 						d_ctx1.drawImage(video, 0, 0, 160, 120);
+						d_ctx1.setTransform(-1, 0, 0, 1, 160, 0);
 						var cur = d_ctx1.getImageData(0, 0, 160, 120);
 						var newCanvas1 = d_ctx2.createImageData(160, 120),
 							newCanvas2 = d_ctx2.createImageData(160, 120);
@@ -347,9 +348,11 @@ Watcher = (function() {
 				var name = UserCtrl.addUser("UED-0");
 				UserCtrl.setUser(name);
 				$('.id').text(name);
+				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+				lettersCtrl.circle.hide()
 				game.nextPhase(function() {
 					setTimeout(function() {
-						var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
+						lettersCtrl.circle.show()
 						Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
 					}, 3000);
 				});
