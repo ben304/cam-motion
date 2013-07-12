@@ -32,6 +32,7 @@
 				this.map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 				this.current = null;
 				$("#timer").addClass("onprocess");
+				$("#debug1").show();
 				this.popup();
 			}
 		},
@@ -187,6 +188,7 @@
 			$("#gameScore").empty().append($('<span id="totalScore" class="total">0</span>'));
 			$("#timer").removeClass("onprocess");
 			var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
+			$("#debug1").hide();
 			game.nextPhase(function() {
 				Watcher.leaveOrRestart(lettersCtrl.bind.bind(lettersCtrl));	
 			});
