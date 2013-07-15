@@ -145,6 +145,16 @@ body {
     left: 50%;
     top: 55%;
   }
+  .countdown {
+    display: inline-block;
+    padding-top: 30px;
+    font-size: 92px;
+    color: #fff;
+    opacity: 0;
+    &.show {
+      -webkit-animation: 'countdown' 1s ease-in-out 1;
+    }
+  }
 }
 
 .gaming {
@@ -433,5 +443,17 @@ body {
   100% {
     top: 20px;
     opacity: 0;
+  }
+}
+@-webkit-keyframes 'countdown' {
+  0% {
+    -webkit-transform: scale(3);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+  90% {
+    opacity: 1;
   }
 }

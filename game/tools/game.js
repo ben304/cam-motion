@@ -21,6 +21,7 @@ void function(global){
 		tf = 'bounceInDown',
 		f = function() { },
 		evts = {
+			before: f,
 			start: f,
 			process: f,
 			over: f
@@ -45,6 +46,20 @@ void function(global){
 			$('#timer').bind('webkitAnimationEnd',function(){
 				context.evts.over(totalScore);
 			});
+			$('#CountDown').bind('webkitAnimationEnd', function(el, n){
+				n = +( el = $(this)).text();
+				el.removeClass('show');
+				if (n > 1) {
+					el.html(--n);
+					setTimeout(function() {
+						el.addClass('show');
+					}, 10);
+				} else {
+					el.html(5);
+					context.evts.before();
+				}
+			});
+
 		},
 		_start: function(){
 			this.evts.start(this._getHoles());

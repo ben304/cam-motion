@@ -267,7 +267,7 @@ Watcher = (function() {
 						}
 					}
 					var newRate = white/(white+black);
-					if (newRate >= 0.98) {
+					if (newRate >= 0.99) {
 						reset();
 					} else {
 						detect[current] = true;
@@ -351,10 +351,12 @@ Watcher = (function() {
 				var lettersCtrl = new LettersCtrl('Page1', '#J_KeyBoardCircle');
 				lettersCtrl.circle.hide()
 				game.nextPhase(function() {
-					setTimeout(function() {
-						lettersCtrl.circle.show()
-						Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
-					}, 3000);
+					$('#CountDown').addClass('show');
+					//App.start();
+					// setTimeout(function() {
+						// lettersCtrl.circle.show()
+						// Watcher.gameStart.bind(undefined, lettersCtrl.bind.bind(lettersCtrl), 30)();
+					// }, 3000);
 				});
 			}
 			last = cur;

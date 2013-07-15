@@ -43,8 +43,9 @@
     <div class="checkin">
       <p class="label">请记住您的游戏ID：</p>
       <p class="id"></p>
-      <a href="javascript:void(0)"></a>
-      <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">
+      <span id="CountDown" class="countdown">5</span>
+      <!--<a href="javascript:void(0)"></a>
+      <input id="J_KeyBoardCircle" type="hidden" value="0" class="keyboard-circle">-->
       <canvas id="c0" width="800" height="600" style="display:none;"></canvas>
       <canvas id="c1" width="800" height="600" style="display:none;"></canvas>
       <canvas id="c2" width="800" height="600" style="display:none;"></canvas>
@@ -245,6 +246,11 @@
     $(".bigCircle2").knob();
     App.LauncherMonster.init();
     Watcher.debug();
+    game.on('before', function(){
+      //game.nextPhase(function(){
+        App.start();
+      //});
+    })
   </script>
 </body>
 </html>
