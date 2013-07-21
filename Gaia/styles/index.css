@@ -1,0 +1,98 @@
+/* for debug */
+#gridContainer {
+	width: 800px;
+	height: 600px;
+	position: absolute;
+	top: 0px;
+}
+
+td {
+    border-width: 1px;
+    border-collapse: collapse;
+    border-color: red;
+    border-style: solid;
+}
+
+#stage > div {
+	display: none;
+}
+
+#username {
+	position: absolute;
+	top: 110px;
+	left: 60px;
+	font-size: 40px;
+	width: 430px;
+	z-index: 1;
+	padding: 5px;
+}
+
+#stage .inspectColor {
+	width: 100%;
+	height: 100%;
+	background: url("../images/g_detect.png");
+	position: absolute;
+}
+
+.inspectColor #wrapper {
+	width: 320px;
+	height: 240px;
+	margin: 0 auto;
+	display: block;
+	margin-top: 230px;
+	background: #FFF;
+	position: relative;
+}
+
+.inspectColor video {
+	-webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.inspectColor #area {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 120px;
+	left: 155px;
+	border: 1px dashed #FFF;
+}
+
+#stage .inputName {
+	width: 100%;
+	height: 100%;
+	background: url("../images/g_keyboard.png");
+	position: absolute;
+}
+
+.loading1 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 380px;
+	left: 50%;
+	margin-left: -50px;
+}
+
+.loading2 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 34%;
+	left: 37%;
+	opacity: 0.5;
+}
+
+.loading3,
+.loading4 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+}
+
+.loading1 > .text {
+	color: #FF4400;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+}
