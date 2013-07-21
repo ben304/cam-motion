@@ -171,7 +171,7 @@
                 charset: "utf-8"
             }]
         });
-        KISSY.use("scripts/game, scripts/watcher, scripts/core, scripts/keyboard", 
+        KISSY.use("scripts/game, scripts/watcher, scripts/core, scripts/keyboard",
             function(S, Game, Watcher, Core, Key) {
                 Game.init(Watcher, Core);
                 Watcher.init(Game);
@@ -179,25 +179,5 @@
                 Key.config(Game, Core);
         });
     </script>
-    <!--
-    <script src="library/jquery.min.js"></script>
-    <script src="library/jquery.knob.js"></script>
-
-    <script src="tools/user.js"></script>
-    <script src="tools/keyboard.js"></script>
-    <script src="tools/SoundBox.js"></script>
-
-    <script src="tools/config.js"></script>
-    <script src="tools/game.js"></script>
-
-    <script src="tools/app.js"></script>
-    <script src="tools/ps.js"></script>
-    <script src="tools/processor.js"></script>
-    <script src="tools/watcher.js"></script>
-    <script>
-    var game = new Game();
-    game.init();
-    </script>
-    -->
     </body>
 </html>
