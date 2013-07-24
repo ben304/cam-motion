@@ -14,9 +14,29 @@
   <div id="stage" class="stage">
     
     <!--游戏开始界面-->
-    <div class="start">
-      <span class="btn"></span>
+    <div class="start"  style="display:block">
+      <!--<span class="btn"></span>-->
+      <span id="CountDown" class="countdown">3</span>
     </div>
+    <script>
+      ~function(){
+        
+        $('#CountDown').bind('webkitAnimationEnd', function(el, n){
+          n = +(el = $(this)).text();
+          el.removeClass('show');
+          if(n > 1){
+            el.html(--n);
+            setTimeout(function(){
+              el.addClass('show');
+            },10);
+          } else {
+            el.html(3);
+          }
+          
+        });
+        
+      }();
+    </script>
     
     <!--游戏进行中-->
     <div class="gaming">
@@ -93,7 +113,7 @@
     </div>
     
     <!--游戏结束-->
-    <div class="game-over"  style="display:block">
+    <div class="game-over">
       <span>0</span>
       <a class="restart" href="javascript:void(0)"></a>
       <a class="board" href="javascript:void(0)"></a>

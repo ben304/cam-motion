@@ -1,0 +1,107 @@
+@import "compass/reset";
+@font-face {
+  font-family: 'WawaSC';
+  src: url("../font/WawaSC-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@mixin hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+body {
+  background: #efab5c;
+  font-family: 'WawaSC';
+  position: relative;
+  color: #fee1bd;
+}
+.main {
+  visibility: hidden;
+  &:before {
+    width: 100%;
+    visibility: visible;
+    content: "40x - 亲，咱要不换个Chrome来试试？";
+    position: fixed;
+    top: 35%;
+    text-align: center;
+    font-size: 26px;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .main {
+    visibility: visible;
+    &:before {
+      display: none;
+    }
+  }
+  h1 {
+    background: url(../images/g_guide_top.png) no-repeat center top;
+    height: 176px;
+    -webkit-box-shadow: 0 3px 3px #d29753;
+    @include hide-text;
+  }
+  .container {
+    counter-reset: li;
+    width: 900px;
+    margin: 0 auto;
+    li {
+      padding: 2.5em;
+      font-size: 20px;
+      .content {
+        position: relative;
+        padding: .5em 0 0 .5em;
+        line-height: 150%;
+      }
+      .content:before {
+        content: counter(li) ". ";
+        counter-increment: li;
+        position: absolute;
+        left: -1em;
+        top: 0;
+        font-size: 48px;
+      }
+      b {
+        display: inline-block;
+        background: url(../images/g_load.png) no-repeat left top;
+        background-size: 100%;
+        margin: 0 5px;
+        width: 50px;
+        height: 50px;
+        vertical-align: middle;
+      }
+      em {
+        font-size: 110%;
+        color: #fff;
+        font-weight: bold;
+      }
+      img {
+        position: absolute;
+        right: 0;
+        &.cam {
+          width: 60%; 
+        }
+        &.body {
+          width: 30%;
+          top: -2em;
+        }
+        &.gloves {
+          width: 20%;
+          top: -1em;
+          right: 1em;
+        }
+      }
+    }
+  }
+  footer {
+    padding-bottom: 100px;
+    text-align: center;
+    a {
+      display: inline-block;
+      background: url(../images/g_go.png) no-repeat center center;
+      background-size: 100%;
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

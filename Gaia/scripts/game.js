@@ -8,7 +8,7 @@ KISSY.add(function (S, Watcher) {
 		App = null;
 
 	// constants
-	var GAME_TIME = 6000;
+	//var GAME_TIME = 6000;
 
 	var MONSTER = [
 		{ CLSNAME: 'm1', SCORE: 1 },

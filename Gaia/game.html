@@ -161,13 +161,13 @@
           <span class="score">{score}</span>
         </li>
     </script>
-    <script src="http://localhost:8000/library/kissy.min.js"></script>
+    <script src="library/kissy.min.js"></script>
     <script>
         KISSY.config({
             debug: true,
             packages: [{
                 name: "scripts",
-                path: "http://localhost:8000",
+                path: location.href.replace(/(.+gaia\/).+/,"$1"),
                 charset: "utf-8"
             }]
         });

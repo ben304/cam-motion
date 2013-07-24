@@ -66,13 +66,21 @@ body {
   top: 50%;
   margin: -300px 0 0 -400px; }
 
+.countdown {
+  display: inline-block;
+  font-size: 92px;
+  color: #fff;
+  opacity: 0; }
+  .countdown.show {
+    -webkit-animation: "countdown" 1s ease-in-out 1; }
+
 .start, .gaming, .gaming ul, .game-over, .rank {
   width: 100%;
   height: 100%; }
 
 .start, .gaming, .game-over, .rank {
   display: none;
-  -webkit-animation-duration: .5s;
+  -webkit-animation-duration: 0.5s;
   -webkit-animation-timing-function: ease-in-out; }
 
 .enabled {
@@ -109,9 +117,9 @@ body {
     .gaming li div.disapear-level2 {
       -webkit-animation: "disapear2" 2.5s ease-in-out 1; }
     .gaming li div.disapear-level3 {
-      -webkit-animation: "disapear3" 2s ease-in-out 1; }
+      -webkit-animation: "disapear3" 2.1s ease-in-out 1; }
     .gaming li div.disapear-level4 {
-      -webkit-animation: "disapear4" 1.5s ease-in-out 1; }
+      -webkit-animation: "disapear4" 1.8s ease-in-out 1; }
     .gaming li div.hit b {
       background: url(../image/g_hit.png) no-repeat center top;
       width: 100%;
@@ -333,3 +341,14 @@ body {
   100% {
     top: 20px;
     opacity: 0; } }
+
+@-webkit-keyframes 'countdown' {
+  0% {
+    -webkit-transform: scale(3); }
+
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1); }
+
+  90% {
+    opacity: 1; } }
