@@ -90,7 +90,7 @@ body {
 
   /* line 38, ../sass/entrance.scss */
   h1 {
-    background: url(../images/g_guide_top.png) no-repeat center top;
+    background: #6bc2c9 url(../images/g_guide_top.png) no-repeat center top;
     height: 176px;
     -webkit-box-shadow: 0 3px 3px #d29753;
     text-indent: 100%;
