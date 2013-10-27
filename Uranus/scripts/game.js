@@ -3,7 +3,7 @@
  * @param  {[type]} S [description]
  * @return {[type]}   [description]
  */
-KISSY.add(function (S, Watcher) {
+KISSY.add(function (S) {
 	var $ = S.Node.all,
 		App = null;
 
@@ -169,11 +169,10 @@ KISSY.add(function (S, Watcher) {
       	}
     };
 
-	var init = function(Watcher, app) {
+	var init = function(app) {
 		App = app;
 		__initGame();
 
-        Watcher.camStart(Watcher.inspectBg.bind(undefined, Watcher.inspectPerson));
         launcherMonster.init();
         on('before', function() {
             App.start();
@@ -233,7 +232,5 @@ KISSY.add(function (S, Watcher) {
 		knobs: knobs
 	}
 }, {
-    requires: [
-    	'./watcher'
-    ]
+    requires: []
 });
