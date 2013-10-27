@@ -13,27 +13,14 @@
         <div class="ued-ad"></div>
 
     <div id="stage" class="stage">
-        <!-- 游戏开始界面 -->
-        <div class="start phase">
-            <ul id="sm">
-                <li class="sm1"></li>
-                <li class="sm2"></li>
-                <li class="sm3"></li>
-                <li class="sm4"></li>
-                <li class="sm5"></li>
-            </ul>
-            <div class="loading1" data-no='1'><span class="text"></span></div>
+        <!--初始页面-->
+        <div class="phase">
+            初始页面
         </div>
-
-        <!-- 检测颜色界面 -->
-        <div class="inspectColor phase">
-            <div id="wrapper">
-                <video autoplay width="320" height="240"></video>
-                <div class="loading2" data-no='2'></div>
-                <div id="area"></div>
-            </div>
+        <!--准备-->
+        <div class="phase">
+            准备页
         </div>
-
         <!--获得用户名-->
         <div class="checkin phase">
             <p class="showColor" style="position: absolute;top:0;left:0;">
@@ -167,16 +154,15 @@
             debug: true,
             packages: [{
                 name: "scripts",
-                path: location.href.replace(/(.+gaia\/).+/i,"$1"),
+                path: location.href.replace(/(.+uranus\/).+/i,"$1"),
                 charset: "utf-8"
             }]
         });
-        KISSY.use("scripts/game, scripts/watcher, scripts/core, scripts/keyboard",
-            function(S, Game, Watcher, Core, Key) {
-                Game.init(Watcher, Core);
-                Watcher.init(Game);
-                Core.config(Game, Watcher, Key);
-                Key.config(Game, Core);
+        KISSY.use("scripts/game, scripts/core, scripts/listener",
+            function(S, Game, Core, Listener) {
+                Game.init(Core);
+                Core.config(Game);
+                Listener.init(Game, Core);
         });
     </script>
     </body>

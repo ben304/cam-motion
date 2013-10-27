@@ -5,7 +5,7 @@
  * @param  {[type]} Watcher [description]
  * @return {[type]}         [description]
  */
-KISSY.add(function(S, SoundBox, UserCtrl) {
+KISSY.add(function(S, SoundBox) {
 
 	var $ = S.Node.all,
 		hammer = $(".hammer");
@@ -21,10 +21,8 @@ KISSY.add(function(S, SoundBox, UserCtrl) {
 
 		holeRect: {w: 0, h: 0},
 
-		config: function(game, watcher, key) {
+		config: function(game) {
 			this.Game = game;
-			this.Watcher = watcher;
-			this.Key = key;
 		},
 
 		init: function(mapArea) {
@@ -143,11 +141,10 @@ KISSY.add(function(S, SoundBox, UserCtrl) {
 
 		start: function() {
 			var self = this;
-			self.Watcher.clearTimer();
 		    self.Game.nextPhase(function() {
 		        self.Game.on('start', function(mapArea) {
 		          self.init(mapArea);
-		          self.Watcher.gameStart.bind(undefined, self.hit.bind(self))();
+		          //TODO: kinect绑定
 		        });
 		        self.Game.on('over', function(score) {
 		          self.stop(score);
@@ -157,7 +154,7 @@ KISSY.add(function(S, SoundBox, UserCtrl) {
 
 		restart: function() {
 			var self = this;
-			self.Watcher.clearTimer();
+            // TODO: kinect解除绑定
 			self.Game.on('start', function(mapArea) {
 			  	$("#totalScore").html(0);
 	          	self.init(mapArea);
@@ -165,64 +162,26 @@ KISSY.add(function(S, SoundBox, UserCtrl) {
 	        self.Game.on('over', function(score) {
 	          	self.stop(score);
 	        });
-	        self.Watcher.gameStart.bind(undefined, self.hit.bind(self))();
-		},
-
-		process: function() {
-			// donothing
+            //TODO: kinect绑定
 		},
 
 		// 停止游戏
 		stop: function(score) {
 			var self = this;
-
+            // TODO: kinect解除绑定
 			this.initialized = false;
 			this.unbindEvent();
-			UserCtrl.setScore(UserCtrl.getUser(), score);
 			$(".monster").attr("class", "monster");
 			$(".monster").all("p").attr("class", "");
-			this.Watcher.clearTimer();
 			$("#endScore").html(score);
 			$("#gameScore").empty().append($('<span id="totalScore" class="total">0</span>'));
 			$("#timer").removeClass("onprocess");
-			//var lettersCtrl = new LettersCtrl('Page2', '#J_KeyBoardCircle2');
 			$("#debug1").hide();
-			this.Game.nextPhase(function() {
-				var knob3 = self.Key.knobs[2];
-				self.Watcher.leaveOrRestart(knob3.process.bind(knob3));
-			});
-		},
-
-		showScoreList: function(cb) {
-			var self = this;
-
-			this.Watcher.clearTimer();
-			var list = UserCtrl.listScore();
-			list.sort(function(a,b){return b.score - a.score});
-			list.splice(10);
-			var tpl = $('.rank-item').html();
-			var str = ((function() {
-	        	var _i, _len, _results = [];
-		        for (_i = 0, _len = list.length; _i < _len; _i++) {
-		          var item = list[_i];
-		          _results.push(tpl.replace('{name}', item.name).replace('{score}', item.score));
-		        }
-		        return _results;
-			})()).join("");
-			$('.rank').all('ul').html("").append(str);
-			//var lettersCtrl = new LettersCtrl('Page3', '#J_KeyBoardCircle3');
-			if (cb && S.isFunction(cb)) {
-				cb();
-			}
-			this.Game.nextPhase(function() {
-				var knob4 = self.Key.knobs[3];
-				self.Watcher.leaveOrRestart(knob4.process.bind(knob4));
-			});
+            //TODO: 等待服务器重开
 		}
 	};
 }, {
 	requires: [
-		'./soundbox',
-		'./user'
+		'./soundbox'
 	]
 });
