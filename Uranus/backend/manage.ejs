@@ -7,15 +7,23 @@
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-
-
+<p><label for=""> a 玩家：<input type="text" id="player_a" /></label></p>
+<p><label for=""> b 玩家：<input type="text" id="player_b" /</label></p>
+<p><button id="ready">准备</button> <button id="begin">开始</button></p>
 
 <script>
-var socket = io.connect('http://localhost:8081');
-socket.on('news', function (data) {
-	console.log(data);
-	socket.emit('my other event', { my: 'data' });
-});
+var socket = io.connect('http://localhost:8081'),
+	$ = function(id) { return document.getElementById(id) };
+
+$('ready').addEventListener('click', function(ev){
+	socket.emit('ready', {
+		namea: $('player_a').value,
+		nameb: $('player_b').value
+	});
+}, false);
+$('begin').addEventListener('click', function(ev){
+	socket.emit('begin')
+}, false);
 </script>
 </body>
 </html>

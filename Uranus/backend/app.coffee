@@ -36,12 +36,16 @@ io.sockets.on 'connection', (socket)->
 		manager = socket.id
 
 	# 排行榜幽灵加入
-	socket.on 'ranking_list', ->
+	socket.on 'ranking_list', (data)->
 		ranking = socket.id
 
+
 	# 新用户加入, data.player: a|b
- 	socket.on 'new_player', (data)->
- 		return if playing
+	socket.on 'new_player', (data)->
+ 		if playing
+ 			console.log ("Game is running. No participator any more").red
+ 			return
+ 		console.log ("User " + data.player + " jion!").green
  		players[data.player] = {
  			id: socket.id
  			name: ""
@@ -52,10 +56,11 @@ io.sockets.on 'connection', (socket)->
 
  	# 广播准备事件
  	socket.on 'ready', (data)->
+ 		console.log "Name a:", data.namea.green, 'Name b:', data.nameb.green
  		players['a']['name'] = data.namea
  		players['b']['name'] = data.nameb
- 		players['a']['isend'] = false
- 		players['b']['isend'] = false
+ 		players['a']['isend'] = players['b']['isend'] = false
+ 		players['a']['sum'] = players['b']['sum'] = 0
  		socket.broadcast.emit 'ready', data
 
  	# 广播开始事件

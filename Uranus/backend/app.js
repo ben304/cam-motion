@@ -48,48 +48,51 @@ io.sockets.on('connection', function(socket) {
   socket.on('manager', function() {
     return manager = socket.id;
   });
-  return socket.on('ranking_list', function() {
-    ranking = socket.id;
-    socket.on('new_player', function(data) {
-      if (playing) {
-        return;
-      }
-      players[data.player] = {
-        id: socket.id,
-        name: "",
-        isend: false,
-        score: 0
-      };
-      return io.sockets[manager].emit('player_update', players);
-    });
-    socket.on('ready', function(data) {
-      players['a']['name'] = data.namea;
-      players['b']['name'] = data.nameb;
-      players['a']['isend'] = false;
-      players['b']['isend'] = false;
-      return socket.broadcast.emit('ready', data);
-    });
-    socket.on('begin', function(data) {
-      playing = true;
-      return socket.broadcast.emit('start');
-    });
-    socket.on('score_update', function(data) {
-      return io.sockets[ranking].emit('score_update', data);
-    });
-    return socket.on('end', function(data) {
-      var player, playera, playerb;
+  socket.on('ranking_list', function(data) {
+    return ranking = socket.id;
+  });
+  socket.on('new_player', function(data) {
+    if (playing) {
+      console.log("Game is running. No participator any more".red);
+      return;
+    }
+    console.log(("User " + data.player + " jion!").green);
+    players[data.player] = {
+      id: socket.id,
+      name: "",
+      isend: false,
+      score: 0
+    };
+    return io.sockets[manager].emit('player_update', players);
+  });
+  socket.on('ready', function(data) {
+    console.log("Name a:", data.namea.green, 'Name b:', data.nameb.green);
+    players['a']['name'] = data.namea;
+    players['b']['name'] = data.nameb;
+    players['a']['isend'] = players['b']['isend'] = false;
+    players['a']['sum'] = players['b']['sum'] = 0;
+    return socket.broadcast.emit('ready', data);
+  });
+  socket.on('begin', function(data) {
+    playing = true;
+    return socket.broadcast.emit('start');
+  });
+  socket.on('score_update', function(data) {
+    return io.sockets[ranking].emit('score_update', data);
+  });
+  return socket.on('end', function(data) {
+    var player, playera, playerb;
 
-      player = players[data.player];
-      playera = players['a'];
-      playerb = players['b'];
-      player.isend = true;
-      player.score = data.sum;
-      config.records.push(player);
-      config.save_records();
-      if (playera.isend && playerb.isend) {
-        playing = false;
-        return io.sockets[ranking].emit('end', players);
-      }
-    });
+    player = players[data.player];
+    playera = players['a'];
+    playerb = players['b'];
+    player.isend = true;
+    player.score = data.sum;
+    config.records.push(player);
+    config.save_records();
+    if (playera.isend && playerb.isend) {
+      playing = false;
+      return io.sockets[ranking].emit('end', players);
+    }
   });
 });
