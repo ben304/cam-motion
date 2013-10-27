@@ -28,6 +28,9 @@ app.get '/', (req, res)->
 app.get '/manage', (req, res)->
 	res.render 'manage'
 
+app.get '/rank', (req, res)->
+	res.render 'rank'
+
 # io.sockets.socket(to).emit(data.msg);
 
 io.sockets.on 'connection', (socket)->

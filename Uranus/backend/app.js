@@ -44,6 +44,10 @@ app.get('/manage', function(req, res) {
   return res.render('manage');
 });
 
+app.get('/rank', function(req, res) {
+  return res.render('rank');
+});
+
 io.sockets.on('connection', function(socket) {
   socket.on('manager', function() {
     return manager = socket.id;
