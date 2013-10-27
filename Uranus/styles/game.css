@@ -1,0 +1,536 @@
+/* line 17, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+/* line 22, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1; }
+
+/* line 24, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 26, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 28, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 103, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 32, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 116, ../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+@font-face {
+  font-family: 'WawaSC';
+  src: url("../font/WawaSC-Regular.otf");
+  font-weight: normal;
+  font-style: normal; }
+
+/* line 15, ../sass/game.scss */
+html, body {
+  height: 100%; }
+
+/* line 18, ../sass/game.scss */
+body {
+  background: #6bc2c9 url(../images/g_sky.jpg) repeat-x center top;
+  font-family: 'WawaSC'; }
+
+/* line 22, ../sass/game.scss */
+.mtg-logo {
+  background: url(../images/g_mtg_logo.png) no-repeat center center;
+  background-size: 80%;
+  width: 133px;
+  height: 40px;
+  position: fixed;
+  top: 20px;
+  right: 20px; }
+
+/* line 31, ../sass/game.scss */
+.ued-ad {
+  background: url(../images/g_ad_qrcode.png) no-repeat center center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  right: 20px;
+  bottom: 30px; }
+
+/* line 40, ../sass/game.scss */
+.ued-ad:after {
+  display: block;
+  margin-top: 100px;
+  content: "TaobaoUED招聘";
+  text-align: center;
+  font-size: 14px; }
+
+/* line 47, ../sass/game.scss */
+.stage {
+  width: 800px;
+  height: 600px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -300px 0 0 -400px; }
+
+/* line 56, ../sass/game.scss */
+.start, .checkin, .gaming, .gaming ul, .game-over, .rank {
+  width: 100%;
+  height: 100%; }
+
+/* line 60, ../sass/game.scss */
+.start, .checkin, .inspectColor, .inputName, .gaming, .game-over, .rank {
+  display: none;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out; }
+
+/* line 64, ../sass/game.scss */
+.enabled {
+  display: block; }
+
+/* line 68, ../sass/game.scss */
+.start {
+  background: url(../images/g_start.png) no-repeat center 25%;
+  background-size: 60%;
+  text-align: center;
+  /*.btn {
+    display: inline-block;
+    background: url(../images/g_start_btn.png) no-repeat left top;
+    width: 183px;
+    height: 153px;
+    margin-top: 55%;
+  }*/ }
+  /* line 72, ../sass/game.scss */
+  .start ul {
+    position: relative; }
+  /* line 75, ../sass/game.scss */
+  .start li {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 60%;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out; }
+    /* line 81, ../sass/game.scss */
+    .start li.sm1 {
+      background-image: url(../images/g_m_1.png);
+      width: 188px;
+      height: 211px;
+      top: 155px;
+      left: 170px; }
+    /* line 88, ../sass/game.scss */
+    .start li.sm2 {
+      background-image: url(../images/g_m_2.png);
+      width: 157px;
+      height: 162px;
+      top: 100px;
+      left: 290px; }
+    /* line 95, ../sass/game.scss */
+    .start li.sm3 {
+      background-image: url(../images/g_m_3.png);
+      width: 117px;
+      height: 117px;
+      top: 134px;
+      left: 378px; }
+    /* line 102, ../sass/game.scss */
+    .start li.sm4 {
+      background-image: url(../images/g_m_4.png);
+      width: 87px;
+      height: 80px;
+      top: 140px;
+      left: 485px; }
+    /* line 109, ../sass/game.scss */
+    .start li.sm5 {
+      background-image: url(../images/g_m_5.png);
+      width: 124px;
+      height: 145px;
+      top: 228px;
+      left: 558px; }
+
+/* line 126, ../sass/game.scss */
+.checkin {
+  background: url(../images/g_id.png) no-repeat center center;
+  text-align: center;
+  color: #fff;
+  font-size: 28px; }
+  /* line 131, ../sass/game.scss */
+  .checkin .label {
+    padding: 180px 0 20px;
+    color: #a9783f; }
+  /* line 135, ../sass/game.scss */
+  .checkin .id {
+    font-size: 42px; }
+  /* line 138, ../sass/game.scss */
+  .checkin a {
+    background: url(../images/g_start_btn.png) no-repeat left top;
+    background-size: 100%;
+    width: 150px;
+    height: 125px;
+    margin-left: -60px;
+    position: absolute;
+    left: 50%;
+    top: 55%; }
+  /* line 148, ../sass/game.scss */
+  .checkin .countdown {
+    display: inline-block;
+    padding-top: 30px;
+    font-size: 92px;
+    color: #fff;
+    opacity: 0; }
+    /* line 154, ../sass/game.scss */
+    .checkin .countdown.show {
+      -webkit-animation: "countdown" 1s ease-in-out 1; }
+
+/* line 161, ../sass/game.scss */
+.gaming ul {
+  position: relative; }
+/* line 164, ../sass/game.scss */
+.gaming li {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  overflow: hidden; }
+  /* line 171, ../sass/game.scss */
+  .gaming li div {
+    background: url(../images/g_cloud.png) no-repeat center bottom;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    top: 120px; }
+    /* line 178, ../sass/game.scss */
+    .gaming li div.disapear-level1 {
+      -webkit-animation: "disapear" 3s ease-in-out 1; }
+    /* line 181, ../sass/game.scss */
+    .gaming li div.disapear-level2 {
+      -webkit-animation: "disapear2" 2.2s ease-in-out 1; }
+    /* line 184, ../sass/game.scss */
+    .gaming li div.disapear-level3 {
+      -webkit-animation: "disapear3" 1.5s ease-in-out 1; }
+    /* line 187, ../sass/game.scss */
+    .gaming li div.disapear-level4 {
+      -webkit-animation: "disapear4" 1s ease-in-out 1; }
+    /* line 190, ../sass/game.scss */
+    .gaming li div.hit b {
+      background: url(../images/g_hit.png) no-repeat center top;
+      width: 100%;
+      height: 71px;
+      position: absolute;
+      top: 0px;
+      left: 0; }
+    /* line 198, ../sass/game.scss */
+    .gaming li div.pause {
+      -webkit-animation-play-state: paused; }
+  /* line 202, ../sass/game.scss */
+  .gaming li p {
+    display: inline-block;
+    background-image: url(../images/g_monster.png);
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 111px;
+    -webkit-animation-timing-function: step-start;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite; }
+/* line 213, ../sass/game.scss */
+.gaming .hammer {
+  background: url(../images/g_hammer.png) no-repeat left top;
+  width: 90px;
+  height: 98px;
+  position: absolute;
+  z-index: 999;
+  -webkit-transition: 0.03s;
+  -webkit-transform: scale(0.7); }
+/* line 222, ../sass/game.scss */
+.gaming .bang {
+  -webkit-animation: "bang" 0.2s ease-in-out 2; }
+/* line 225, ../sass/game.scss */
+.gaming .process-bar {
+  background: #fff;
+  font-size: 0;
+  line-height: 0;
+  height: 10px;
+  opacity: .7;
+  -webkit-border-radius: 5px; }
+  /* line 232, ../sass/game.scss */
+  .gaming .process-bar .status {
+    height: 10px;
+    -webkit-border-radius: 5px; }
+    /* line 235, ../sass/game.scss */
+    .gaming .process-bar .status.onprocess {
+      background: #fcd207;
+      -webkit-animation: "gameprocess" 60s linear; }
+/* line 241, ../sass/game.scss */
+.gaming .score {
+  background: url(../images/g_score.png) no-repeat left top;
+  width: 200px;
+  height: 100px;
+  margin-left: -100px;
+  position: absolute;
+  left: 50%;
+  top: 40px; }
+  /* line 249, ../sass/game.scss */
+  .gaming .score span {
+    display: block;
+    padding: 10px 0 0 75px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center; }
+  /* line 256, ../sass/game.scss */
+  .gaming .score .add {
+    width: 125px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    font-size: 32px;
+    opacity: 0; }
+    /* line 263, ../sass/game.scss */
+    .gaming .score .add.raise {
+      -webkit-animation: "raise" 1.5s ease-in-out; }
+
+/* line 269, ../sass/game.scss */
+.game-over {
+  background: url(../images/g_gameover.png) no-repeat center top;
+  position: relative; }
+  /* line 272, ../sass/game.scss */
+  .game-over span {
+    position: absolute;
+    left: 395px;
+    top: 195px;
+    color: #fff;
+    font-size: 36px; }
+  /* line 279, ../sass/game.scss */
+  .game-over a {
+    background: transparent;
+    opacity: 0;
+    width: 145px;
+    height: 125px;
+    position: absolute;
+    top: 293px; }
+    /* line 286, ../sass/game.scss */
+    .game-over a.restart {
+      left: 225px; }
+    /* line 289, ../sass/game.scss */
+    .game-over a.board {
+      left: 435px; }
+  /* line 293, ../sass/game.scss */
+  .game-over .recruit {
+    background: #09696d url(../images/g_ad.png) no-repeat 18% center;
+    background-size: 16%;
+    border-top: white 1px solid;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0px; }
+    /* line 301, ../sass/game.scss */
+    .game-over .recruit div {
+      float: left;
+      padding-top: 26px;
+      width: 200px;
+      text-align: center;
+      color: #fff;
+      opacity: .7; }
+      /* line 308, ../sass/game.scss */
+      .game-over .recruit div.f2e {
+        margin-left: 40%; }
+      /* line 311, ../sass/game.scss */
+      .game-over .recruit div .email {
+        font-family: Arial;
+        font-size: 16px; }
+      /* line 315, ../sass/game.scss */
+      .game-over .recruit div .leader {
+        font-size: 24px; }
+
+/* line 321, ../sass/game.scss */
+.rank {
+  background: url(../images/g_rank.png) no-repeat center center;
+  position: relative;
+  color: #fff; }
+  /* line 325, ../sass/game.scss */
+  .rank ul {
+    position: absolute;
+    left: 126px;
+    top: 134px; }
+    /* line 329, ../sass/game.scss */
+    .rank ul li {
+      float: left;
+      width: 270px;
+      margin: 0 65px 46px 0; }
+    /* line 334, ../sass/game.scss */
+    .rank ul .name {
+      float: left;
+      width: 200px;
+      font-size: 18px; }
+    /* line 339, ../sass/game.scss */
+    .rank ul .score {
+      font-size: 14px; }
+  /* line 343, ../sass/game.scss */
+  .rank a {
+    background: transparent;
+    opacity: 0;
+    width: 90px;
+    height: 78px;
+    position: absolute;
+    left: 225px;
+    top: 385px; }
+
+@-webkit-keyframes 'bang' {
+  /* line 355, ../sass/game.scss */
+  50% {
+    -webkit-transform: rotate(-90deg); }
+
+  /* line 358, ../sass/game.scss */
+  100% {
+    -webkit-transform: rotate(0deg); } }
+
+@-webkit-keyframes 'disapear' {
+  /* line 363, ../sass/game.scss */
+  0% {
+    top: 120px; }
+
+  /* line 366, ../sass/game.scss */
+  30% {
+    top: 0px; }
+
+  /* line 369, ../sass/game.scss */
+  70% {
+    top: 0px; }
+
+  /* line 372, ../sass/game.scss */
+  100% {
+    top: 120px; } }
+
+@-webkit-keyframes 'disapear2' {
+  /* line 377, ../sass/game.scss */
+  0% {
+    top: 120px; }
+
+  /* line 380, ../sass/game.scss */
+  30% {
+    top: 0px; }
+
+  /* line 383, ../sass/game.scss */
+  70% {
+    top: 0px; }
+
+  /* line 386, ../sass/game.scss */
+  100% {
+    top: 120px; } }
+
+@-webkit-keyframes 'disapear3' {
+  /* line 391, ../sass/game.scss */
+  0% {
+    top: 120px; }
+
+  /* line 394, ../sass/game.scss */
+  30% {
+    top: 0px; }
+
+  /* line 397, ../sass/game.scss */
+  70% {
+    top: 0px; }
+
+  /* line 400, ../sass/game.scss */
+  100% {
+    top: 120px; } }
+
+@-webkit-keyframes 'disapear4' {
+  /* line 405, ../sass/game.scss */
+  0% {
+    top: 120px; }
+
+  /* line 408, ../sass/game.scss */
+  30% {
+    top: 0px; }
+
+  /* line 411, ../sass/game.scss */
+  70% {
+    top: 0px; }
+
+  /* line 414, ../sass/game.scss */
+  100% {
+    top: 120px; } }
+
+@-webkit-keyframes 'gameprocess' {
+  /* line 419, ../sass/game.scss */
+  0% {
+    width: 100%; }
+
+  /* line 422, ../sass/game.scss */
+  80% {
+    background: #fcd207; }
+
+  /* line 425, ../sass/game.scss */
+  82% {
+    background: #ff0000; }
+
+  /* line 428, ../sass/game.scss */
+  100% {
+    background: #ff0000;
+    width: 0%; } }
+
+@-webkit-keyframes 'raise' {
+  /* line 434, ../sass/game.scss */
+  0% {
+    top: 60px; }
+
+  /* line 437, ../sass/game.scss */
+  40% {
+    opacity: 1; }
+
+  /* line 440, ../sass/game.scss */
+  60% {
+    opacity: 1; }
+
+  /* line 443, ../sass/game.scss */
+  100% {
+    top: 20px;
+    opacity: 0; } }
+
+@-webkit-keyframes 'countdown' {
+  /* line 449, ../sass/game.scss */
+  0% {
+    -webkit-transform: scale(3); }
+
+  /* line 452, ../sass/game.scss */
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1); }
+
+  /* line 456, ../sass/game.scss */
+  90% {
+    opacity: 1; } }
