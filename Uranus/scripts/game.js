@@ -195,7 +195,7 @@ KISSY.add(function (S) {
 	var restart = function(callback) {
 		phase.item(currentPhase).hide();
 		__reset();
-		currentPhase = 2;
+		currentPhase = 0;
 		nextPhase(callback);
 	};
 

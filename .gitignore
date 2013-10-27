@@ -4,3 +4,4 @@ browser-plugins/spm-chrome/spm.zip
 browser-plugins/udata-chrome/udata.zip
 .DS_Store
 *.iml
+node_modules
