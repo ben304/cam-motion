@@ -1,0 +1,24 @@
+{
+  "name": "Uranus",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "colors": "~0.6.2",
+    "ejs": "~0.8.4",
+    "express": "~3.4.3",
+    "socket.io": "~0.9.16"
+  },
+  "devDependencies": {
+    "colors": "~0.6.2",
+    "ejs": "~0.8.4",
+    "js-beautify": "~1.4.1",
+    "socket.io": "~0.9.16",
+    "express": "~3.4.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
