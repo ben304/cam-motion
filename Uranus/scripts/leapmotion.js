@@ -7,7 +7,7 @@ KISSY.add('leapmotion',function(S){
       //y轴方向的运动的最小比率
       HANDSCREENTAP_RAT_Y = -450,
       //x z轴方向的运动的最大比率
-      HANDSCREENTAP_RAT_XZ_ABS = 100;
+      HANDSCREENTAP_RAT_XZ_ABS = 400;
 
     var leapmotion = {
 
