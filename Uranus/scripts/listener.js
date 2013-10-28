@@ -2,7 +2,8 @@ KISSY.add(function (S) {
 
     var $ = S.Node.all,
         self = this,
-        socket = io.connect('http://localhost:8081'),
+        host = location.host,
+        socket = io.connect('http://' + host + ':8081'),
         player = location.search.replace(/\?|&/ig, '');
 
     // 分数更新， add 是本次增加的分数，sum 是总分
