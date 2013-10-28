@@ -98,7 +98,7 @@ KISSY.add(function(S, SoundBox) {
 		hit: function(left, top, hit) {
 			var that = this;
 			hammer.css({"left": left, "top": top});
-			if (hit) {
+			if (hit || 1) {
                 if (this.current != null) {
                     var monster = $(".monster").item(this.current-1),
                         score = parseInt(monster.attr("data-score"));
