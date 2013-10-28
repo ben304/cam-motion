@@ -176,8 +176,7 @@ KISSY.add(function(S, SoundBox) {
 			$("#endScore").html(score);
 			$("#gameScore").empty().append($('<span id="totalScore" class="total">0</span>'));
 			$("#timer").removeClass("onprocess");
-			$("#debug1").hide();
-            //TODO: 等待服务器重开
+            self.Game.nextPhase();
 		}
 	};
 }, {
