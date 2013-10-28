@@ -74,10 +74,12 @@ io.sockets.on 'connection', (socket)->
  	# 实时分数 data = {player: "a", add: 4, sum: 20}
  	socket.on 'score_update', (data)->
  		# players[data.player].score = data.sum
- 		io.sockets[ranking].emit 'score_update', data
+ 		if ranking
+ 			io.sockets[ranking].emit 'score_update', data
 
  	# 接收结束事件 data = {player: "a", sum: 20}
  	socket.on 'end', (data)->
+ 		console.log "end".green, data
  		player = players[data.player]
  		playera = players['a']
  		playerb = players['b']

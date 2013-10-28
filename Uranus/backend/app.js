@@ -82,11 +82,14 @@ io.sockets.on('connection', function(socket) {
     return socket.broadcast.emit('start');
   });
   socket.on('score_update', function(data) {
-    return io.sockets[ranking].emit('score_update', data);
+    if (ranking) {
+      return io.sockets[ranking].emit('score_update', data);
+    }
   });
   return socket.on('end', function(data) {
     var player, playera, playerb;
 
+    console.log("end".green, data);
     player = players[data.player];
     playera = players['a'];
     playerb = players['b'];
