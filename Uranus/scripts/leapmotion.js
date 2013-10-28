@@ -76,7 +76,7 @@ KISSY.add(function(S){
 
           var len = handScreenTaps.length;
 
-          if(len > 7){
+          if(len > 3){
 
             var age =  (frame.timestamp - handScreenTaps[0]) / 1000000;
 
