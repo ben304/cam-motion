@@ -1,0 +1,101 @@
+.mtg-scr {
+  width: 1245px;
+  height: 790px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -395px 0 0 -622px;
+}
+.mtg-scr .animate {
+  display: inline-block;
+}
+.mtg-scr .animate .child {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.mtg-scr .vs-bar {
+  float: left;
+  background: url(../images/scr-challenge.png) no-repeat left top;
+  width: 608px;
+  height: 692px;
+  margin-top: 30px;
+}
+.mtg-scr .vs-bar li {
+  height: 80px;
+  padding: 195px 0 15px 105px;
+  font-size: 36px;
+  color: #FFF;
+  position: relative;
+}
+.mtg-scr .vs-bar li p {
+  margin-bottom: 10px;
+}
+.mtg-scr .vs-bar li p span {
+  margin-left: 42px;
+  font-size: 22px;
+}
+.mtg-scr .vs-bar li p em {
+  font-size: 48px;
+  position: relative
+}
+.mtg-scr .vs-bar strong {
+  background: url(../images/scr-result.png) no-repeat left 300px;
+  width: 285px;
+  height: 237px;
+  position: absolute;
+  right: 0;
+  top: 150px;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.mtg-scr .vs-bar strong.win {
+  background-position: left -271px;
+}
+.mtg-scr .vs-bar strong.lose {
+  background-position: left top;
+}
+
+.mtg-scr .rank-bar {
+  float: right;
+  background: url(../images/scr-rnk.png) no-repeat left top;
+  width: 606px;
+  height: 790px;
+}
+.mtg-scr .rank-bar ol {
+  padding: 110px 0 0 50px;
+  color: #fff;
+  font-size: 32px;
+  counter-reset: li;
+}
+.mtg-scr .rank-bar li {
+  height: 65px;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.mtg-scr .rank-bar li:before {
+  display: inline-block;
+  background: url(../images/scr-item.png) no-repeat left -49px;
+  background-size: 100%;
+  width: 47px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 26px;
+  content: counter(li);
+  counter-increment: li;
+}
+.mtg-scr .rank-bar li.hot:before {
+  background-position: left top;
+  color: #ebac5f;
+}
+.mtg-scr .rank-bar li strong {
+  display: inline-block;
+  width: 280px;
+}
+.mtg-scr .rank-bar li span {
+  font-size: 22px;
+}
