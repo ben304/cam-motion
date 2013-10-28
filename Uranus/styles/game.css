@@ -273,7 +273,7 @@ body {
   height: 98px;
   position: absolute;
   z-index: 999;
-  -webkit-transition: 0.03s;
+  /*-webkit-transition: 0.03s;*/
   -webkit-transform: scale(0.7); }
 /* line 222, ../sass/game.scss */
 .gaming .bang {
