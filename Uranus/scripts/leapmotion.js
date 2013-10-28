@@ -1,9 +1,9 @@
-KISSY.add(function(S){
+KISSY.add('leapmotion',function(S){
 
     var D = S.DOM,
       handScreenTaps = [],
       //生命周期
-      HANDSCREENTAP_LIFE = 0.5,
+      HANDSCREENTAP_LIFE = 1,
       //y轴方向的运动的最小比率
       HANDSCREENTAP_RAT_Y = -450,
       //x z轴方向的运动的最大比率
@@ -67,8 +67,33 @@ KISSY.add(function(S){
           handPos = self.leapToScene(frame , hand.palmPosition),
           result = S.merge(handPos,{'isHit':false});
 
-        if(!fingers.length){
+        if((fingers.length < 2) && hand){
 
+          handScreenTaps.push(frame.timestamp);
+
+          // console.log('is no fingers');
+
+
+          var len = handScreenTaps.length;
+
+          if(len > 7){
+
+            var age =  (frame.timestamp - handScreenTaps[0]) / 1000000;
+
+            if(age < HANDSCREENTAP_LIFE){
+
+              console.log(palmVelocityY);
+              console.log('is hit');
+              result.isHit = true;
+              console.log(result);
+            }
+
+            handScreenTaps = [];
+          }
+
+
+
+          /*
           if((palmVelocityY < HANDSCREENTAP_RAT_Y) && (palmVelocityX < HANDSCREENTAP_RAT_XZ_ABS) && (palmVelocityZ < HANDSCREENTAP_RAT_XZ_ABS)){
 
             console.log(palmVelocityY);
@@ -94,6 +119,7 @@ KISSY.add(function(S){
               handScreenTaps = [];
             }
           }
+          */
         }
 
         return result;
