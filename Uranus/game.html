@@ -158,11 +158,12 @@
                 charset: "utf-8"
             }]
         });
-        KISSY.use("scripts/game, scripts/core, scripts/listener",
-            function(S, Game, Core, Listener) {
+        KISSY.use("scripts/game, scripts/core, scripts/listener, scripts/leapmotion",
+            function(S, Game, Core, Listener, LeapMotion) {
                 Game.init(Core);
-                Core.config(Game);
+                Core.config(Game, Listener);
                 Listener.init(Game, Core);
+                LeapMotion.init(Core);
         });
     </script>
     </body>

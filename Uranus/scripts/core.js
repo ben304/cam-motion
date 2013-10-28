@@ -21,8 +21,9 @@ KISSY.add(function(S, SoundBox) {
 
 		holeRect: {w: 0, h: 0},
 
-		config: function(game) {
+		config: function(game, listener) {
 			this.Game = game;
+            this.Listener = listener;
 		},
 
 		init: function(mapArea) {
@@ -94,33 +95,35 @@ KISSY.add(function(S, SoundBox) {
 			$("#gameScore").undelegate();
 		},
 
-		hit: function(left, top) {
+		hit: function(left, top, hit) {
 			var that = this;
 			hammer.css({"left": left, "top": top});
-			if (this.current != null) {
-				var monster = $(".monster").item(this.current-1),
-					score = parseInt(monster.attr("data-score"));
+			if (hit) {
+                if (this.current != null) {
+                    var monster = $(".monster").item(this.current-1),
+                        score = parseInt(monster.attr("data-score"));
 
-				if (this.checkCollision(left, top, monster)) {
-					var totalScore = this.Game.addScore(score);
-					this.showScore(score, totalScore);
+                    if (this.checkCollision(left, top, monster)) {
+                        var totalScore = this.Game.addScore(score);
+                        this.showScore(score, totalScore);
 
-					//console.log("hit"+this.current);
-					hammer.addClass("bang");
-					monster.data("hit", true);
-					monster.addClass("pause");
-					monster.addClass("hit");
-					SoundBox.play('HIT');
-					setTimeout(function(){
-						hammer.removeClass("bang");
-						monster.attr("class", "monster");
-						monster.removeClass("hit");
-						monster.removeClass("pause");
-						monster.data("hit", false);
-						that.popup();
-					}, 10);
-				}
-			}
+                        hammer.addClass("bang");
+                        monster.data("hit", true);
+                        monster.addClass("pause");
+                        monster.addClass("hit");
+                        SoundBox.play('HIT');
+                        this.Listener.sendScore(score, totalScore);
+                        setTimeout(function(){
+                            hammer.removeClass("bang");
+                            monster.attr("class", "monster");
+                            monster.removeClass("hit");
+                            monster.removeClass("pause");
+                            monster.data("hit", false);
+                            that.popup();
+                        }, 10);
+                    }
+                }
+            }
 		},
 
 		checkCollision: function(left, top, monster) {
@@ -168,6 +171,7 @@ KISSY.add(function(S, SoundBox) {
 		// 停止游戏
 		stop: function(score) {
 			var self = this;
+            this.Listener.sendEnd(score);
             // TODO: kinect解除绑定
 			this.initialized = false;
 			this.unbindEvent();
