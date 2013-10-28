@@ -13,7 +13,8 @@ KISSY.add('leapmotion',function(S){
 
       init: function(core){
 
-        var controller = new Leap.Controller({enableGestures:true});
+        var self = this,
+          controller = new Leap.Controller({enableGestures:true});
 
         controller.on( 'frame' , function(frame){
 
@@ -23,8 +24,8 @@ KISSY.add('leapmotion',function(S){
             return;
           }
 
-          var posAndMotion = getPosAndMotion(frame,hand);
-          core.hit(posAndMotion.left,posAndMotion.top,posAndMotion.isHit);
+          var posAndMotion = self.getPosAndMotion(frame,hand);
+          core.hit(posAndMotion.left, posAndMotion.top, posAndMotion.isHit);
 
         });
 
@@ -35,16 +36,17 @@ KISSY.add('leapmotion',function(S){
       //转换leap的坐标为绝对定位的left  top
       leapToScene: function(frame,leapPos){
 
-        left = iBox.center[0] - iBox.size[0]/2,
-        top = iBox.center[1] + iBox.size[1]/2,
-        x = leapPos[0] - left,
-        y = leapPos[1] - top;
+        var iBox = frame.interactionBox,
+          left = iBox.center[0] - iBox.size[0]/2,
+          top = iBox.center[1] + iBox.size[1]/2,
+          x = leapPos[0] - left,
+          y = leapPos[1] - top;
 
-        x /= iBox.size[0];
-        y /= iBox.size[1];
+          x /= iBox.size[0];
+          y /= iBox.size[1];
 
-        x *= D.viewportWidth();
-        y *= D.viewportHeight();
+          x *= D.viewportWidth();
+          y *= D.viewportHeight();
 
         return {
           left: x,
@@ -56,12 +58,13 @@ KISSY.add('leapmotion',function(S){
     //获得定位的信息和动作如 {top:123,left:321,isHit:true}
       getPosAndMotion: function (frame,hand){
 
-        var palmVelocity = hand.palmVelocity,
+        var self = this,
+          palmVelocity = hand.palmVelocity,
           palmVelocityX = Math.abs(palmVelocity[0]),
           palmVelocityY = palmVelocity[1],
           palmVelocityZ = Math.abs(palmVelocity[2]),
           fingers = frame.fingers,
-          handPos = leapToScene(frame , hand.palmPosition),
+          handPos = self.leapToScene(frame , hand.palmPosition),
           result = S.merge(handPos,{'isHit':false});
 
         if(!fingers.length){
