@@ -1,4 +1,4 @@
-KISSY.add('leapmotion',function(S){
+KISSY.add(function(S){
 
     var D = S.DOM,
       handScreenTaps = [],
