@@ -46,31 +46,31 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
-      KISSY.use('screen',function(S, Screen){
-        var self = arguments.callee, i = 0;
-        var rand = function(){ return Math.random()*20|0; }
+      // KISSY.use('screen',function(S, Screen){
+      //   var self = arguments.callee, i = 0;
+      //   var rand = function(){ return Math.random()*20|0; }
         
-        // 准备 & 初始化对战玩家信息
-        Screen.ready();
-        Screen.updatePlayer('a','毛小俊',0);
-        Screen.updatePlayer('b','十渡',0);
+      //   // 准备 & 初始化对战玩家信息
+      //   Screen.ready();
+      //   Screen.updatePlayer('a','毛小俊',0);
+      //   Screen.updatePlayer('b','十渡',0);
         
-        setTimeout(function(){
+      //   setTimeout(function(){
           
-          //实时更新对战玩家信息
-          Screen.updatePlayer('a','毛小俊',++i*rand());
-          Screen.updatePlayer('b','十渡',++i*rand());
+      //     //实时更新对战玩家信息
+      //     Screen.updatePlayer('a','毛小俊',++i*rand());
+      //     Screen.updatePlayer('b','十渡',++i*rand());
           
-          if(i<20) return setTimeout(arguments.callee,500);
+      //     if(i<20) return setTimeout(arguments.callee,500);
           
-          //游戏结束后分出胜负和更新排行榜
-          Screen.updateWinner();
-          Screen.updateRank();
+      //     //游戏结束后分出胜负和更新排行榜
+      //     Screen.updateWinner();
+      //     Screen.updateRank();
           
-          i = 0;
-          setTimeout(function(){self(S,Screen)},5000);
-        },3000);
-      });
+      //     i = 0;
+      //     setTimeout(function(){self(S,Screen)},5000);
+      //   },3000);
+      // });
     </script>
     <script>
       KISSY.use('screen', function(S, Screen){
@@ -87,7 +87,7 @@
           Screen.updatePlayer('b', data.nameb, 0);
         });
 
-        socket.on('score_upate', function(data){
+        socket.on('score_update', function(data){
           Screen.updatePlayer(data.player, name[data.player], data.sum);
         });
 
