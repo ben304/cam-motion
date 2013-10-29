@@ -171,6 +171,7 @@ KISSY.add(function(S, SoundBox) {
 		// 停止游戏
 		stop: function(score) {
 			var self = this;
+            this.current = null;
             this.Listener.sendEnd(score);
             // TODO: kinect解除绑定
 			this.initialized = false;
