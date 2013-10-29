@@ -78,6 +78,8 @@
         var host = location.host,
             socket = io.connect('http://' + host),
             name = {};
+            
+        socket.emit('ranking_list');
 
         socket.on('ready', function(data){
           Screen.ready();
