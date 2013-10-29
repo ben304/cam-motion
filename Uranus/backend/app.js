@@ -99,6 +99,7 @@ io.sockets.on('connection', function(socket) {
     player.score = data.sum;
     config.records.push(player);
     config.save_records();
+    console.log("end2", players, playing);
     if (playera.isend && playerb.isend) {
       playing = false;
       if (ranking) {
