@@ -53,6 +53,7 @@ io.sockets.on('connection', function(socket) {
     return manager = socket.id;
   });
   socket.on('ranking_list', function(data) {
+    console.log("rank_on".blue, socket.id);
     return ranking = socket.id;
   });
   socket.on('new_player', function(data) {
@@ -67,7 +68,7 @@ io.sockets.on('connection', function(socket) {
       isend: false,
       score: 0
     };
-    return io.sockets[manager].emit('player_update', players);
+    return io.sockets.socket(manage).emit('player_update', players);
   });
   socket.on('ready', function(data) {
     console.log("Name a:", data.namea.green, 'Name b:', data.nameb.green);
@@ -82,9 +83,9 @@ io.sockets.on('connection', function(socket) {
     return socket.broadcast.emit('start');
   });
   socket.on('score_update', function(data) {
-    console.log('score'.green, ranking, data);
+    console.log('score'.green, ranking, io.sockets.socket(ranking), data);
     if (ranking) {
-      return io.sockets[ranking].emit('score_update', data);
+      return io.sockets.socket(ranking).emit('score_update', data);
     }
   });
   return socket.on('end', function(data) {
@@ -100,7 +101,9 @@ io.sockets.on('connection', function(socket) {
     config.save_records();
     if (playera.isend && playerb.isend) {
       playing = false;
-      return io.sockets[ranking].emit('end', players);
+      if (ranking) {
+        return io.sockets.socket(ranking).emit('end', players);
+      }
     }
   });
 });
