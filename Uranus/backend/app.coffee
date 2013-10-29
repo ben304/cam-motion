@@ -17,7 +17,7 @@ app.set 'views', __dirname
 # 全局变量
 manager = ""
 ranking = ""
-players = { a: "", b: "" }
+players = { a: {}, b: {} }
 playing = false
 
 
@@ -46,9 +46,6 @@ io.sockets.on 'connection', (socket)->
 
 	# 新用户加入, data.player: a|b
 	socket.on 'new_player', (data)->
- 		if playing
- 			console.log ("Game is running. No participator any more").red
- 			return
  		console.log ("User " + data.player + " jion!").green
  		players[data.player] = {
  			id: socket.id
@@ -56,7 +53,8 @@ io.sockets.on 'connection', (socket)->
  			isend: false
  			score: 0
  		}
- 		io.sockets.socket(manage).emit 'player_update', players
+ 		if manager
+ 			io.sockets.socket(manager).emit 'player_update', players
 
  	# 广播准备事件
  	socket.on 'ready', (data)->
@@ -75,7 +73,7 @@ io.sockets.on 'connection', (socket)->
  	# 实时分数 data = {player: "a", add: 4, sum: 20}
  	socket.on 'score_update', (data)->
  		# players[data.player].score = data.sum
- 		console.log 'score'.green, ranking, io.sockets.socket(ranking), data 
+ 		# console.log 'score'.green, ranking, io.sockets.socket(ranking), data 
  		if ranking
  			io.sockets.socket(ranking).emit 'score_update', data
 
@@ -89,7 +87,7 @@ io.sockets.on 'connection', (socket)->
  		player.score = data.sum
  		config.records.push player
  		config.save_records()
- 		console.log "end2", players, playing
+ 		console.log "end2".blue, players, playing
  		if playera.isend and playerb.isend
  			playing = false
  			if ranking

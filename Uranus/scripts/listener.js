@@ -28,6 +28,9 @@ KISSY.add(function (S) {
             this.core = core;
 
             var self = this;
+
+            socket.emit('new_player', {player: player});
+
             socket.on('ready', function(data){
                 // 准备事件，显示登录页面，其中名字是 data['name' + player]
                 $("#player").html(data["name"+player]);

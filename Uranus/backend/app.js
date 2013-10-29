@@ -30,8 +30,8 @@ manager = "";
 ranking = "";
 
 players = {
-  a: "",
-  b: ""
+  a: {},
+  b: {}
 };
 
 playing = false;
@@ -57,10 +57,6 @@ io.sockets.on('connection', function(socket) {
     return ranking = socket.id;
   });
   socket.on('new_player', function(data) {
-    if (playing) {
-      console.log("Game is running. No participator any more".red);
-      return;
-    }
     console.log(("User " + data.player + " jion!").green);
     players[data.player] = {
       id: socket.id,
@@ -68,7 +64,9 @@ io.sockets.on('connection', function(socket) {
       isend: false,
       score: 0
     };
-    return io.sockets.socket(manage).emit('player_update', players);
+    if (manager) {
+      return io.sockets.socket(manager).emit('player_update', players);
+    }
   });
   socket.on('ready', function(data) {
     console.log("Name a:", data.namea.green, 'Name b:', data.nameb.green);
@@ -83,7 +81,6 @@ io.sockets.on('connection', function(socket) {
     return socket.broadcast.emit('start');
   });
   socket.on('score_update', function(data) {
-    console.log('score'.green, ranking, io.sockets.socket(ranking), data);
     if (ranking) {
       return io.sockets.socket(ranking).emit('score_update', data);
     }
@@ -99,7 +96,7 @@ io.sockets.on('connection', function(socket) {
     player.score = data.sum;
     config.records.push(player);
     config.save_records();
-    console.log("end2", players, playing);
+    console.log("end2".blue, players, playing);
     if (playera.isend && playerb.isend) {
       playing = false;
       if (ranking) {
