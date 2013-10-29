@@ -89,6 +89,7 @@ io.sockets.on 'connection', (socket)->
  		player.score = data.sum
  		config.records.push player
  		config.save_records()
+ 		console.log "end2", players, playing
  		if playera.isend and playerb.isend
  			playing = false
  			if ranking
