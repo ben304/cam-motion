@@ -87,7 +87,7 @@
           Screen.updatePlayer('b', data.nameb, 0);
         });
 
-        socket.on('score_upate', function(data){
+        socket.on('score_update', function(data){
           Screen.updatePlayer(data.player, name[data.player], data.sum);
         });
 
