@@ -82,6 +82,7 @@ io.sockets.on('connection', function(socket) {
     return socket.broadcast.emit('start');
   });
   socket.on('score_update', function(data) {
+    console.log('score'.green, data);
     if (ranking) {
       return io.sockets[ranking].emit('score_update', data);
     }
