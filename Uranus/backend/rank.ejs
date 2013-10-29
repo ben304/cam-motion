@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>怪兽打打</title>
+        <link rel="stylesheet" href="styles/game.css" />
+        <link rel="stylesheet" href="styles/scr.css" />
+        <link rel="stylesheet" href="styles/animate.css" />
+    </head>
+    <body>
+      <div class="mtg-scr">
+        <ul class="vs-bar">
+          <li id="client-a">
+            <p class="name">?</p>
+            <p>
+              <span>得分：</span>
+              <em class="animate">
+                <a class="score">0</a>
+              </em>
+            </p>
+            <strong></strong>
+          </li>
+          <li id="client-b">
+            <p class="name">?</p>
+            <p>
+              <span>得分：</span>
+              <em class="animate">
+                <a class="score">0</a>
+              </em>
+            </p>
+            <strong></strong>
+          </li>
+        </ul>
+        <div class="rank-bar">
+          <ol id="rank">
+            <li>
+              <strong>?</strong>
+              <span>最高分：</span>
+              <em>0</em>
+            </li>
+          </ol>
+        </div>
+      </div>
+    <script src="library/kissy.min.js"></script>
+    <script src="scripts/screen.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+      KISSY.use('screen',function(S, Screen){
+        var self = arguments.callee, i = 0;
+        var rand = function(){ return Math.random()*20|0; }
+        
+        // 准备 & 初始化对战玩家信息
+        Screen.ready();
+        Screen.updatePlayer('a','毛小俊',0);
+        Screen.updatePlayer('b','十渡',0);
+        
+        setTimeout(function(){
+          
+          //实时更新对战玩家信息
+          Screen.updatePlayer('a','毛小俊',++i*rand());
+          Screen.updatePlayer('b','十渡',++i*rand());
+          
+          if(i<20) return setTimeout(arguments.callee,500);
+          
+          //游戏结束后分出胜负和更新排行榜
+          Screen.updateWinner();
+          Screen.updateRank();
+          
+          i = 0;
+          setTimeout(function(){self(S,Screen)},5000);
+        },3000);
+      });
+    </script>
+    <script>
+      KISSY.use('screen', function(S, Screen){
+
+        var host = location.host,
+            socket = io.connect('http://' + host),
+            name = {};
+
+        socket.on('ready', function(data){
+          Screen.ready();
+          name['a'] = data.namea;
+          name['b'] = data.nameb;
+          Screen.updatePlayer('a', data.namea, 0);
+          Screen.updatePlayer('b', data.nameb, 0);
+        });
+
+        socket.on('score_upate', function(data){
+          Screen.updatePlayer(data.player, name[data.player], data.sum);
+        });
+
+        socket.on('end', function(data){
+          Screen.updateWinner();
+          Screen.updateRank();
+        })
+
+      })
+    </script>
+    </body>
+</html>
