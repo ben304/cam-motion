@@ -30,6 +30,7 @@ KISSY.add(function (S) {
             var self = this;
             socket.on('ready', function(data){
                 // 准备事件，显示登录页面，其中名字是 data['name' + player]
+                $("#player").html(data["name"+player]);
                 self.game.restart();
             });
 

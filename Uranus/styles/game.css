@@ -325,7 +325,9 @@ body {
 /* line 269, ../sass/game.scss */
 .game-over {
   background: url(../images/g_gameover.png) no-repeat center top;
-  position: relative; }
+  position: relative;
+  margin: 100px 0 0 50px;
+}
   /* line 272, ../sass/game.scss */
   .game-over span {
     position: absolute;
