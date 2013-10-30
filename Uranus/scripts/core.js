@@ -120,7 +120,7 @@ KISSY.add(function(S, SoundBox) {
                             monster.removeClass("pause");
                             monster.data("hit", false);
                             that.popup();
-                        }, 10);
+                        }, 100);
                     }
                 }
             }

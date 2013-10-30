@@ -268,16 +268,16 @@ body {
     -webkit-animation-iteration-count: infinite; }
 /* line 213, ../sass/game.scss */
 .gaming .hammer {
-  background: url(../images/g_hammer.png) no-repeat left top;
-  width: 90px;
-  height: 98px;
+  background: url(../images/g_hand.png) no-repeat 0px 0px;
+  width: 52px;
+  height: 56px;
   position: absolute;
   z-index: 999;
   /*-webkit-transition: 0.03s;*/
   -webkit-transform: scale(0.7); }
 /* line 222, ../sass/game.scss */
 .gaming .bang {
-  -webkit-animation: "bang" 0.2s ease-in-out 2; }
+  background-position: -52px 0px;}
 /* line 225, ../sass/game.scss */
 .gaming .process-bar {
   background: #fff;
